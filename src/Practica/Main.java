@@ -28,7 +28,8 @@ public class Main {
                 Opcion = teclado.nextInt();
                 System.out.print("\n ==== editado ===: \n");
                 System.out.print("\n ==== editadopa  ===: \n");
-
+                System.out.print("\n ==== editadopa  ===: \n");
+                System.out.print("\n ==== editadopa  ===: \n");
                 switch (Opcion) {
                     case 1:
                         System.out.println(" Mis activos \n");
