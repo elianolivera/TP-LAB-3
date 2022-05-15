@@ -30,6 +30,11 @@ public class Main {
                 System.out.print("\n ==== editadopa  ===: \n");
                 System.out.print("\n ==== editadopa  ===: \n");
                 System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
+                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
+                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
+                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
+                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
+                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
                 switch (Opcion) {
                     case 1:
                         System.out.println(" Mis activos \n");
