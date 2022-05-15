@@ -27,6 +27,7 @@ public class Main {
                 Scanner teclado = new Scanner(System.in);
                 Opcion = teclado.nextInt();
                 System.out.print("\n ==== editado ===: \n");
+                System.out.print("\n ==== editadopa  ===: \n");
 
                 switch (Opcion) {
                     case 1:
