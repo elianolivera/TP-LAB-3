@@ -27,11 +27,6 @@ public class Main {
                 Scanner teclado = new Scanner(System.in);
                 Opcion = teclado.nextInt();
                 System.out.print("\n ==== editado ===: \n");
-                System.out.print("\n ==== editadopa  ===: \n");
-                System.out.print("\n ==== editadopa  ===: \n");
-                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
-                System.out.print("\n ====  QUE ONDA WACHO  ===: \n");
-
 
                 switch (Opcion) {
                     case 1:
