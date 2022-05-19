@@ -1,4 +1,4 @@
-package Practica;
+package Clases;
 
 public class Tranferencia {
     User us;
