@@ -36,7 +36,7 @@ public class Main {
                 System.out.print("\n 5. Archivo de transacciones ");
                 System.out.print("\n 6. Volver al login ");
                 System.out.print("\n ==== SELECIONA OPCIÓN ===: \n");
-                Scanner teclado = new Scanner(System.in);sa
+                Scanner teclado = new Scanner(System.in);
                 Opcion = teclado.nextInt();
                 System.out.print("\n ==== editado ===: \n");
                 System.out.println(" Mis activos \n");
