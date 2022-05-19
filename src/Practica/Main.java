@@ -9,6 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println(" Hola grupo \n");
+
            /* ///EJEMPLO SIMPLE DE TRANSACCION
             User us1  = new User(1,"Pedro","pedr",800);
             User us2  = new User(2,"Robert","pedr",600);
@@ -16,6 +18,7 @@ public class Main {
             t1.transferir(t1,us1,us2,100);
             System.out.println(us1);
             System.out.println(us2);*/
+
 
 
           ///EJEMPLO SIMPLE MENÚ
@@ -33,7 +36,7 @@ public class Main {
                 System.out.print("\n 5. Archivo de transacciones ");
                 System.out.print("\n 6. Volver al login ");
                 System.out.print("\n ==== SELECIONA OPCIÓN ===: \n");
-                Scanner teclado = new Scanner(System.in);
+                Scanner teclado = new Scanner(System.in);sa
                 Opcion = teclado.nextInt();
                 System.out.print("\n ==== editado ===: \n");
                 System.out.println(" Mis activos \n");
