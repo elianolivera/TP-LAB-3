@@ -8,8 +8,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        System.out.print("\n ========  Elian: ======== ");
 
+        System.out.print("\n ========  HOLA : ======== ");
            /* ///EJEMPLO SIMPLE DE TRANSACCION
             User us1  = new User(1,"Pedro","pedr",800);
             User us2  = new User(2,"Robert","pedr",600);
