@@ -9,7 +9,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+           /* ///EJEMPLO SIMPLE DE TRANSACCION
+            User us1  = new User(1,"Pedro","pedr",800);
+            User us2  = new User(2,"Robert","pedr",600);
+            Tranferencia t1= new Tranferencia();
+            t1.transferir(t1,us1,us2,100);
+            System.out.println(us1);
+            System.out.println(us2);*/
 
+
+          ///EJEMPLO SIMPLE MENÚ
             try{
                 int Opcion = 0;
                 System.out.print("\n ========  BIENVENIDO USUARIO: ======== ");
@@ -33,7 +42,7 @@ public class Main {
                 switch (Opcion) {
                     case 1:
                         System.out.println(" Mis activos \n");
-                        User u1 = new User();
+
 
                         break;
                     case 2:
