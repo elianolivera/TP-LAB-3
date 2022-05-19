@@ -8,8 +8,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-
-        System.out.println(" Hola grupo \n");
+        System.out.print("\n ========  Elian: ======== ");
 
            /* ///EJEMPLO SIMPLE DE TRANSACCION
             User us1  = new User(1,"Pedro","pedr",800);
@@ -18,7 +17,6 @@ public class Main {
             t1.transferir(t1,us1,us2,100);
             System.out.println(us1);
             System.out.println(us2);*/
-
 
 
           ///EJEMPLO SIMPLE MENÚ
