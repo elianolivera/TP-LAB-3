@@ -7,7 +7,7 @@ public class Main {
 
 
            /* ///EJEMPLO SIMPLE DE TRANSACCION
-              System.out.print("\n ======== PROBANDO MÉTODO TRANSACCIÓN : ======== ");
+              System.out.print("\n ========  PROBANDO MÉTODO TRANSACCIÓN : ======== ");
             User us1  = new User(1,"Pedro","pedr",800);
             User us2  = new User(2,"Robert","pedr",600);
             Tranferencia t1= new Tranferencia();
