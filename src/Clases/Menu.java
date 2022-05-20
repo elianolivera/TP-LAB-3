@@ -11,7 +11,6 @@ public final class Menu {
             int opcion;
             System.out.print("\n ========  BIENVENIDO USUARIO: ======== ");
             System.out.print("\n ======== MENÚ DE USUARIO : ======== ");
-            Scanner scanner = new Scanner(System.in);
             System.out.print("\n 1. Consultar estado de activos. ");
             System.out.print("\n 2. Realizar una transacción.");
             System.out.print("\n 3. Transacciones pendientes.");
