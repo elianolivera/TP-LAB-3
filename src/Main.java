@@ -21,6 +21,7 @@ public class Main {
 
             if(opcion == 7) {
                 sesion.finalizarSesion();
+                System.out.println("Hasta luego!");
             }
         }
 
