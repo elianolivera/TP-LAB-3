@@ -17,9 +17,12 @@ public class Main {
         Menu menu = new Menu();
 
         while(sesion.isActivo()) {
-            int opcion = menu.mostrarMenu();
+            int opcionMenuPrincipal = -1;
+            while(opcionMenuPrincipal == -1 || (opcionMenuPrincipal < 1 || opcionMenuPrincipal > 7)) {
+                opcionMenuPrincipal = menu.mostrarMenu();
+            }
 
-            if(opcion == 7) {
+            if(opcionMenuPrincipal == 7) {
                 sesion.finalizarSesion();
                 System.out.println("Hasta luego!");
             }
