@@ -1,17 +1,30 @@
-import Clases.Menu;
-import Clases.Sesion;
+import Clases.*;
+import Clases.Transferencia;
+
+import java.util.Scanner;
 
 public class Main {
+    
 
     public static void main(String[] args) {
+        User us1  = new User(1,"Pedro Gonzales","pedr.com",100);
+        User us2  = new User(2,"Robert Parker","Robertgmail.com",100);
 
-           /* ///EJEMPLO SIMPLE DE TRANSACCION
-            User us1  = new User(1,"Pedro","pedr",800);
-            User us2  = new User(2,"Robert","pedr",600);
-            Tranferencia t1= new Tranferencia();
-            t1.transferir(t1,us1,us2,100);
-            System.out.println(us1);
-            System.out.println(us2);*/
+
+        /*
+        System.out.print("\n ========  Ingrese monto a transferir : ======== ");
+        float monto=0;
+        Scanner teclado = new Scanner(System.in);
+        monto = teclado.nextFloat();
+        Transferencia t1 = new Transferencia(us1,us2,1,0,monto, Estado.NOVALIDADA);
+        ///Método transferencia
+        t1.transferir(t1,us1,us2,monto);
+        System.out.println(us1);
+        System.out.println(us2);
+        ///Muestra transferencia
+        System.out.print("\n ======== Comprobante : ======== ");
+        System.out.println(t1);
+        */
 
         Sesion sesion = new Sesion();
         Menu menu = new Menu();
