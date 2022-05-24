@@ -37,7 +37,8 @@ public class Main {
 
             if(opcionMenuUsuario != 3) {
                 // Le pido los datos para loguear or registrar a el usuario.
-                // Cuando lo logueo, seteo la variable de la sesion currentUser = <el usuario>
+                // Cuando lo logueo, seteo la variable de la clase Sesion con sesion.setCurrentUser(user);
+                // Eso me va a permitir saber quien es el usuario que esta manejando la sesion.
                 int opcionMenuPrincipal = -1;
                 while(opcionMenuPrincipal == -1 || (opcionMenuPrincipal < 1 || opcionMenuPrincipal > 7)) {
                     opcionMenuPrincipal = menu.mostrarMenuPrincipal();
