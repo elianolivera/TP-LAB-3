@@ -6,7 +6,7 @@ public final class Menu {
     public Menu() {
     }
 
-    public int mostrarMenu() {
+    public int mostrarMenuPrincipal() {
         try{
             int opcion;
             System.out.print("\n ========  BIENVENIDO USUARIO: ======== ");
@@ -18,6 +18,22 @@ public final class Menu {
             System.out.print("\n 5. Archivo de transacciones. ");
             System.out.print("\n 6. Volver al login. ");
             System.out.print("\n 7. Salir. ");
+            System.out.print("\n ==== SELECIONA OPCIÓN ===: \n");
+            Scanner teclado = new Scanner(System.in);
+            opcion = Integer.valueOf(teclado.nextLine());
+            return opcion;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int mostrarMenuUsuario() {
+        try{
+            int opcion;
+            System.out.print("\n 1. Log in. ");
+            System.out.print("\n 2. Registrarse.");
+            System.out.print("\n 3. Salir.");
             System.out.print("\n ==== SELECIONA OPCIÓN ===: \n");
             Scanner teclado = new Scanner(System.in);
             opcion = Integer.valueOf(teclado.nextLine());

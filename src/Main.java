@@ -30,15 +30,25 @@ public class Main {
         Menu menu = new Menu();
 
         while(sesion.isActivo()) {
-            int opcionMenuPrincipal = -1;
-            while(opcionMenuPrincipal == -1 || (opcionMenuPrincipal < 1 || opcionMenuPrincipal > 7)) {
-                opcionMenuPrincipal = menu.mostrarMenu();
+            int opcionMenuUsuario = -1;
+            while(opcionMenuUsuario == -1 || (opcionMenuUsuario < 1 || opcionMenuUsuario > 3)) {
+                opcionMenuUsuario = menu.mostrarMenuUsuario();
             }
 
-            if(opcionMenuPrincipal == 7) {
-                sesion.finalizarSesion();
-                System.out.println("Hasta luego!");
+            if(opcionMenuUsuario != 3) {
+                // Le pido los datos para loguear or registrar a el usuario.
+                // Cuando lo logueo, seteo la variable de la sesion currentUser = <el usuario>
+                int opcionMenuPrincipal = -1;
+                while(opcionMenuPrincipal == -1 || (opcionMenuPrincipal < 1 || opcionMenuPrincipal > 7)) {
+                    opcionMenuPrincipal = menu.mostrarMenuPrincipal();
+                }
+                if(opcionMenuPrincipal != 7) {
+                    // Hago lo que haya pedido el usuario.
+                }
             }
+
+            sesion.finalizarSesion();
+            System.out.println("Hasta luego!");
         }
 
     }
