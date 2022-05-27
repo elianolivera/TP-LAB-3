@@ -1,32 +1,46 @@
 package Clases;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 // En el caso de que quiera hacer algo como agregar datos a un archivo al apretar salir me parecio mejor usar una clase sesion.
 public final class Sesion {
-    private boolean activo;
-    private User currentUser;
+    private List<User> usuarios = new ArrayList<>();
+    private User usuarioActivo;
 
     public Sesion() {
-        this.activo = true;
+        this.usuarioActivo = null;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public User getUsuarioActivo() {
+        return usuarioActivo;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setUsuarioActivo(User usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public UUID registrarUsuario(String email, String password) {
+        User usuariox = new User("x",email, password, 100);
+        usuarios.add(usuariox);
+
+        return usuariox.getUUID();
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public User loguearUsuario(String email, String password, UUID id) {
+        for(User u : usuarios) {
+            if(id.equals(u.id) && email.equals(u.email) && password.equals(u.password)) {
+                setUsuarioActivo(u);
+                return u;
+            }
+        }
+
+        return null;
     }
 
     public void finalizarSesion() {
-        setActivo(false);
-        setCurrentUser(null);
+        // Paso los nuevos usuarios registrados a el archivo.
+        System.exit(0);
     }
 }
