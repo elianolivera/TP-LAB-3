@@ -14,7 +14,7 @@ public class Main {
 
 
         /*
-        System.out.print("\n ========  Ingrese montos a transferir : ======== ");
+        System.out.print("\n ========  Ingrese monto a transferir : ======== ");
         float monto=0;
         Scanner teclado = new Scanner(System.in);
         monto = teclado.nextFloat();
