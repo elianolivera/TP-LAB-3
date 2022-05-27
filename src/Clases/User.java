@@ -1,33 +1,38 @@
 package Clases;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class User {
-    protected int UUID;
-    protected String Nombre;
+    protected UUID id;
+    protected String nombre;
     protected String email;
+    protected String password;
     protected float saldo;
 
-    public User(int UUID, String nombre, String email, float saldo) {
-        this.UUID = UUID;
-        Nombre = nombre;
+    public User(String nombre, String email,String password, float saldo) {
+        this.id = UUID.randomUUID();
+        this.nombre = nombre;
+        this.password = password;
         this.email = email;
         this.saldo = saldo;
     }
 
-    public int getUUID() {
-        return UUID;
+    public UUID getUUID() {
+        return id;
     }
 
-    public User setUUID(int UUID) {
-        this.UUID = UUID;
+    public User setUUID(UUID id) {
+        this.id = id;
         return this;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public User setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
         return this;
     }
 
@@ -49,11 +54,19 @@ public class User {
         return this;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "UUID=" + UUID +
-                ", Nombre='" + Nombre + '\'' +
+                "UUID=" + id +
+                ", Nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", saldo=" + saldo +
                 '}';

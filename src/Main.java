@@ -1,14 +1,16 @@
 import Clases.*;
 import Clases.Transferencia;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Main {
     
 
-    public static void main(String[] args) {
-        User us1  = new User(1,"Pedro Gonzales","pedr.com",100);
-        User us2  = new User(2,"Robert Parker","Robertgmail.com",100);
+    public static void main(String[] args) throws IOException {
+        User us1  = new User("Pedro Gonzales","pedr.com","pw",100);
+        User us2  = new User("Robert Parker","Robertgmail.com","pw",100);
 
 
         /*
@@ -29,29 +31,36 @@ public class Main {
         Sesion sesion = new Sesion();
         Menu menu = new Menu();
 
-        while(sesion.isActivo()) {
-            int opcionMenuUsuario = -1;
-            while(opcionMenuUsuario == -1 || (opcionMenuUsuario < 1 || opcionMenuUsuario > 3)) {
-                opcionMenuUsuario = menu.mostrarMenuUsuario();
-            }
+        // Este while se encarga de las operaciones de registrar y loguear.
+        while(sesion.getUsuarioActivo() == null) {
+            int opcionMenuUsuario = menu.mostrarMenuUsuario();
 
-            if(opcionMenuUsuario != 3) {
-                // Le pido los datos para loguear or registrar a el usuario.
-                // Cuando lo logueo, seteo la variable de la clase Sesion con sesion.setCurrentUser(user);
-                // Eso me va a permitir saber quien es el usuario que esta manejando la sesion.
-                int opcionMenuPrincipal = -1;
-                while(opcionMenuPrincipal == -1 || (opcionMenuPrincipal < 1 || opcionMenuPrincipal > 7)) {
-                    opcionMenuPrincipal = menu.mostrarMenuPrincipal();
-                }
-                if(opcionMenuPrincipal != 7) {
-                    // Hago lo que haya pedido el usuario.
-                }
-            }
+            if(opcionMenuUsuario == 2) {
+                // Le pido los datos para registrar a el usuario.
+                String email = menu.pedirEmail();
+                String password = menu.pedirPassword();
 
-            sesion.finalizarSesion();
-            System.out.println("Hasta luego!");
+                UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
+                System.out.println("This is your new generated ID: " + uuidNuevoUser + ". Save it!");
+                System.in.read();
+            } else if(opcionMenuUsuario == 1) {
+
+                // Le pido los datos para loguear a el usuario.
+                String email = menu.pedirEmail();
+                String password = menu.pedirPassword();
+                UUID id = menu.pedirUUID();
+
+                sesion.loguearUsuario(email,password,id);
+                if(sesion.getUsuarioActivo() == null) {
+                    System.out.println("Bad credentials (Press any key to continue).");
+                    System.in.read();
+                }
+            } else {
+                sesion.finalizarSesion();
+            }
         }
 
+        System.out.println("User logueado");
     }
 }
 
