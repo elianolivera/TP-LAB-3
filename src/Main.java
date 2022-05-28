@@ -11,8 +11,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         User us1  = new User("Pedro Gonzales","pedr.com","pw",100);
         User us2  = new User("Robert Parker","Robertgmail.com","pw",100);
-
-
         /*
         System.out.print("\n ========  Ingrese monto a transferir : ======== ");
         float monto=0;
