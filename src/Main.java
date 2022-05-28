@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Main {
-    
+
 
     public static void main(String[] args) throws IOException {
         User us1  = new User("Pedro Gonzales","pedr.com","pw",100);
