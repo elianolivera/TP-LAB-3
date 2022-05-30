@@ -1,6 +1,8 @@
 package Clases;
 
 
+import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Transferencia {
@@ -15,6 +17,19 @@ public class Transferencia {
     public Transferencia() {
 
     }
+
+    ///busca usuario en la lista
+    public User buscarCliente(String nombre, List<User>lista) {
+        Scanner clientes = new Scanner(System.in);
+        nombre= clientes.nextLine();
+        for (User cliente : lista) {
+            if (cliente != null && cliente.getNombre().equals(nombre)) {
+                return cliente; }
+
+        }
+        return null;
+    }
+
     public Transferencia(User us, User receptor, UUID UUIDtransaccion, int cantidadtransac, double monto, Estado estado) {
         this.us = us;
         this.receptor = receptor;
@@ -24,17 +39,6 @@ public class Transferencia {
         this.estado = estado;
     }
 
-        public Transferencia transferir(Transferencia t1,  User u1 ,  User u2, float monto){
-            u1.setSaldo(u1.getSaldo()-monto);
-            u2.setSaldo(u2.getSaldo()+monto);
-            t1.setCantidadtransac(t1.getCantidadtransac()+1);
-            if (t1.getCantidadtransac()>3){
-                t1.setEstado(Estado.VALIDADA);
-                ///SE PASA AL ARCHIVO DE VALIDADAS
-            }
-
-            return t1;
-        }
 
 
 
