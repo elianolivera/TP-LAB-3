@@ -18,6 +18,27 @@ public class Transferencia {
 
     }
 
+
+    public Transferencia(User us, User receptor, UUID UUIDtransaccion, int cantidadtransac, double monto, Estado estado) {
+        this.us = us;
+        this.receptor = receptor;
+        this.UUIDtransaccion = UUIDtransaccion;
+        this.cantidadtransac = cantidadtransac;
+        this.monto = monto;
+        this.estado = estado;
+    }
+
+
+    /// VALIDAR TRANSFERENCIA
+    public void validar (Transferencia t1){
+        if (t1.getCantidadtransac()>=3){
+            t1.setEstado(Estado.VALIDADA);
+            ///SE PASA AL ARCHIVO DE VALIDADAS
+        }else if (t1.getCantidadtransac()<=3){
+            t1.setCantidadtransac(t1.getCantidadtransac()+1);
+            /// Se añade una validación
+        }
+    }
     ///busca usuario en la lista
     public User buscarCliente(String nombre, List<User>lista) {
         Scanner clientes = new Scanner(System.in);
@@ -30,16 +51,24 @@ public class Transferencia {
         return null;
     }
 
-    public Transferencia(User us, User receptor, UUID UUIDtransaccion, int cantidadtransac, double monto, Estado estado) {
-        this.us = us;
-        this.receptor = receptor;
-        this.UUIDtransaccion = UUIDtransaccion;
-        this.cantidadtransac = cantidadtransac;
-        this.monto = monto;
-        this.estado = estado;
+    ///Transeferir de un cliente insertado por teclado a otro.
+    public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
+        String nombre = null;
+        System.out.print(" ========  Ingrese su nombre    ========: ");
+        User u1 = t1.buscarCliente(nombre, lista);
+        System.out.print(" ========  Ingrese  el nombre a quien va a transferir ========: ");
+        User u2 = t1.buscarCliente(nombre, lista);
+        u1.setSaldo(u1.getSaldo() - monto);
+        u2.setSaldo(u2.getSaldo() + monto);
+        t1.setCantidadtransac(t1.getCantidadtransac() + 1);
+        UUIDtransaccion = UUID.randomUUID();
+        t1 = new Transferencia(u1, u2, UUIDtransaccion, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
+        if (t1.getCantidadtransac() >= 3) {
+            t1.setEstado(Estado.VALIDADA);
+            ///SE PASA AL ARCHIVO DE VALIDADAS
+        }
+        return t1;
     }
-
-
 
 
     public User getReceptor() {
