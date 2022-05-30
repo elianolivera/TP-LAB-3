@@ -49,8 +49,7 @@ public class Main {
                     String email = menu.pedirEmail();
                     String password = menu.pedirPassword();
                     UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
-                    System.out.println("Esta es tu nueva ID: " + uuidNuevoUser + ". Guardala!");
-                    System.in.read();
+                    System.out.println("\nEsta es tu nueva ID: " + uuidNuevoUser + ". Guardala!");
                 } else if(opcionMenuUsuario == 1) {
                     // Le pido los datos para loguear a el usuario.
                     String email = menu.pedirEmail();
@@ -61,19 +60,17 @@ public class Main {
 
                         sesion.loguearUsuario(email,password,id);
                     } catch (IllegalArgumentException ex) {
-                        System.out.println("El ID ingresado no es valido como ID. ");
+                        System.out.println("\n El ID ingresado no es valido como UUID.");
                     }
 
                     if(sesion.getUsuarioActivo() == null) {
-                        System.out.print("Los datos ingresados no son correctos o no existe el usuario. (Presiona una tecla para continuar).");
-                        System.in.read();
+                        System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
                     sesion.finalizarSesion();
                 }
             } catch(InvalidOptionException | InputMismatchException ex) {
-                System.out.println((ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()) + "(Presiona una tecla para continuar)");
-                System.in.read();
+                System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
             }
         }
         System.out.println("User logueado");
