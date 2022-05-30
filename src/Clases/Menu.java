@@ -77,18 +77,15 @@ public final class Menu {
         }
     }
 
-    public UUID pedirUUID() {
-        try{
-            String opcion = "";
-            while(opcion.isEmpty()) {
-                System.out.print("3.ID: ");
-                Scanner teclado = new Scanner(System.in);
-                opcion = teclado.nextLine();
-            }
-            return UUID.fromString(opcion);
-        } catch (Exception e) {
-            //e.printStackTrace();
-            return null;
+    public UUID pedirUUID() throws IllegalArgumentException {
+        String opcion = "";
+        while(opcion.isEmpty()) {
+            System.out.print("3.ID: ");
+            Scanner teclado = new Scanner(System.in);
+            opcion = teclado.nextLine();
         }
+
+        UUID id = UUID.fromString(opcion);
+        return id;
     }
 }
