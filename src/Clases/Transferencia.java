@@ -13,9 +13,7 @@ public class Transferencia {
     protected  double monto;
     protected Estado estado;
 
-
     public Transferencia() {
-
     }
 
 
@@ -48,8 +46,7 @@ public class Transferencia {
                 return cliente; }
 
         }
-        return null;
-    }
+        return null; }
 
     ///Transeferir de un cliente insertado por teclado a otro.
     public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
@@ -67,36 +64,21 @@ public class Transferencia {
             t1.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS
         }
-        return t1;
-    }
-
-
-    public User getReceptor() {
-        return receptor;
-    }
-
-    public Transferencia setReceptor(User receptor) {
-        this.receptor = receptor;
-        return this;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public Transferencia setEstado(Estado estado) {
-        this.estado = estado;
-        return this;
-    }
+        return t1; }
 
     public User getUs() {
         return us;
     }
-
     public Transferencia setUs(User us) {
         this.us = us;
         return this;
     }
+    public User getReceptor() {
+        return receptor;
+    }
+    public Transferencia setReceptor(User receptor) {
+        this.receptor = receptor;
+        return this; }
 
     public UUID getUUIDtransaccion() {
         return UUIDtransaccion;
@@ -107,22 +89,26 @@ public class Transferencia {
         return this;
     }
 
-
     public int getCantidadtransac() {
         return cantidadtransac;
     }
-
     public Transferencia setCantidadtransac(int cantidadtransac) {
         this.cantidadtransac = cantidadtransac;
         return this;
     }
-
     public double getMonto() {
         return monto;
     }
-
     public Transferencia setMonto(double monto) {
         this.monto = monto;
+        return this;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+    public Transferencia setEstado(Estado estado) {
+        this.estado = estado;
         return this;
     }
 
