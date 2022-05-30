@@ -16,10 +16,11 @@ public final class Menu {
                 System.out.print("\n 1. Consultar estado de activos. ");
                 System.out.print("\n 2. Realizar una transacción.");
                 System.out.print("\n 3. Transacciones pendientes.");
-                System.out.print("\n 4. Historial de transacciones. ");
-                System.out.print("\n 5. Archivo de transacciones. ");
-                System.out.print("\n 6. Volver al login. ");
-                System.out.print("\n 7. Salir. ");
+                System.out.print("\n 4. Validar transaccion.");
+                System.out.print("\n 5. Historial de transacciones. ");
+                System.out.print("\n 6. Archivo de transacciones. ");
+                System.out.print("\n 7. Volver al login. ");
+                System.out.print("\n 8. Salir. ");
                 System.out.print("\n ==== SELECIONA OPCIÓN ===: \n");
                 Scanner teclado = new Scanner(System.in);
                 opcion = Integer.valueOf(teclado.nextLine());
