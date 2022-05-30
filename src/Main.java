@@ -41,6 +41,14 @@ public class Main {
 
         // Este while se encarga de las operaciones de registrar y loguear.
         while(sesion.getUsuarioActivo() == null) {
+            logInOrRegister(sesion,menu);
+            userOperations(sesion,menu);
+
+        }
+    }
+
+    private static void logInOrRegister(Sesion sesion, Menu menu) {
+        while(sesion.getUsuarioActivo() == null) {
             try {
                 int opcionMenuUsuario = menu.mostrarMenuUsuario();
 
@@ -74,6 +82,17 @@ public class Main {
             }
         }
         System.out.println("User logueado");
+    }
+
+    private static void userOperations(Sesion sesion, Menu menu) {
+        try {
+            int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
+
+            //aca iria el switch con las operaciones.
+
+        } catch(InvalidOptionException | InputMismatchException ex) {
+            System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
+        }
     }
 }
 
