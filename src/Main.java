@@ -19,11 +19,9 @@ public class Main {
         lista.add(us1);
         lista.add(us2);
         lista.add(us3);
-
-
-        /*
         System.out.println(lista);
         /// TRANSFERENCIA
+        /*
         System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
         float monto=0;
         Scanner teclado = new Scanner(System.in);
@@ -34,7 +32,9 @@ public class Main {
         System.out.println(us2);
         /// MOSTAR TRANSFERENCIAS
         System.out.print("\n ======== Comprobante : ======== ");
-        System.out.println(t1);*/
+        System.out.println(t1);
+*/
+
 
         Sesion sesion = new Sesion();
         Menu menu = new Menu();
