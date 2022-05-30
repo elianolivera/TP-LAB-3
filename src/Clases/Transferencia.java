@@ -18,7 +18,6 @@ public class Transferencia {
     public Transferencia() {
     }
 
-
     public Transferencia(User us, User receptor, UUID UUIDtransaccion, int cantidadtransac, double monto, Estado estado) {
         this.us = us;
         this.receptor = receptor;
@@ -28,7 +27,6 @@ public class Transferencia {
         this.estado = estado;
     }
 
-
     /// VALIDAR TRANSFERENCIA
     public void validar (Transferencia t1){
         if (t1.getCantidadtransac()>=3){
@@ -37,18 +35,16 @@ public class Transferencia {
         }else if (t1.getCantidadtransac()<=3){
             t1.setCantidadtransac(t1.getCantidadtransac()+1);
             /// Se añade una validación
-        }
-    }
-    ///busca usuario en la lista
+        } }
+
+    ///Busca usuario en la lista
     public User buscarCliente(String nombre, List<User>lista) {
         Scanner clientes = new Scanner(System.in);
         nombre= clientes.nextLine();
         for (User cliente : lista) {
             if (cliente != null && cliente.getNombre().equals(nombre)) {
                 return cliente; }
-
-        }
-        return null; }
+        }return null; }
 
     ///Transeferir de un cliente insertado por teclado a otro.
     public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
@@ -90,7 +86,6 @@ public class Transferencia {
         this.UUIDtransaccion = UUIDtransaccion;
         return this;
     }
-
     public int getCantidadtransac() {
         return cantidadtransac;
     }
@@ -113,7 +108,6 @@ public class Transferencia {
         this.estado = estado;
         return this;
     }
-
     @Override
     public String toString() {
         return "Transferencia{" +

@@ -20,6 +20,8 @@ public class Main {
         lista.add(us2);
         lista.add(us3);
         System.out.println(lista);
+
+
         /// TRANSFERENCIA
         /*
         System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
@@ -30,10 +32,10 @@ public class Main {
         t1=t1.transferir(t1,monto,lista);
         System.out.println(us1);
         System.out.println(us2);
-        /// MOSTAR TRANSFERENCIAS
+        /// MOSTRAR TRANSFERENCIAS
         System.out.print("\n ======== Comprobante : ======== ");
         System.out.println(t1);
-*/
+       */
 
 
         Sesion sesion = new Sesion();
@@ -47,27 +49,22 @@ public class Main {
                 // Le pido los datos para registrar a el usuario.
                 String email = menu.pedirEmail();
                 String password = menu.pedirPassword();
-
                 UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
                 System.out.println("This is your new generated ID: " + uuidNuevoUser + ". Save it!");
                 System.in.read();
             } else if(opcionMenuUsuario == 1) {
-
                 // Le pido los datos para loguear a el usuario.
                 String email = menu.pedirEmail();
                 String password = menu.pedirPassword();
                 UUID id = menu.pedirUUID();
-
                 sesion.loguearUsuario(email,password,id);
                 if(sesion.getUsuarioActivo() == null) {
                     System.out.println("Bad credentials (Press any key to continue).");
                     System.in.read();
                 }
             } else {
-                sesion.finalizarSesion();
-            }
+                sesion.finalizarSesion(); }
         }
-
         System.out.println("User logueado");
     }
 }
