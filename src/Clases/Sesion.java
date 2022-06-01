@@ -1,11 +1,8 @@
 package Clases;
 
-import Exceptions.InvalidOptionException;
-
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.UUID;
+import java.util.Scanner;
 
 // En el caso de que quiera hacer algo como agregar datos a un archivo al apretar salir me parecio mejor usar una clase sesion.
 public final class Sesion {
@@ -24,16 +21,33 @@ public final class Sesion {
         this.usuarioActivo = usuarioActivo;
     }
 
-    public UUID registrarUsuario(String email, String password) {
-        User usuariox = new User("x",email, password, 100);
+    public User registrarUsuario(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("\nIngreso de Datos:");
+        System.out.println("\nIngrese su Nombre");
+        nombre=teclado.nextLine();
+        System.out.println("\nIngrese su Apellido");
+        apellido=teclado.nextLine();
+        System.out.println("\nIngrese su Numero de documento");
+        dni=teclado.nextLine();
+        System.out.println("\nIngrese su Fecha de nacimiento");
+        fechaDeNacimiento=teclado.nextLine();
+        System.out.println("\nIngrese su Correo electronico");
+        email=teclado.nextLine();
+        System.out.println("\nIngrese su password");
+        password=teclado.nextLine();
+
+        User usuariox = new User( nombre,  apellido,  dni,  fechaDeNacimiento, email,  password);
         usuarios.add(usuariox);
 
-        return usuariox.getUUID();
+        return usuariox;
     }
 
-    public User loguearUsuario(String email, String password, UUID id) {
+    public User loguearUsuario(String email, String password) {
         for(User u : usuarios) {
-            if(id.equals(u.id) && email.equals(u.email) && password.equals(u.password)) {
+          if(email.equals(u.email) && password.equals(u.password)) {
                 setUsuarioActivo(u);
                 return u;
             }

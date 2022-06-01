@@ -1,57 +1,71 @@
 package Clases;
 
-import java.util.Objects;
 import java.util.UUID;
 
 public class User {
-    protected UUID id;
+    protected UUID billetera;
     protected String nombre;
+    protected String apellido;
+    protected String dni;
+    protected String fechaDeNacimiento;
     protected String email;
     protected String password;
-    protected float saldo;
 
-    public User(String nombre, String email,String password, float saldo) {
-        this.id = UUID.randomUUID();
+    public User(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
+        this.billetera=UUID.randomUUID();
         this.nombre = nombre;
-        this.password = password;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.fechaDeNacimiento = fechaDeNacimiento;
         this.email = email;
-        this.saldo = saldo;
+        this.password = password;
     }
 
-    public UUID getUUID() {
-        return id;
+    public User() {
     }
 
-    public User setUUID(UUID id) {
-        this.id = id;
-        return this;
+    public UUID getBilletera() {
+        return billetera;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public User setNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
-        return this;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getFechaDeNacimiento() {
+        return fechaDeNacimiento;
+    }
+
+    public void setFechaDeNacimiento(String fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public User setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public float getSaldo() {
-        return saldo;
-    }
-
-    public User setSaldo(float saldo) {
-        this.saldo = saldo;
-        return this;
     }
 
     public String getPassword() {
@@ -64,11 +78,14 @@ public class User {
 
     @Override
     public String toString() {
-        return "\n User{" +
-                "UUID=" + id +
-                ", Nombre='" + nombre + '\'' +
+        return "User{" +
+                "\nN de billetera=" + billetera +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni='" + dni + '\'' +
+                ", fechaDeNacimiento='" + fechaDeNacimiento + '\'' +
                 ", email='" + email + '\'' +
-                ", saldo=" + saldo +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

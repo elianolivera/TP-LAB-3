@@ -1,23 +1,25 @@
-import Clases.*;
-import Clases.Transferencia;
-import Exceptions.InvalidOptionException;
+import Clases.Menu;
+import Clases.Sesion;
+import Clases.User;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Main {
 
 
     public static void main(String[] args) throws IOException {
         ///Lista de usuarios
-        User us1  = new User("Peter","pedr.com","pw",100);
+       /* User us1  = new User("Peter","pedr.com","pw",100);
         User us2  = new User("Robert","Robertgmail.com","pw",100);
         User us3  = new User("Alan","Robertgmail.com","pw",100);
         List<User> lista= new ArrayList<>();
         lista.add(us1);
         lista.add(us2);
         lista.add(us3);
-        System.out.println(lista);
+        System.out.println(lista);*/
 
 
         /// TRANSFERENCIA
@@ -41,58 +43,29 @@ public class Main {
 
         // Este while se encarga de las operaciones de registrar y loguear.
         while(sesion.getUsuarioActivo() == null) {
-            logInOrRegister(sesion,menu);
-            userOperations(sesion,menu);
+            int opcionMenuUsuario = menu.mostrarMenuUsuario();
 
-        }
-    }
-
-    private static void logInOrRegister(Sesion sesion, Menu menu) {
-        while(sesion.getUsuarioActivo() == null) {
-            try {
-                int opcionMenuUsuario = menu.mostrarMenuUsuario();
-
-                if(opcionMenuUsuario == 2) {
-                    // Le pido los datos para registrar a el usuario.
-                    String email = menu.pedirEmail();
-                    String password = menu.pedirPassword();
-                    UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
-                    System.out.println("\nEsta es tu nueva ID: " + uuidNuevoUser + ". Guardala!");
-                } else if(opcionMenuUsuario == 1) {
-                    // Le pido los datos para loguear a el usuario.
-                    String email = menu.pedirEmail();
-                    String password = menu.pedirPassword();
-
-                    try {
-                        UUID id = menu.pedirUUID();
-
-                        sesion.loguearUsuario(email,password,id);
-                    } catch (IllegalArgumentException ex) {
-                        System.out.println("\n El ID ingresado no es valido como UUID.");
-                    }
-
-                    if(sesion.getUsuarioActivo() == null) {
-                        System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
-                    }
-                } else {
-                    sesion.finalizarSesion();
+            if(opcionMenuUsuario == 2) {
+                // Le pido los datos para registrar a el usuario.
+                String email = menu.pedirEmail();
+                String password = menu.pedirPassword();
+                UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
+                System.out.println("This is your new generated ID: " + uuidNuevoUser + ". Save it!");
+                System.in.read();
+            } else if(opcionMenuUsuario == 1) {
+                // Le pido los datos para loguear a el usuario.
+                String email = menu.pedirEmail();
+                String password = menu.pedirPassword();
+                UUID id = menu.pedirUUID();
+                sesion.loguearUsuario(email,password,id);
+                if(sesion.getUsuarioActivo() == null) {
+                    System.out.println("Bad credentials (Press any key to continue).");
+                    System.in.read();
                 }
-            } catch(InvalidOptionException | InputMismatchException ex) {
-                System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
-            }
+            } else {
+                sesion.finalizarSesion(); }
         }
         System.out.println("User logueado");
-    }
-
-    private static void userOperations(Sesion sesion, Menu menu) {
-        try {
-            int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
-
-            //aca iria el switch con las operaciones.
-
-        } catch(InvalidOptionException | InputMismatchException ex) {
-            System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
-        }
     }
 }
 

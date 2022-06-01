@@ -1,8 +1,6 @@
 package Clases;
 
 
-
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -18,10 +16,10 @@ public class Transferencia {
     public Transferencia() {
     }
 
-    public Transferencia(User us, User receptor, UUID UUIDtransaccion, int cantidadtransac, double monto, Estado estado) {
+    public Transferencia(User us, User receptor, int cantidadtransac, double monto, Estado estado) {
+        this.UUIDtransaccion = UUID.randomUUID();
         this.us = us;
         this.receptor = receptor;
-        this.UUIDtransaccion = UUIDtransaccion;
         this.cantidadtransac = cantidadtransac;
         this.monto = monto;
         this.estado = estado;
@@ -38,26 +36,27 @@ public class Transferencia {
         } }
 
     ///Busca usuario en la lista
-    public User buscarCliente(String nombre, List<User>lista) {
-        Scanner clientes = new Scanner(System.in);
-        nombre= clientes.nextLine();
-        for (User cliente : lista) {
-            if (cliente != null && cliente.getNombre().equals(nombre)) {
-                return cliente; }
+    public User buscarUsuarioPorDNI(List<User>lista) {
+        String dni;
+        Scanner dniAux = new Scanner(System.in);
+        dni= dniAux.nextLine();
+        for (User usuario : lista) {
+            if (usuario != null && usuario.getDni().equals(dni)) {
+                return usuario; }
         }return null; }
 
-    ///Transeferir de un cliente insertado por teclado a otro.
+    ///Transeferir de un usuario insertado por teclado a otro.
     public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
         String nombre = null;
-        System.out.print(" ========  Ingrese su nombre    ========: ");
-        User u1 = t1.buscarCliente(nombre, lista);
-        System.out.print(" ========  Ingrese  el nombre a quien va a transferir ========: ");
-        User u2 = t1.buscarCliente(nombre, lista);
+        System.out.print(" ========  Ingrese su DNI   ========: ");
+        User u1 = t1.buscarUsuarioPorDNI(lista);
+        System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
+        User u2 = t1.buscarUsuarioPorDNI(lista);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);
-        UUIDtransaccion = UUID.randomUUID();
-        t1 = new Transferencia(u1, u2, UUIDtransaccion, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
+        ///UUIDtransaccion = UUID.randomUUID();
+        t1 = new Transferencia(u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (t1.getCantidadtransac() >= 3) {
             t1.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS
@@ -82,10 +81,10 @@ public class Transferencia {
         return UUIDtransaccion;
     }
 
-    public Transferencia setUUIDtransaccion(UUID UUIDtransaccion) {
+    /*public Transferencia setUUIDtransaccion(UUID UUIDtransaccion) {
         this.UUIDtransaccion = UUIDtransaccion;
         return this;
-    }
+    }*/
     public int getCantidadtransac() {
         return cantidadtransac;
     }

@@ -4,7 +4,6 @@ import Exceptions.InvalidOptionException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.UUID;
 
 public final class Menu {
     public Menu() {
@@ -51,7 +50,7 @@ public final class Menu {
         try{
             String opcion = "";
             while(opcion.isEmpty()) {
-                System.out.print("1.Email: ");
+                System.out.print("Ingrese su direccion de correo");
                 Scanner teclado = new Scanner(System.in);
                 opcion = teclado.nextLine();
             }
@@ -66,7 +65,7 @@ public final class Menu {
         try{
             String opcion = "";
             while(opcion.isEmpty()) {
-                System.out.print("2.Password: ");
+                System.out.print("Ingrese su password ");
                 Scanner teclado = new Scanner(System.in);
                 opcion = teclado.nextLine();
             }
@@ -77,7 +76,7 @@ public final class Menu {
         }
     }
 
-    public UUID pedirUUID() throws IllegalArgumentException {
+    /*public UUID pedirUUID() throws IllegalArgumentException {
         String opcion = "";
         while(opcion.isEmpty()) {
             System.out.print("3.ID: ");
@@ -87,5 +86,5 @@ public final class Menu {
 
         UUID id = UUID.fromString(opcion);
         return id;
-    }
+    }*/
 }
