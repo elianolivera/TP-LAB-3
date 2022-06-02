@@ -39,7 +39,13 @@ public class Main {
         Sesion sesion = new Sesion();
         Menu menu = new Menu();
 
+        correrApp(sesion, menu);
+    }
+
+    // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
+    private static void correrApp(Sesion sesion, Menu menu) {
         handleLoginAndRegister(sesion, menu);
+        userOperations(sesion,menu);
     }
 
     private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
@@ -70,6 +76,45 @@ public class Main {
         }
 
         System.out.println("User logueado satisfactoriamente.");
+    }
+
+    private static void userOperations(Sesion sesion, Menu menu) {
+        try {
+            int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
+
+            switch (opcionMenuPrincipal) {
+                case 1:
+                    // Consultar activos.
+                    break;
+                case 2:
+                    // Realizar una transaccion.
+                    break;
+                case 3:
+                    // Transacciones pendientes.
+                    break;
+                case 4:
+                    // Validar transaccion.
+                    break;
+                case 5:
+                    // Historial de transacciones.
+                    break;
+                case 6:
+                    // Archivo de transacciones.
+                    break;
+                case 7:
+                    // Volver al login
+                    sesion.setUsuarioActivo(null);
+                    break;
+                case 8:
+                    // Salir.
+                    sesion.finalizarSesion();
+                    break;
+            }
+            //aca iria el switch con las operaciones.
+
+        } catch(InvalidOptionException | InputMismatchException ex) {
+            System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
+        }
     }
 }
 
