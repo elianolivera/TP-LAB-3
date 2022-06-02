@@ -29,23 +29,26 @@ public final class Sesion {
         System.out.println("\nIngreso de Datos:");
         System.out.println("\nIngrese su Nombre");
         nombre=teclado.nextLine();
+
         System.out.println("\nIngrese su Apellido");
         apellido=teclado.nextLine();
+
         System.out.println("\nIngrese su Numero de documento");
         dni=teclado.nextLine();
+
         System.out.println("\nIngrese su Fecha de nacimiento");
         fechaDeNacimiento=teclado.nextLine();
+
         System.out.println("\nIngrese su Correo electronico");
         email=teclado.nextLine();
+        //buscarEmail(email);
+
         System.out.println("\nIngrese su password");
         password=teclado.nextLine();
 
         System.out.println("Los datos ingresados son:");
-
         User usuariox = new User( nombre,  apellido,  dni,  fechaDeNacimiento, email,  password);
-
         System.out.println(usuariox);
-
         usuarios.add(usuariox);
 
         return usuariox;
@@ -68,6 +71,15 @@ public final class Sesion {
                 System.out.println(lista.toString());
             }
         }
+    }
+
+    public User buscarEmail(String email) {
+        for (User usuario : usuarios) {
+            if (usuario != null && usuario.getEmail().equals(email)) {
+                return usuario;
+            }
+        }
+        return null;
     }
 
     public void finalizarSesion() {

@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 public final class Menu {
 
-    private List<User> usuarios = new ArrayList<>();
-
     public Menu() {
     }
 
@@ -58,7 +56,6 @@ public final class Menu {
                 System.out.print("Ingrese su direccion de correo");
                 Scanner teclado = new Scanner(System.in);
                 opcion = teclado.nextLine();
-                buscarEmail(opcion,usuarios);
             }
             return opcion;
         } catch (Exception e) {
@@ -81,12 +78,6 @@ public final class Menu {
             return null;
         }
     }
-
-    public User buscarEmail(String email,List<User> lista) {
-        for (User usuario : lista) {
-            if (usuario != null && usuario.getEmail().equals(email)) {
-                return usuario; }
-        }return null; }
 
     /*public UUID pedirUUID() throws IllegalArgumentException {
         String opcion = "";
