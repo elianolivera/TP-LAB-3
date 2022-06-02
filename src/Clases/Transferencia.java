@@ -27,13 +27,14 @@ public class Transferencia {
 
     /// VALIDAR TRANSFERENCIA
     public void validar (Transferencia t1){
-        if (t1.getCantidadtransac()>=3){
+        if (t1.getCantidadtransac()>=3) {
             t1.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS
         }else if (t1.getCantidadtransac()<=3){
             t1.setCantidadtransac(t1.getCantidadtransac()+1);
             /// Se añade una validación
-        } }
+        }
+    }
 
     ///Busca usuario en la lista por DNI
     public User buscarUsuarioPorDNI(List<User>lista) {
@@ -42,16 +43,22 @@ public class Transferencia {
         dni= dniAux.nextLine();
         for (User usuario : lista) {
             if (usuario != null && usuario.getDni().equals(dni)) {
-                return usuario; }
-        }return null; }
+                return usuario;
+            }
+        }
+        return null;
+    }
 
     ///Transeferir de un usuario insertado por teclado a otro.
     public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
         String nombre = null;
+
         System.out.print(" ========  Ingrese su DNI   ========: ");
         Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(lista);
+
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
         Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(lista);
+
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);
@@ -71,6 +78,7 @@ public class Transferencia {
         this.us = us;
         return this;
     }
+
     public User getReceptor() {
         return receptor;
     }
@@ -86,6 +94,7 @@ public class Transferencia {
     public int getCantidadtransac() {
         return cantidadtransac;
     }
+
     public Transferencia setCantidadtransac(int cantidadtransac) {
         this.cantidadtransac = cantidadtransac;
         return this;
@@ -93,6 +102,7 @@ public class Transferencia {
     public double getMonto() {
         return monto;
     }
+
     public Transferencia setMonto(double monto) {
         this.monto = monto;
         return this;
@@ -101,6 +111,7 @@ public class Transferencia {
     public Estado getEstado() {
         return estado;
     }
+
     public Transferencia setEstado(Estado estado) {
         this.estado = estado;
         return this;
