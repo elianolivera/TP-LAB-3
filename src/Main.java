@@ -1,7 +1,9 @@
 import Clases.Menu;
 import Clases.Sesion;
+import Exceptions.InvalidOptionException;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 
 public class Main {
 
@@ -37,35 +39,37 @@ public class Main {
         Sesion sesion = new Sesion();
         Menu menu = new Menu();
 
-        // Este while se encarga de las operaciones de registrar y loguear.
+        handleLoginAndRegister(sesion, menu);
+    }
+
+    private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
         while(sesion.getUsuarioActivo() == null) {
-            int opcionMenuUsuario = menu.mostrarMenuUsuario();
+            try {
+                int opcionMenuUsuario = menu.mostrarMenuUsuario();
 
-            if(opcionMenuUsuario == 2) {
+                if(opcionMenuUsuario == 2) {
 
-                sesion.registrarUsuario();
-                System.out.println("Nuevo usuario resgistardo");
+                    sesion.registrarUsuario();
+                    System.out.println("Nuevo usuario resgistrado.");
 
-                /*Le pido los datos para registrar a el usuario.
-                String email = menu.pedirEmail();
-                String password = menu.pedirPassword();
-                UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
-                System.out.println("This is your new generated ID: " + uuidNuevoUser + ". Save it!");
-                System.in.read();*/
-            } else if(opcionMenuUsuario == 1) {
-                // Le pido los datos para loguear a el usuario.
-                String email = menu.pedirEmail();
-                String password = menu.pedirPassword();
-                ///UUID id = menu.pedirUUID();
-                sesion.loguearUsuario(email,password);
-                if(sesion.getUsuarioActivo() == null) {
-                    System.out.println("Bad credentials (Press any key to continue).");
-                    System.in.read();
+                } else if(opcionMenuUsuario == 1) {
+                    // Le pido los datos para loguear a el usuario.
+                    String email = menu.pedirEmail();
+                    String password = menu.pedirPassword();
+                    ///UUID id = menu.pedirUUID();
+                    sesion.loguearUsuario(email,password);
+                    if(sesion.getUsuarioActivo() == null) {
+                        System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
+                    }
+                } else {
+                    sesion.finalizarSesion();
                 }
-            } else {
-                sesion.finalizarSesion(); }
+            } catch(InvalidOptionException | InputMismatchException ex) {
+                System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
+            }
         }
-        System.out.println("User logueado");
+
+        System.out.println("User logueado satisfactoriamente.");
     }
 }
 
