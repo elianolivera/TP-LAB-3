@@ -4,6 +4,7 @@ import Exceptions.InvalidOptionException;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.UUID;
 
 public class Main {
 
@@ -62,8 +63,8 @@ public class Main {
                     // Le pido los datos para loguear a el usuario.
                     String email = menu.pedirEmail();
                     String password = menu.pedirPassword();
-                    ///UUID id = menu.pedirUUID();
-                    sesion.loguearUsuario(email,password);
+                    UUID id = menu.pedirUUID();
+                    sesion.loguearUsuario(email,password,id);
                     if(sesion.getUsuarioActivo() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
@@ -75,7 +76,7 @@ public class Main {
             }
         }
 
-        System.out.println("User logueado satisfactoriamente.");
+        System.out.println("Usuario logueado satisfactoriamente.");
     }
 
     private static void userOperations(Sesion sesion, Menu menu) {

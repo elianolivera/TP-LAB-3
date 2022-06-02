@@ -2,10 +2,7 @@ package Clases;
 
 import Exceptions.InvalidOptionException;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public final class Menu {
 
@@ -58,7 +55,6 @@ public final class Menu {
                 System.out.print("Ingrese su direccion de correo");
                 Scanner teclado = new Scanner(System.in);
                 opcion = teclado.nextLine();
-                buscarEmail(opcion,usuarios);
             }
             return opcion;
         } catch (Exception e) {
@@ -82,13 +78,7 @@ public final class Menu {
         }
     }
 
-    public User buscarEmail(String email,List<User> lista) {
-        for (User usuario : lista) {
-            if (usuario != null && usuario.getEmail().equals(email)) {
-                return usuario; }
-        }return null; }
-
-    /*public UUID pedirUUID() throws IllegalArgumentException {
+    public UUID pedirUUID() throws IllegalArgumentException {
         String opcion = "";
         while(opcion.isEmpty()) {
             System.out.print("3.ID: ");
@@ -98,5 +88,5 @@ public final class Menu {
 
         UUID id = UUID.fromString(opcion);
         return id;
-    }*/
+    }
 }

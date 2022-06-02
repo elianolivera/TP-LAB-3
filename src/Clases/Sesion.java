@@ -1,12 +1,10 @@
 package Clases;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
-import org.codehaus.jackson.map.ObjectMapper;
 
 
 // En el caso de que quiera hacer algo como agregar datos a un archivo al apretar salir me parecio mejor usar una clase sesion.
@@ -48,7 +46,6 @@ public final class Sesion implements Serializable {
 
         System.out.println("\nIngrese su Correo electronico");
         email=teclado.nextLine();
-        //buscarEmail(email);
 
         System.out.println("\nIngrese su password");
         password=teclado.nextLine();
@@ -72,7 +69,7 @@ public final class Sesion implements Serializable {
         return null;
     }
 
-    public void guardaUsuarioEnArchivo(List<User> lista) {
+    /*public void guardaUsuarioEnArchivo(List<User> lista) {
 
         File archivoUsuarios = JSON_MAPPER.readValue (new File("usuarios.json"));
 
@@ -83,7 +80,7 @@ public final class Sesion implements Serializable {
             if (u == null) {
             }
         }
-    }
+    }*/
 
     public void mostarUsuarios(List<User> lista){
         for(User u : lista){
@@ -91,15 +88,6 @@ public final class Sesion implements Serializable {
                 System.out.println(u.toString());
             }
         }
-    }
-
-    public User buscarEmail(String email) {
-        for (User usuario : usuarios) {
-            if (usuario != null && usuario.getEmail().equals(email)) {
-                return usuario;
-            }
-        }
-        return null;
     }
 
     public void finalizarSesion() {
