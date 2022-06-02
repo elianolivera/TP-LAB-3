@@ -1,11 +1,7 @@
 import Clases.Menu;
 import Clases.Sesion;
-import Clases.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class Main {
 
@@ -46,18 +42,22 @@ public class Main {
             int opcionMenuUsuario = menu.mostrarMenuUsuario();
 
             if(opcionMenuUsuario == 2) {
-                // Le pido los datos para registrar a el usuario.
+
+                sesion.registrarUsuario();
+                System.out.println("Nuevo usuario resgistardo");
+
+                /*Le pido los datos para registrar a el usuario.
                 String email = menu.pedirEmail();
                 String password = menu.pedirPassword();
                 UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
                 System.out.println("This is your new generated ID: " + uuidNuevoUser + ". Save it!");
-                System.in.read();
+                System.in.read();*/
             } else if(opcionMenuUsuario == 1) {
                 // Le pido los datos para loguear a el usuario.
                 String email = menu.pedirEmail();
                 String password = menu.pedirPassword();
-                UUID id = menu.pedirUUID();
-                sesion.loguearUsuario(email,password,id);
+                ///UUID id = menu.pedirUUID();
+                sesion.loguearUsuario(email,password);
                 if(sesion.getUsuarioActivo() == null) {
                     System.out.println("Bad credentials (Press any key to continue).");
                     System.in.read();

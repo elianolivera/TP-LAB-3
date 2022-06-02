@@ -35,7 +35,7 @@ public class Transferencia {
             /// Se añade una validación
         } }
 
-    ///Busca usuario en la lista
+    ///Busca usuario en la lista por DNI
     public User buscarUsuarioPorDNI(List<User>lista) {
         String dni;
         Scanner dniAux = new Scanner(System.in);

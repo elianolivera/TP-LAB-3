@@ -21,8 +21,9 @@ public final class Sesion {
         this.usuarioActivo = usuarioActivo;
     }
 
-    public User registrarUsuario(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
+    public User registrarUsuario() {
 
+        String nombre,apellido,dni,fechaDeNacimiento,email,password;
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("\nIngreso de Datos:");
@@ -39,7 +40,12 @@ public final class Sesion {
         System.out.println("\nIngrese su password");
         password=teclado.nextLine();
 
+        System.out.println("Los datos ingresados son:");
+
         User usuariox = new User( nombre,  apellido,  dni,  fechaDeNacimiento, email,  password);
+
+        System.out.println(usuariox);
+
         usuarios.add(usuariox);
 
         return usuariox;

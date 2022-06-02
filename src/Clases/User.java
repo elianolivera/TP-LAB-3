@@ -21,9 +21,6 @@ public class User {
         this.password = password;
     }
 
-    public User() {
-    }
-
     public UUID getBilletera() {
         return billetera;
     }
