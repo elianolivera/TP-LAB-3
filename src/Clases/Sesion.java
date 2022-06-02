@@ -1,11 +1,18 @@
 package Clases;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
+import org.codehaus.jackson.map.ObjectMapper;
+
 
 // En el caso de que quiera hacer algo como agregar datos a un archivo al apretar salir me parecio mejor usar una clase sesion.
-public final class Sesion {
+public final class Sesion implements Serializable {
+
+    private static final long serialVersionUID = -6719022570919861969L;
     private List<User> usuarios = new ArrayList<>();
     private User usuarioActivo;
 
@@ -51,9 +58,9 @@ public final class Sesion {
         return usuariox;
     }
 
-    public User loguearUsuario(String email, String password) {
+    public User loguearUsuario(String email, String password, UUID billetera) {
         for(User u : usuarios) {
-          if(email.equals(u.email) && password.equals(u.password)) {
+          if(email.equals(u.email) && password.equals(u.password) && billetera.equals(u.billetera)) {///Validacion de correo y contraseña
                 setUsuarioActivo(u);
                 return u;
             }
@@ -62,10 +69,23 @@ public final class Sesion {
         return null;
     }
 
+    public void guardaUsuarioEnArchivo(List<User> lista) {
+
+        File archivoUsuarios = JSON_MAPPER.readValue (new File("usuarios.json"));
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        for (User u : lista) {
+            if (u == null) {
+            }
+        }
+    }
+
     public void mostarUsuarios(List<User> lista){
-        for(User usuario : lista){
-            if(usuario !=null){
-                System.out.println(lista.toString());
+        for(User u : lista){
+            if(u !=null){
+                System.out.println(u.toString());
             }
         }
     }

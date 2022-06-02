@@ -55,7 +55,7 @@ public class Transferencia {
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);
-        ///UUIDtransaccion = UUID.randomUUID();
+        UUIDtransaccion = UUID.randomUUID();
         t1 = new Transferencia(u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (t1.getCantidadtransac() >= 3) {
             t1.setEstado(Estado.VALIDADA);
@@ -66,6 +66,7 @@ public class Transferencia {
     public User getUs() {
         return us;
     }
+
     public Transferencia setUs(User us) {
         this.us = us;
         return this;
@@ -73,6 +74,7 @@ public class Transferencia {
     public User getReceptor() {
         return receptor;
     }
+
     public Transferencia setReceptor(User receptor) {
         this.receptor = receptor;
         return this; }
@@ -81,10 +83,6 @@ public class Transferencia {
         return UUIDtransaccion;
     }
 
-    /*public Transferencia setUUIDtransaccion(UUID UUIDtransaccion) {
-        this.UUIDtransaccion = UUIDtransaccion;
-        return this;
-    }*/
     public int getCantidadtransac() {
         return cantidadtransac;
     }

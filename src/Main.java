@@ -2,6 +2,7 @@ import Clases.Menu;
 import Clases.Sesion;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class Main {
 
@@ -44,28 +45,26 @@ public class Main {
             if(opcionMenuUsuario == 2) {
 
                 sesion.registrarUsuario();
-                System.out.println("Nuevo usuario resgistardo");
-
-                /*Le pido los datos para registrar a el usuario.
-                String email = menu.pedirEmail();
-                String password = menu.pedirPassword();
-                UUID uuidNuevoUser = sesion.registrarUsuario(email,password);
-                System.out.println("This is your new generated ID: " + uuidNuevoUser + ". Save it!");
-                System.in.read();*/
+                System.out.println("Nuevo usuario resgistrado. Presione cualquier tecla para continuar");
+                System.in.read();
             } else if(opcionMenuUsuario == 1) {
+
                 // Le pido los datos para loguear a el usuario.
                 String email = menu.pedirEmail();
                 String password = menu.pedirPassword();
-                ///UUID id = menu.pedirUUID();
-                sesion.loguearUsuario(email,password);
+                UUID id = menu.pedirUUID();
+                sesion.loguearUsuario(email,password,id);
                 if(sesion.getUsuarioActivo() == null) {
-                    System.out.println("Bad credentials (Press any key to continue).");
+                    System.out.println("Error en la carga de datos. Presione cualquier tecla para continuar");
                     System.in.read();
                 }
+
             } else {
                 sesion.finalizarSesion(); }
         }
-        System.out.println("User logueado");
+        System.out.println("Usuario logueado");
+
+        menu.mostrarMenuPrincipal();
     }
 }
 

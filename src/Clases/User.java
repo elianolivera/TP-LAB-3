@@ -75,14 +75,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "\nN de billetera=" + billetera +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", dni='" + dni + '\'' +
-                ", fechaDeNacimiento='" + fechaDeNacimiento + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return  "\nN de billetera=" + billetera +
+                "\n Nombre='" + nombre +
+                "\n Apellido='" + apellido +
+                "\n Fecha De Nacimiento='" + fechaDeNacimiento +
+                "\n Correo electrónico='" + email +
+                "\n Password='" + password;
     }
 }
