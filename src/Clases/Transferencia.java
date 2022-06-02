@@ -49,9 +49,9 @@ public class Transferencia {
     public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
         String nombre = null;
         System.out.print(" ========  Ingrese su DNI   ========: ");
-        User u1 = t1.buscarUsuarioPorDNI(lista);
+        Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(lista);
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
-        User u2 = t1.buscarUsuarioPorDNI(lista);
+        Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(lista);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);

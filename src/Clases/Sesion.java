@@ -62,6 +62,14 @@ public final class Sesion {
         return null;
     }
 
+    public void mostarUsuarios(List<User> lista){
+        for(User usuario : lista){
+            if(usuario !=null){
+                System.out.println(lista.toString());
+            }
+        }
+    }
+
     public void finalizarSesion() {
         // Paso los nuevos usuarios registrados a el archivo.
         System.exit(0);
