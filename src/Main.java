@@ -71,7 +71,6 @@ public class Main {
                     float monto=0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-
                     ttt=ttt.transferir(ttt,monto,lista);
                     System.out.println(us1);
                     System.out.println(us2);
