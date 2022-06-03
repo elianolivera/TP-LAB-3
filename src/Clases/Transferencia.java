@@ -37,7 +37,7 @@ public class Transferencia {
     }
 
     ///Busca usuario en la lista por DNI
-    public User buscarUsuarioPorDNI(List<User>lista) {
+    public User buscarUsuarioPorDNI(List<Billetera>lista) {
         String dni;
         Scanner dniAux = new Scanner(System.in);
         dni= dniAux.nextLine();
@@ -50,15 +50,13 @@ public class Transferencia {
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(Transferencia t1, float monto,List<User>lista) {
+    public Transferencia transferir(Transferencia t1, float monto, List<Billetera> lista) {
         String nombre = null;
 
         System.out.print(" ========  Ingrese su DNI   ========: ");
         Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(lista);
-
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
         Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(lista);
-
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);

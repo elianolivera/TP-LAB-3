@@ -19,8 +19,12 @@ public  class Billetera extends User{
 
     @Override
     public String toString() {
-        return "Billetera{" + super.toString() +
+        return "\n Billetera{" +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
                 "saldo=" + saldo +
+                ", billetera=" + billetera +
+                ", dni='" + dni + '\'' +
                 '}';
     }
 }
