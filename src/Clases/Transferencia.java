@@ -63,10 +63,9 @@ public class Transferencia {
         t1 = new Transferencia(u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (t1.getCantidadtransac() >= 3) {
             t1.setEstado(Estado.VALIDADA);
+            transferencias.add(t1);
             ///SE PASA AL ARCHIVO DE VALIDADAS
-        }
-        transferencias.add(t1);
-        return t1; }
+        }return t1; }
 
     public User getUs() {
         return us;
