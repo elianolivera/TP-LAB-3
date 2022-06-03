@@ -50,9 +50,8 @@ public class Transferencia {
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(Transferencia t1, float monto, List<Billetera> lista) {
+    public Transferencia transferir(Transferencia t1, float monto, List<Billetera> lista,List<Transferencia>transferencias) {
         String nombre = null;
-
         System.out.print(" ========  Ingrese su DNI   ========: ");
         Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(lista);
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
@@ -66,6 +65,7 @@ public class Transferencia {
             t1.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS
         }
+        transferencias.add(t1);
         return t1; }
 
     public User getUs() {

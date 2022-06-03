@@ -16,7 +16,7 @@ public class Main {
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(Sesion sesion, Menu menu) {
-        handleLoginAndRegister(sesion, menu);
+        //handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
@@ -54,10 +54,11 @@ public class Main {
             Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123",100);
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123",100);
             List<Billetera> lista= new ArrayList<>();
+            List<Transferencia> transferencias= new ArrayList<>();
+            Transferencia ttt = new Transferencia();
             lista.add(us1);
             lista.add(us2);
             lista.add(us3);
-            Transferencia ttt = new Transferencia();
 
             switch (opcionMenuPrincipal) {
 
@@ -66,12 +67,12 @@ public class Main {
                     break;
                 case 2:
                     // Realizar transferencia
-                    System.out.println("\n ======== Lista de usuarios ======== :  \n"+lista);
+                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + lista);
                     System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
-                    float monto=0;
+                    float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt=ttt.transferir(ttt,monto,lista);
+                    ttt = ttt.transferir(ttt, monto, lista, transferencias);
                     System.out.println(us1);
                     System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
@@ -89,9 +90,8 @@ public class Main {
                     break;
                 case 5:
                     // Historial de transacciones.
-
                     System.out.print("\n ======== Comprobante : ======== ");
-                    System.out.println(ttt);
+                    System.out.println(transferencias);
 
                     break;
                 case 6:
