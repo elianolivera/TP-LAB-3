@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.UUID;
 
 
-// En el caso de que quiera hacer algo como agregar datos a un archivo al apretar salir me parecio mejor usar una clase sesion.
 public final class Sesion implements Serializable {
 
     private static final long serialVersionUID = -6719022570919861969L;

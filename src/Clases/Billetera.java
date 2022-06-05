@@ -4,9 +4,9 @@ public  class Billetera extends User{
 
     protected double saldo;
 
-    public Billetera(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password, double saldo) {
+    public Billetera(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
         super(nombre, apellido, dni, fechaDeNacimiento, email, password);
-        this.saldo = saldo;
+        this.saldo = 100;
     }
 
     public double getSaldo() {

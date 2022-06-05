@@ -57,9 +57,9 @@ public class Main {
         try {
             int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
             ///Lista de usuarios
-            Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123",100);
-            Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123",100);
-            Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123",100);
+            Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
+            Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
+            Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             List<Billetera> lista= new ArrayList<>();
             List<Transferencia> transferencias= new ArrayList<>();
             Transferencia ttt = new Transferencia();
@@ -68,7 +68,6 @@ public class Main {
             lista.add(us3);
 
             switch (opcionMenuPrincipal) {
-
                 case 1:
                     // Consultar activos.
                     break;
@@ -113,8 +112,6 @@ public class Main {
                     sesion.finalizarSesion();
                     break;
             }
-            //aca iria el switch con las operaciones.
-
         } catch(InvalidOptionException | InputMismatchException ex) {
             System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
         }
