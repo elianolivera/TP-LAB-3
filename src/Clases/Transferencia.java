@@ -50,6 +50,8 @@ public class Transferencia {
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
+    // Para mi esta funcion deberia ir en billetera, porque no tiene sentido inicializar una transferencia en null en el main para sobreescribirla aca.
+    // Tampoco usar esa transferencia en null para llamar a una funcion transferir, deberia ser trabajo de la billetera transferir.
     public Transferencia transferir(Transferencia t1, float monto, List<Billetera> lista,List<Transferencia>transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su DNI   ========: ");
@@ -63,7 +65,7 @@ public class Transferencia {
         t1 = new Transferencia(u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (t1.getCantidadtransac() >= 3) {
             t1.setEstado(Estado.VALIDADA);
-            transferencias.add(t1);
+            // transferencias.add(t1); Esto deberia hacerse desde el main, la clase sesion agrega a su lista la transferencia ya hecha.
             ///SE PASA AL ARCHIVO DE VALIDADAS
         }return t1; }
 

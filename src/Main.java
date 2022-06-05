@@ -82,9 +82,18 @@ public class Main {
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);
+
+
+                    sesion.aniadirTransferencia(ttt);
                     break;
                 case 3:
                     // Transacciones pendientes.
+                    System.out.println("Estas son las transacciones pendientes de validacion: \n");
+                    for(Transferencia t : sesion.getTransferencias()) {
+                        if(t != null && t.getEstado() != Estado.VALIDADA) {
+                            System.out.println(t);
+                        }
+                    }
 
                     break;
                 case 4:
