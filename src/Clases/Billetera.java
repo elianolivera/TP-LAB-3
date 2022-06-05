@@ -2,7 +2,7 @@ package Clases;
 
 public  class Billetera extends User{
 
-    protected double saldo;
+    private double saldo;
 
     public Billetera(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
         super(nombre, apellido, dni, fechaDeNacimiento, email, password);

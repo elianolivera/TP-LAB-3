@@ -16,12 +16,12 @@ public class Main {
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(Sesion sesion, Menu menu) {
-        //handleLoginAndRegister(sesion, menu);
+        handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
      private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
-        while(sesion.getUsuarioActivo() == null) {
+        while(sesion.getBilleteraActiva() == null) {
             try {
                 int opcionMenuUsuario = menu.mostrarMenuUsuario();
                 if(opcionMenuUsuario == 2) {
@@ -41,7 +41,7 @@ public class Main {
                         System.out.println("\n El ID ingresado no es valido como UUID.");
                     }
 
-                    if(sesion.getUsuarioActivo() == null) {
+                    if(sesion.getBilleteraActiva() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
@@ -60,12 +60,10 @@ public class Main {
             Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
             Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
-            List<Billetera> lista= new ArrayList<>();
-            List<Transferencia> transferencias= new ArrayList<>();
             Transferencia ttt = new Transferencia();
-            lista.add(us1);
-            lista.add(us2);
-            lista.add(us3);
+            sesion.aniadirBilletera(us1);
+            sesion.aniadirBilletera(us2);
+            sesion.aniadirBilletera(us3);
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -73,12 +71,12 @@ public class Main {
                     break;
                 case 2:
                     // Realizar transferencia
-                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + lista);
+                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getBilleteras());
                     System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = ttt.transferir(ttt, monto, lista, transferencias);
+                    ttt = ttt.transferir(ttt, monto, sesion.getBilleteras(), sesion.getTransferencias());
                     System.out.println(us1);
                     System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
@@ -97,7 +95,7 @@ public class Main {
                 case 5:
                     // Historial de transacciones.
                     System.out.print("\n ======== Comprobante : ======== ");
-                    System.out.println(transferencias);
+                    System.out.println(sesion.getTransferencias());
 
                     break;
                 case 6:
@@ -105,7 +103,7 @@ public class Main {
                     break;
                 case 7:
                     // Volver al login
-                    sesion.setUsuarioActivo(null);
+                    sesion.setBilleteraActiva(null);
                     break;
                 case 8:
                     // Salir.

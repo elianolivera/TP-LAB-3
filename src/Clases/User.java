@@ -2,7 +2,8 @@ package Clases;
 
 import java.util.UUID;
 
-public class User {
+// Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
+public abstract class User {
     protected UUID billetera;
     protected String nombre;
     protected String apellido;

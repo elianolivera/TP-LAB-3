@@ -50,7 +50,7 @@ public final class Menu {
         try{
             String opcion = "";
             while(opcion.isEmpty()) {
-                System.out.print("Ingrese su direccion de correo");
+                System.out.print("Ingrese su direccion email: ");
                 Scanner teclado = new Scanner(System.in);
                 opcion = teclado.nextLine();
             }
@@ -65,7 +65,7 @@ public final class Menu {
         try{
             String opcion = "";
             while(opcion.isEmpty()) {
-                System.out.print("Ingrese su password ");
+                System.out.print("Ingrese su password: ");
                 Scanner teclado = new Scanner(System.in);
                 opcion = teclado.nextLine();
             }
@@ -79,7 +79,7 @@ public final class Menu {
     public UUID pedirUUID() throws IllegalArgumentException {
         String opcion = "";
         while(opcion.isEmpty()) {
-            System.out.print("3.ID: ");
+            System.out.print("3. Ingrese su ID: ");
             Scanner teclado = new Scanner(System.in);
             opcion = teclado.nextLine();
         }

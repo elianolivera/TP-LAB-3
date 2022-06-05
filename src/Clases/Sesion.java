@@ -10,19 +10,20 @@ import java.util.UUID;
 public final class Sesion implements Serializable {
 
     private static final long serialVersionUID = -6719022570919861969L;
-    private List<User> usuarios = new ArrayList<>();
-    private User usuarioActivo;
+    private List<Billetera> billeteras = new ArrayList<>();
+    private List<Transferencia> transferencias = new ArrayList<>();
+    private Billetera billeteraActiva;
 
     public Sesion() {
-        this.usuarioActivo = null;
+        this.billeteraActiva = null;
     }
 
-    public User getUsuarioActivo() {
-        return usuarioActivo;
+    public User getBilleteraActiva() {
+        return billeteraActiva;
     }
 
-    public void setUsuarioActivo(User usuarioActivo) {
-        this.usuarioActivo = usuarioActivo;
+    public void setBilleteraActiva(Billetera billeteraActiva) {
+        this.billeteraActiva = billeteraActiva;
     }
 
     public User registrarUsuario() {
@@ -30,37 +31,34 @@ public final class Sesion implements Serializable {
         String nombre,apellido,dni,fechaDeNacimiento,email,password;
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("\nIngreso de Datos:");
-        System.out.println("\nIngrese su Nombre");
+        System.out.println("\nIngreso de Datos.");
+
+        System.out.println("\nIngrese su Nombre: ");
         nombre=teclado.nextLine();
-
-        System.out.println("\nIngrese su Apellido");
+        System.out.println("\nIngrese su Apellido: ");
         apellido=teclado.nextLine();
-
-        System.out.println("\nIngrese su Numero de documento");
+        System.out.println("\nIngrese su Numero de documento: ");
         dni=teclado.nextLine();
-
-        System.out.println("\nIngrese su Fecha de nacimiento");
+        System.out.println("\nIngrese su Fecha de nacimiento: ");
         fechaDeNacimiento=teclado.nextLine();
-
-        System.out.println("\nIngrese su Correo electronico");
+        System.out.println("\nIngrese su Correo electronico: ");
         email=teclado.nextLine();
-
-        System.out.println("\nIngrese su password");
+        System.out.println("\nIngrese su password: ");
         password=teclado.nextLine();
 
-        System.out.println("Los datos ingresados son:");
-        User usuariox = new User( nombre,  apellido,  dni,  fechaDeNacimiento, email,  password);
-        System.out.println(usuariox);
-        usuarios.add(usuariox);
+        Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
 
-        return usuariox;
+        System.out.println("Su ID para loguearse es: " + billetera.billetera + ". Guardalo!");
+
+        billeteras.add(billetera);
+
+        return billetera;
     }
 
-    public User loguearUsuario(String email, String password, UUID billetera) {
-        for(User u : usuarios) {
+    public Billetera loguearUsuario(String email, String password, UUID billetera) {
+        for(Billetera u : billeteras) {
           if(email.equals(u.email) && password.equals(u.password) && billetera.equals(u.billetera)) {///Validacion de correo y contraseña
-                setUsuarioActivo(u);
+                setBilleteraActiva(u);
                 return u;
             }
         }
@@ -81,12 +79,30 @@ public final class Sesion implements Serializable {
         }
     }*/
 
-    public void mostarUsuarios(List<User> lista){
-        for(User u : lista){
-            if(u !=null){
-                System.out.println(u.toString());
+    public List<Billetera> getBilleteras() {
+        return billeteras;
+    }
+
+    public List<Transferencia> getTransferencias() {
+        return transferencias;
+    }
+
+    public void mostrarUsuarios(){
+        for(Billetera b : billeteras){
+            if(b !=null){
+                System.out.println(b);
             }
         }
+    }
+
+    public List<Billetera> aniadirBilletera(Billetera b) {
+        this.billeteras.add(b);
+        return billeteras;
+    }
+
+    public List<Transferencia> aniadirTransferencia(Transferencia t) {
+        this.transferencias.add(t);
+        return transferencias;
     }
 
     public void finalizarSesion() {
