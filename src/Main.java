@@ -32,8 +32,15 @@ public class Main {
                     // Le pido los datos para loguear a el usuario.
                     String email = menu.pedirEmail();
                     String password = menu.pedirPassword();
-                    UUID id = menu.pedirUUID();
-                    sesion.loguearUsuario(email,password,id);
+
+                    try {
+                        UUID id = menu.pedirUUID();
+
+                        sesion.loguearUsuario(email,password,id);
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println("\n El ID ingresado no es valido como UUID.");
+                    }
+
                     if(sesion.getUsuarioActivo() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }

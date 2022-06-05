@@ -6,8 +6,6 @@ import java.util.*;
 
 public final class Menu {
 
-    private List<User> usuarios = new ArrayList<>();
-
     public Menu() {
     }
 
