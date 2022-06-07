@@ -1,4 +1,4 @@
-import Clases.*;
+import Modelos.*;
 import Exceptions.InvalidOptionException;
 
 import java.io.IOException;

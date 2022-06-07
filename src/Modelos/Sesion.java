@@ -1,18 +1,18 @@
-package Clases;
+package Modelos;
 
+import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 
 public final class Sesion implements Serializable {
 
     private static final long serialVersionUID = -6719022570919861969L;
-    private List<Billetera> billeteras = new ArrayList<>();
+    HashMap<String, UUID> usuariosLoguin = new HashMap<>();
     private List<Transferencia> transferencias = new ArrayList<>();
     private Billetera billeteraActiva;
+
+
 
     public Sesion() {
         this.billeteraActiva = null;
@@ -39,25 +39,33 @@ public final class Sesion implements Serializable {
         apellido=teclado.nextLine();
         System.out.println("\nIngrese su Numero de documento: ");
         dni=teclado.nextLine();
+            if(usuariosLoguin.containsKey(dni)){
+                System.out.println("El numero de Documento ya existe");
+                return null;
+            }
         System.out.println("\nIngrese su Fecha de nacimiento: ");
         fechaDeNacimiento=teclado.nextLine();
         System.out.println("\nIngrese su Correo electronico: ");
         email=teclado.nextLine();
+            if(usuariosLoguin.containsKey(email)){
+                System.out.println("El Correo electronico ya existe");
+                return null;
+            }
         System.out.println("\nIngrese su password: ");
         password=teclado.nextLine();
 
         Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
+        UUID id=billetera.billetera;
+        System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
-        System.out.println("Su ID para loguearse es: " + billetera.billetera + ". Guardalo!");
-
-        billeteras.add(billetera);
+       usuariosLoguin.put(email,id);
 
         return billetera;
     }
 
     public Billetera loguearUsuario(String email, String password, UUID billetera) {
-        for(Billetera u : billeteras) {
-          if(email.equals(u.email) && password.equals(u.password) && billetera.equals(u.billetera)) {///Validacion de correo y contraseña
+        for(Map.Entry<String,UUID> entry: usuariosLoguin.entrySet()) {
+          if(email.equals(entry.getKey()) && password.equals(entry.getKey()) && billetera.equals(entry.getKey())) {///Validacion de correo y contraseña
                 setBilleteraActiva(u);
                 return u;
             }
@@ -79,26 +87,6 @@ public final class Sesion implements Serializable {
         }
     }*/
 
-    public List<Billetera> getBilleteras() {
-        return billeteras;
-    }
-
-    public List<Transferencia> getTransferencias() {
-        return transferencias;
-    }
-
-    public void mostrarUsuarios(){
-        for(Billetera b : billeteras){
-            if(b !=null){
-                System.out.println(b);
-            }
-        }
-    }
-
-    public List<Billetera> aniadirBilletera(Billetera b) {
-        this.billeteras.add(b);
-        return billeteras;
-    }
 
     public List<Transferencia> aniadirTransferencia(Transferencia t) {
         this.transferencias.add(t);

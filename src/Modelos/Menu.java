@@ -1,4 +1,4 @@
-package Clases;
+package Modelos;
 
 import Exceptions.InvalidOptionException;
 

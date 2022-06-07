@@ -1,4 +1,4 @@
-package Clases;
+package Modelos;
 
 public  class Billetera extends User{
 
