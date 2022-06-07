@@ -61,6 +61,7 @@ public class Main {
             Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
+            List<Transferencia>transferencias=new ArrayList<>();
             sesion.aniadirBilletera(us1);
             sesion.aniadirBilletera(us2);
             sesion.aniadirBilletera(us3);
@@ -99,7 +100,7 @@ public class Main {
                 case 4:
                     // Validar transaccion.
 
-                    ttt.validar(ttt);
+                    ttt.validar(transferencias);
                     break;
                 case 5:
                     // Historial de transacciones.
