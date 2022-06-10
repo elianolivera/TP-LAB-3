@@ -64,6 +64,7 @@ public class Transferencia {
         return null;
     }
 
+
     ///Transeferir de un usuario insertado por teclado a otro.
     // Para mi esta funcion deberia ir en billetera, porque no tiene sentido inicializar una transferencia en null en el main para sobreescribirla aca.
     // Tampoco usar esa transferencia en null para llamar a una funcion transferir, deberia ser trabajo de la billetera transferir.
