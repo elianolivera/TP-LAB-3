@@ -1,6 +1,11 @@
-package Clases;
+package Modelos;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -16,7 +21,7 @@ public class Transferencia {
     public Transferencia() {
     }
 
-    public Transferencia(User us, User receptor, int cantidadtransac, double monto, Estado estado) {
+    public Transferencia(UUID UUIDtransaccion,User us, User receptor, int cantidadtransac, double monto, Estado estado) {
         this.UUIDtransaccion = UUID.randomUUID();
         this.us = us;
         this.receptor = receptor;
@@ -24,9 +29,24 @@ public class Transferencia {
         this.monto = monto;
         this.estado = estado;
     }
+    // Busca transferencia por UUID para validarla
+    public Transferencia buscartransferencia(List<Transferencia>transferencias) {
+        System.out.println("Ingrese el UUID de la transferencia a validar: \n");
+        String UUIDt;
+        Scanner id = new Scanner(System.in);
+        UUIDt=id.nextLine();
+        for (Transferencia  transf :transferencias) {
+            if (transf != null && transf .getUUIDtransaccion().equals(UUIDt)) {
+                return transf;
+            } }
+        return null;
+    }
 
     /// VALIDAR TRANSFERENCIA
-    public void validar (Transferencia t1){
+    public void validar (List<Transferencia>transferencias){
+
+        Transferencia t1= new Transferencia();
+        t1= t1.buscartransferencia(transferencias);
         if (t1.getCantidadtransac()>=3) {
             t1.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS
@@ -49,6 +69,7 @@ public class Transferencia {
         return null;
     }
 
+
     ///Transeferir de un usuario insertado por teclado a otro.
     // Para mi esta funcion deberia ir en billetera, porque no tiene sentido inicializar una transferencia en null en el main para sobreescribirla aca.
     // Tampoco usar esa transferencia en null para llamar a una funcion transferir, deberia ser trabajo de la billetera transferir.
@@ -62,7 +83,7 @@ public class Transferencia {
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);
         UUIDtransaccion = UUID.randomUUID();
-        t1 = new Transferencia(u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
+        t1 = new Transferencia(UUIDtransaccion,u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (t1.getCantidadtransac() >= 3) {
             t1.setEstado(Estado.VALIDADA);
             // transferencias.add(t1); Esto deberia hacerse desde el main, la clase sesion agrega a su lista la transferencia ya hecha.
