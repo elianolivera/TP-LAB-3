@@ -1,8 +1,6 @@
 import Modelos.*;
 import Exceptions.InvalidOptionException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -10,8 +8,7 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-
-          Sesion sesion = new Sesion();
+        Sesion sesion = new Sesion();
         Menu menu = new Menu();
         correrApp(sesion, menu);
     }
