@@ -10,20 +10,20 @@ public final class Sesion implements Serializable {
     private static final long serialVersionUID = -6719022570919861969L;
     HashMap<String, UUID> usuariosLoguin = new HashMap<>();
     private List<Transferencia> transferencias = new ArrayList<>();
-    private Billetera billeteraActiva;
+    private UUID idUsuarioActivo;
 
 
 
     public Sesion() {
-        this.billeteraActiva = null;
+        this.idUsuarioActivo = null;
     }
 
-    public User getBilleteraActiva() {
-        return billeteraActiva;
+    public UUID getIdUsuarioActivo() {
+        return idUsuarioActivo;
     }
 
-    public void setBilleteraActiva(Billetera billeteraActiva) {
-        this.billeteraActiva = billeteraActiva;
+    public void setIdUsuarioActivo(UUID idUsuarioActivo) {
+        this.idUsuarioActivo = idUsuarioActivo;
     }
 
     public User registrarUsuario() {
@@ -65,11 +65,11 @@ public final class Sesion implements Serializable {
         return billetera;
     }
 
-    public Billetera loguearUsuario(String email, String password, UUID billetera) {
+    public UUID loguearUsuario(String email, String password, UUID billetera) {
         for(Map.Entry<String,UUID> entry: usuariosLoguin.entrySet()) {
           if(email.equals(entry.getKey()) && password.equals(entry.getKey()) && billetera.equals(entry.getKey())) {///Validacion de correo y contraseña
-               // setBilleteraActiva(u);
-               // return u;
+               setIdUsuarioActivo(billetera);
+               return billetera;
             }
         }
 

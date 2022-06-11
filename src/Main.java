@@ -20,7 +20,7 @@ public class Main {
     }
 
      private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
-        while(sesion.getBilleteraActiva() == null) {
+        while(sesion.getIdUsuarioActivo() == null) {
             try {
                 int opcionMenuUsuario = menu.mostrarMenuUsuario();
                 if(opcionMenuUsuario == 2) {
@@ -40,7 +40,7 @@ public class Main {
                         System.out.println("\n El ID ingresado no es valido como UUID.");
                     }
 
-                    if(sesion.getBilleteraActiva() == null) {
+                    if(sesion.getIdUsuarioActivo() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
@@ -113,7 +113,7 @@ public class Main {
                     break;
                 case 7:
                     // Volver al login
-                    sesion.setBilleteraActiva(null);
+                    sesion.setIdUsuarioActivo(null);
                     break;
                 case 8:
                     // Salir.
