@@ -32,33 +32,35 @@ public final class Sesion implements Serializable {
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("\nIngreso de Datos.");
-
         System.out.println("\nIngrese su Nombre: ");
         nombre=teclado.nextLine();
+
         System.out.println("\nIngrese su Apellido: ");
         apellido=teclado.nextLine();
+
         System.out.println("\nIngrese su Numero de documento: ");
         dni=teclado.nextLine();
-            if(usuariosLoguin.containsKey(dni)){
-                System.out.println("El numero de Documento ya existe");
-                return null;
-            }
+        if(usuariosLoguin.containsKey(dni)){
+            System.out.println("El numero de Documento ya existe");
+            return null;
+        }
+
         System.out.println("\nIngrese su Fecha de nacimiento: ");
         fechaDeNacimiento=teclado.nextLine();
+
         System.out.println("\nIngrese su Correo electronico: ");
         email=teclado.nextLine();
-            if(usuariosLoguin.containsKey(email)){
-                System.out.println("El Correo electronico ya existe");
-                return null;
-            }
+        if(usuariosLoguin.containsKey(email)){
+            System.out.println("El Correo electronico ya existe");
+            return null;
+        }
+
         System.out.println("\nIngrese su password: ");
         password=teclado.nextLine();
 
         Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
         UUID id=billetera.billetera;
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
-
-       usuariosLoguin.put(email,id);
 
         return billetera;
     }
@@ -87,9 +89,20 @@ public final class Sesion implements Serializable {
         }
     }*/
 
+    public void aniadirUsuario(String email, UUID id) {
+        this.usuariosLoguin.put(email,id);
+    }
+
+    public HashMap<String, UUID> getUsuariosLoguin() {
+        return usuariosLoguin;
+    }
 
     public List<Transferencia> aniadirTransferencia(Transferencia t) {
         this.transferencias.add(t);
+        return transferencias;
+    }
+
+    public List<Transferencia> getTransferencias() {
         return transferencias;
     }
 

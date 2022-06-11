@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class Transferencia {
     protected User us;
@@ -57,28 +54,28 @@ public class Transferencia {
     }
 
     ///Busca usuario en la lista por DNI
-    public User buscarUsuarioPorDNI(List<Billetera>lista) {
+    /*public User buscarUsuarioPorDNI(HashMap<String, UUID> usuariosLista) {
         String dni;
         Scanner dniAux = new Scanner(System.in);
         dni= dniAux.nextLine();
-        for (User usuario : lista) {
-            if (usuario != null && usuario.getDni().equals(dni)) {
+        for (Map.Entry<String,UUID> entry: usuariosLista.entrySet()) {
+            if (entry != null && entry.getDni().equals(dni)) {
                 return usuario;
             }
         }
         return null;
-    }
+    }*/
 
 
     ///Transeferir de un usuario insertado por teclado a otro.
     // Para mi esta funcion deberia ir en billetera, porque no tiene sentido inicializar una transferencia en null en el main para sobreescribirla aca.
     // Tampoco usar esa transferencia en null para llamar a una funcion transferir, deberia ser trabajo de la billetera transferir.
-    public Transferencia transferir(Transferencia t1, float monto, List<Billetera> lista,List<Transferencia>transferencias) {
+    public Transferencia transferir(Transferencia t1, float monto, HashMap<String, UUID> usuariosLista, List<Transferencia>transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su DNI   ========: ");
-        Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(lista);
+        Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
-        Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(lista);
+        Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         t1.setCantidadtransac(t1.getCantidadtransac() + 1);

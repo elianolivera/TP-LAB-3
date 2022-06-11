@@ -62,11 +62,9 @@ public class Main {
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
 
-
-
-            sesion.aniadirBilletera(us1);
-            sesion.aniadirBilletera(us2);
-            sesion.aniadirBilletera(us3);
+            sesion.aniadirUsuario(us1.getEmail(), us1.getBilletera());
+            sesion.aniadirUsuario(us2.getEmail(), us2.getBilletera());
+            sesion.aniadirUsuario(us3.getEmail(), us3.getBilletera());
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -74,12 +72,12 @@ public class Main {
                     break;
                 case 2:
                     // Realizar transferencia
-                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getBilleteras());
+                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getUsuariosLoguin());
                     System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = ttt.transferir(ttt, monto, sesion.getBilleteras(), sesion.getTransferencias());
+                    ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
                     System.out.println(us1);
                     System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
@@ -122,7 +120,7 @@ public class Main {
                     sesion.finalizarSesion();
                     break;
             }
-        } catch(InvalidOptionException | InputMismatchException | IOException ex) {
+        } catch(InvalidOptionException | InputMismatchException ex) {
             System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
 
         }
