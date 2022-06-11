@@ -14,7 +14,6 @@ public final class Sesion implements Serializable {
     private static final long serialVersionUID = -6719022570919861969L;
     HashMap<String, UUID> usuariosLoguin = new HashMap<>();
     private List<Transferencia> transferencias = new ArrayList<>();
-    private List<Billetera> billeteras = new ArrayList<>();
     private UUID idUsuarioActivo;
 
 
@@ -86,12 +85,12 @@ public final class Sesion implements Serializable {
     public void guardarBilleteraEnArchivo(Billetera billetera) {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
-        billeteras.add(billetera);
+        aniadirUsuario(billetera.getEmail(), billetera.getBilletera());
         try {
             if(!file.exists()){
                 file.createNewFile();
             }
-            mapper.writeValue(file, this.billeteras);
+            mapper.writeValue(file, this.usuariosLoguin);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -103,7 +102,7 @@ public final class Sesion implements Serializable {
 
         if(file.exists()) {
             try {
-                this.billeteras = mapper.readValue(file, new TypeReference<List<Billetera>>(){});
+                this.usuariosLoguin = mapper.readValue(file, new TypeReference<Map<String, UUID>>(){});
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
