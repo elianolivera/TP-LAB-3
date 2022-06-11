@@ -1,6 +1,8 @@
 import Modelos.*;
 import Exceptions.InvalidOptionException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -9,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Sesion sesion = new Sesion();
+          Sesion sesion = new Sesion();
         Menu menu = new Menu();
         correrApp(sesion, menu);
     }
@@ -17,7 +19,7 @@ public class Main {
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(Sesion sesion, Menu menu) {
         handleLoginAndRegister(sesion, menu);
-        userOperations(sesion,menu);
+       userOperations(sesion,menu);
     }
 
      private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
@@ -57,11 +59,14 @@ public class Main {
         try {
             int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
             ///Lista de usuarios
+            List<Transferencia> transferencias =new ArrayList<>();
             Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
             Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
-            List<Transferencia>transferencias=new ArrayList<>();
+
+
+
             sesion.aniadirBilletera(us1);
             sesion.aniadirBilletera(us2);
             sesion.aniadirBilletera(us3);
@@ -120,8 +125,9 @@ public class Main {
                     sesion.finalizarSesion();
                     break;
             }
-        } catch(InvalidOptionException | InputMismatchException ex) {
+        } catch(InvalidOptionException | InputMismatchException | IOException ex) {
             System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
+
         }
     }
 }

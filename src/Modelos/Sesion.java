@@ -66,8 +66,8 @@ public final class Sesion implements Serializable {
     public Billetera loguearUsuario(String email, String password, UUID billetera) {
         for(Map.Entry<String,UUID> entry: usuariosLoguin.entrySet()) {
           if(email.equals(entry.getKey()) && password.equals(entry.getKey()) && billetera.equals(entry.getKey())) {///Validacion de correo y contraseña
-                setBilleteraActiva(u);
-                return u;
+               // setBilleteraActiva(u);
+               // return u;
             }
         }
 
