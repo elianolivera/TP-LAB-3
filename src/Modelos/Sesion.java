@@ -1,5 +1,7 @@
 package Modelos;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.*;
@@ -61,7 +63,7 @@ public final class Sesion implements Serializable {
         Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
         UUID id=billetera.billetera;
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
-
+        guardarBilleteraEnArchivo(billetera);
         return billetera;
     }
 
@@ -76,18 +78,15 @@ public final class Sesion implements Serializable {
         return null;
     }
 
-    /*public void guardaUsuarioEnArchivo(List<User> lista) {
+    public void guardarBilleteraEnArchivo(Billetera billetera) {
 
-        File archivoUsuarios = JSON_MAPPER.readValue (new File("usuarios.json"));
-
-        ObjectMapper mapper = new ObjectMapper();
-
-
-        for (User u : lista) {
-            if (u == null) {
-            }
+        ObjectMapper mapper=new ObjectMapper();
+        try {
+            mapper.writeValue(new File("./billeteras.json"), billetera);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
         }
-    }*/
+    }
 
     public void aniadirUsuario(String email, UUID id) {
         this.usuariosLoguin.put(email,id);
