@@ -12,6 +12,8 @@ public abstract class User {
     protected String email;
     protected String password;
 
+    public User() {}
+
     public User(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
         this.billetera=UUID.randomUUID();
         this.nombre = nombre;

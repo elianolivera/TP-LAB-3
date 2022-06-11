@@ -6,6 +6,8 @@ public  class Billetera extends User{
 
     private double saldo;
 
+    public Billetera() {}
+
     public Billetera(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
         super(nombre, apellido, dni, fechaDeNacimiento, email, password);
         this.saldo = 100;

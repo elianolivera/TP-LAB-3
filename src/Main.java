@@ -15,8 +15,9 @@ public class Main {
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(Sesion sesion, Menu menu) {
+        sesion.archivoALista();
         handleLoginAndRegister(sesion, menu);
-       userOperations(sesion,menu);
+        userOperations(sesion,menu);
     }
 
      private static void handleLoginAndRegister(Sesion sesion, Menu menu) {

@@ -1,8 +1,10 @@
 package Modelos;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
+import java.io.*;
 import java.io.Serializable;
 import java.util.*;
 
@@ -12,6 +14,7 @@ public final class Sesion implements Serializable {
     private static final long serialVersionUID = -6719022570919861969L;
     HashMap<String, UUID> usuariosLoguin = new HashMap<>();
     private List<Transferencia> transferencias = new ArrayList<>();
+    private List<Billetera> billeteras = new ArrayList<>();
     private UUID idUsuarioActivo;
 
 
@@ -63,7 +66,9 @@ public final class Sesion implements Serializable {
         Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
         UUID id=billetera.billetera;
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
+
         guardarBilleteraEnArchivo(billetera);
+
         return billetera;
     }
 
@@ -79,12 +84,29 @@ public final class Sesion implements Serializable {
     }
 
     public void guardarBilleteraEnArchivo(Billetera billetera) {
-
+        File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
+        billeteras.add(billetera);
         try {
-            mapper.writeValue(new File("./billeteras.json"), billetera);
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            mapper.writeValue(file, this.billeteras);
         } catch(Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void archivoALista() {
+        File file = new File("./billeteras.json");
+        ObjectMapper mapper=new ObjectMapper();
+
+        if(file.exists()) {
+            try {
+                this.billeteras = mapper.readValue(file, new TypeReference<List<Billetera>>(){});
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
