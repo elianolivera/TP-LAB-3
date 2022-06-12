@@ -57,15 +57,9 @@ public class Main {
         try {
             int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
             ///Lista de usuarios
+            HashMap<UUID, List<String>> usuarios = sesion.getUsuariosLoguin();
             List<Transferencia> transferencias =new ArrayList<>();
-            Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
-            Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
-            Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
-
-            sesion.aniadirUsuario(us1.getEmail(), us1.getBilletera());
-            sesion.aniadirUsuario(us2.getEmail(), us2.getBilletera());
-            sesion.aniadirUsuario(us3.getEmail(), us3.getBilletera());
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -78,9 +72,7 @@ public class Main {
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
-                    System.out.println(us1);
-                    System.out.println(us2);
+                    ttt = ttt.transferir(ttt, monto, usuarios, sesion.getTransferencias());
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);

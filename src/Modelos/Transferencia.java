@@ -1,10 +1,6 @@
 package Modelos;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class Transferencia {
@@ -68,7 +64,7 @@ public class Transferencia {
 
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(Transferencia t1, float monto, HashMap<String, UUID> usuariosLista, List<Transferencia>transferencias) {
+    public Transferencia transferir(Transferencia t1, float monto, HashMap<UUID, List<String>> usuariosLista, List<Transferencia>transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su DNI   ========: ");
         //Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
