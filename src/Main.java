@@ -1,4 +1,8 @@
+import Logica.MenuLogica;
+import Logica.SesionLogica;
 import Modelos.*;
+import Modelos.Sesion;
+import Modelos.Menu;
 import Exceptions.InvalidOptionException;
 
 import java.io.IOException;
@@ -8,35 +12,41 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        Sesion sesion = new Sesion();
+        SesionLogica sesionLogica = new SesionLogica();
+        MenuLogica menuLogica = new MenuLogica();
         Menu menu = new Menu();
-        correrApp(sesion, menu);
+        Sesion sesion = new Sesion();
+        
+        correrApp(sesion, menu, sesionLogica, menuLogica);
     }
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
-    private static void correrApp(Sesion sesion, Menu menu) {
-        sesion.archivoALista();
-        handleLoginAndRegister(sesion, menu);
-        userOperations(sesion,menu);
+    private static void correrApp(Sesion sesion, Menu menu,SesionLogica sesionLogica, MenuLogica menuLogica) {
+        sesionLogica.archivoALista();
+        handleLoginAndRegister(sesion, menu, sesionLogica, menuLogica);
+        userOperations(sesion,menu,sesionLogica, menuLogica);
     }
 
-     private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
-        while(sesion.getIdUsuarioActivo() == null) {
+     private static void handleLoginAndRegister(Sesion sesion, Menu menu,SesionLogica sesionLogica, MenuLogica menuLogica) {
+        
+        Billetera usuario = null;
+        
+        while(sesion.getIdUsuarioActivo()== null) {
             try {
                 int opcionMenuUsuario = menu.mostrarMenuUsuario();
                 if(opcionMenuUsuario == 2) {
-                    sesion.registrarUsuario();
+                    usuario= (Billetera) SesionLogica.registrarUsuario();
                     System.out.println("Nuevo usuario resgistrado.");
 
                 } else if(opcionMenuUsuario == 1) {
                     // Le pido los datos para loguear a el usuario.
-                    String email = menu.pedirEmail();
-                    String password = menu.pedirPassword();
+                    String email = menuLogica.pedirEmail();
+                    String password = menuLogica.pedirPassword();
 
                     try {
-                        UUID id = menu.pedirUUID();
+                        UUID id = menuLogica.pedirUUID();
 
-                        sesion.loguearUsuario(email,password,id);
+                        SesionLogica.loguearUsuario(usuario);
                     } catch (IllegalArgumentException ex) {
                         System.out.println("\n El ID ingresado no es valido como UUID.");
                     }
@@ -45,7 +55,7 @@ public class Main {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
-                    sesion.finalizarSesion();
+                    SesionLogica.finalizarSesion();
                 }
             } catch(InvalidOptionException | InputMismatchException ex) {
                 System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
@@ -53,7 +63,7 @@ public class Main {
         System.out.println("Usuario logueado satisfactoriamente.");
     }
 
-    private static void userOperations(Sesion sesion, Menu menu) {
+    private static void userOperations(Sesion sesion, Menu menu, SesionLogica sesionLogica, MenuLogica menuLogica) {
         try {
             int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
             ///Lista de usuarios
@@ -63,9 +73,9 @@ public class Main {
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
 
-            sesion.aniadirUsuario(us1.getEmail(), us1.getBilletera());
-            sesion.aniadirUsuario(us2.getEmail(), us2.getBilletera());
-            sesion.aniadirUsuario(us3.getEmail(), us3.getBilletera());
+            sesionLogica.aniadirUsuario(us1.getEmail(), us1.getBilletera());
+            sesionLogica.aniadirUsuario(us2.getEmail(), us2.getBilletera());
+            sesionLogica.aniadirUsuario(us3.getEmail(), us3.getBilletera());
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -73,12 +83,12 @@ public class Main {
                     break;
                 case 2:
                     // Realizar transferencia
-                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getUsuariosLoguin());
+                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesionLogica.getUsuariosLoguin());
                     System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
+                    ttt = ttt.transferir(ttt, monto, sesionLogica.getUsuariosLoguin(), sesionLogica.getTransferencias());
                     System.out.println(us1);
                     System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
@@ -86,12 +96,12 @@ public class Main {
                     System.out.println(ttt);
 
 
-                    sesion.aniadirTransferencia(ttt);
+                    sesionLogica.aniadirTransferencia(ttt);
                     break;
                 case 3:
                     // Transacciones pendientes.
                     System.out.println("Estas son las transacciones pendientes de validacion: \n");
-                    for(Transferencia t : sesion.getTransferencias()) {
+                    for(Transferencia t : sesionLogica.getTransferencias()) {
                         if(t != null && t.getEstado() != Estado.VALIDADA) {
                             System.out.println(t);
                         }
@@ -106,7 +116,7 @@ public class Main {
                 case 5:
                     // Historial de transacciones.
                     System.out.print("\n ======== Comprobante : ======== ");
-                    System.out.println(sesion.getTransferencias());
+                    System.out.println(SesionLogica.getTransferencias());
 
                     break;
                 case 6:
@@ -118,7 +128,7 @@ public class Main {
                     break;
                 case 8:
                     // Salir.
-                    sesion.finalizarSesion();
+                    sesionLogica.finalizarSesion();
                     break;
             }
         } catch(InvalidOptionException | InputMismatchException ex) {

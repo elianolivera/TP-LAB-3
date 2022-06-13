@@ -1,15 +1,11 @@
 package Modelos;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.UUID;
 
 public class Transferencia {
-    protected User us;
-    protected  User receptor;
+    protected Usuario us;
+    protected Usuario receptor;
     public UUID UUIDtransaccion;
     protected  int cantidadtransac;
     protected  double monto;
@@ -18,7 +14,7 @@ public class Transferencia {
     public Transferencia() {
     }
 
-    public Transferencia(UUID UUIDtransaccion,User us, User receptor, int cantidadtransac, double monto, Estado estado) {
+    public Transferencia(UUID UUIDtransaccion, Usuario us, Usuario receptor, int cantidadtransac, double monto, Estado estado) {
         this.UUIDtransaccion = UUID.randomUUID();
         this.us = us;
         this.receptor = receptor;
@@ -26,78 +22,22 @@ public class Transferencia {
         this.monto = monto;
         this.estado = estado;
     }
-    // Busca transferencia por UUID para validarla
-    public Transferencia buscartransferencia(List<Transferencia>transferencias) {
-        System.out.println("Ingrese el UUID de la transferencia a validar: \n");
-        String UUIDt;
-        Scanner id = new Scanner(System.in);
-        UUIDt=id.nextLine();
-        for (Transferencia  transf :transferencias) {
-            if (transf != null && transf .getUUIDtransaccion().equals(UUIDt)) {
-                return transf;
-            } }
-        return null;
-    }
-
-    /// VALIDAR TRANSFERENCIA
-    public void validar (List<Transferencia>transferencias){
-
-        Transferencia t1= new Transferencia();
-        t1= t1.buscartransferencia(transferencias);
-        if (t1.getCantidadtransac()>=3) {
-            t1.setEstado(Estado.VALIDADA);
-            ///SE PASA AL ARCHIVO DE VALIDADAS
-        }else if (t1.getCantidadtransac()<=3){
-            t1.setCantidadtransac(t1.getCantidadtransac()+1);
-            /// Se añade una validación
-        }
-    }
-
-    ///Busca usuario en la lista por DNI
-    /*public User buscarUsuarioPorDNI(HashMap<String, UUID> usuariosLista) {
-        String dni;
-        Scanner dniAux = new Scanner(System.in);
-        dni= dniAux.nextLine();
-        for (Map.Entry<String,UUID> entry: usuariosLista.entrySet()) {
-            if (entry != null && entry.getDni().equals(dni)) {
-                return usuario;
-            }
-        }
-        return null;
-    }*/
 
 
-    ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(Transferencia t1, float monto, HashMap<String, UUID> usuariosLista, List<Transferencia>transferencias) {
-        String nombre = null;
-        System.out.print(" ========  Ingrese su DNI   ========: ");
-        //Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
-        System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
-        //Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
-        //u1.setSaldo(u1.getSaldo() - monto);
-        //u2.setSaldo(u2.getSaldo() + monto);
-        t1.setCantidadtransac(t1.getCantidadtransac() + 1);
-        UUIDtransaccion = UUID.randomUUID();
-        //t1 = new Transferencia(UUIDtransaccion,u1, u2, t1.getCantidadtransac(), monto, Estado.NOVALIDADA);
-        if (t1.getCantidadtransac() >= 3) {
-            t1.setEstado(Estado.VALIDADA);
-            ///SE PASA AL ARCHIVO DE VALIDADAS
-        }return t1; }
-
-    public User getUs() {
+    public Usuario getUs() {
         return us;
     }
 
-    public Transferencia setUs(User us) {
+    public Transferencia setUs(Usuario us) {
         this.us = us;
         return this;
     }
 
-    public User getReceptor() {
+    public Usuario getReceptor() {
         return receptor;
     }
 
-    public Transferencia setReceptor(User receptor) {
+    public Transferencia setReceptor(Usuario receptor) {
         this.receptor = receptor;
         return this; }
 

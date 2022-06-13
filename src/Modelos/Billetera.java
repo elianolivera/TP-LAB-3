@@ -1,6 +1,6 @@
 package Modelos;
 
-public  class Billetera extends User{
+public  class Billetera extends Usuario {
 
     private double saldo;
 
@@ -21,12 +21,8 @@ public  class Billetera extends User{
 
     @Override
     public String toString() {
-        return "\n Billetera{" +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                "saldo=" + saldo +
-                ", billetera=" + billetera +
-                ", dni='" + dni + '\'' +
-                '}';
+        return super.toString() +
+                "\n saldo=" + saldo;
     }
+
 }
