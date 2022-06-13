@@ -1,6 +1,7 @@
 import Modelos.*;
 import Exceptions.InvalidOptionException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -55,6 +56,7 @@ public class Main {
 
     private static void userOperations(Sesion sesion, Menu menu) {
         try {
+            File file = new File("./Transferencias.json");
             int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
             ///Lista de usuarios
             HashMap<UUID, List<String>> usuarios = sesion.getUsuariosLoguin();
@@ -76,9 +78,8 @@ public class Main {
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);
-
-
-                    sesion.aniadirTransferencia(ttt);
+                    ///Añade transferencia a lista y archivo
+                    sesion.aniadirTransferencia(ttt,file);
                     break;
                 case 3:
                     // Transacciones pendientes.

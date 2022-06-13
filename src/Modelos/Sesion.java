@@ -125,11 +125,26 @@ public final class Sesion implements Serializable {
     public HashMap<UUID, List<String>> getUsuariosLoguin() {
         return usuariosLoguin;
     }
+    public User getUs() {
+        return us;
+    }
 
-    public List<Transferencia> aniadirTransferencia(Transferencia t) {
+    public void guardarTransferenciaenARchivo(File file,List<Transferencia> transferencias ) {
+        ObjectMapper mapper=new ObjectMapper();
+        try {
+            if(!file.exists()){
+                file.createNewFile();
+            }   mapper.writeValue(file, transferencias);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }  }
+
+    public List<Transferencia> aniadirTransferencia(Transferencia t,File file) {
         this.transferencias.add(t);
+      guardarTransferenciaenARchivo(file,transferencias);
         return transferencias;
     }
+
 
     public List<Transferencia> getTransferencias() {
         return transferencias;

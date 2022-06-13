@@ -1,6 +1,7 @@
 package Modelos;
 
 
+import java.io.File;
 import java.util.*;
 
 public class Transferencia {
@@ -80,9 +81,8 @@ public class Transferencia {
             ///SE PASA AL ARCHIVO DE VALIDADAS
         }return t1; }
 
-    public User getUs() {
-        return us;
-    }
+    ///Pasar transferencia a archivo
+
 
     public Transferencia setUs(User us) {
         this.us = us;
