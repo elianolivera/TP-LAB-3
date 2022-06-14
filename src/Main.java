@@ -1,7 +1,6 @@
 import Modelos.*;
 import Exceptions.InvalidOptionException;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -56,12 +55,17 @@ public class Main {
 
     private static void userOperations(Sesion sesion, Menu menu) {
         try {
-            File file = new File("./Transferencias.json");
             int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
             ///Lista de usuarios
-            HashMap<UUID, List<String>> usuarios = sesion.getUsuariosLoguin();
             List<Transferencia> transferencias =new ArrayList<>();
+            Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
+            Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
+            Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
+
+            sesion.aniadirUsuario(us1.getEmail(), us1.getBilletera());
+            sesion.aniadirUsuario(us2.getEmail(), us2.getBilletera());
+            sesion.aniadirUsuario(us3.getEmail(), us3.getBilletera());
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -74,12 +78,15 @@ public class Main {
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = ttt.transferir(ttt, monto, usuarios, sesion.getTransferencias());
+                    ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
+                    System.out.println(us1);
+                    System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);
-                    ///Añade transferencia a lista y archivo
-                    sesion.aniadirTransferencia(ttt,file);
+
+
+                    sesion.aniadirTransferencia(ttt);
                     break;
                 case 3:
                     // Transacciones pendientes.

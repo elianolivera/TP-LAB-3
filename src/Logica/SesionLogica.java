@@ -1,35 +1,25 @@
-package Modelos;
+package Logica;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.*;
+import Modelos.Billetera;
+import Modelos.Sesion;
+import Modelos.Transferencia;
+import Modelos.Usuario;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.*;
+import java.util.UUID;
 
 
-public final class Sesion implements Serializable {
+public class SesionLogica implements Serializable {
 
+    static Sesion modelo=new Sesion();
     private static final long serialVersionUID = -6719022570919861969L;
-    HashMap<String, UUID> usuariosLoguin = new HashMap<>();
+    static HashMap<String, Billetera> usuariosLoguin = new HashMap<>();
     private List<Transferencia> transferencias = new ArrayList<>();
-    private UUID idUsuarioActivo;
 
-
-
-    public Sesion() {
-        this.idUsuarioActivo = null;
-    }
-
-    public UUID getIdUsuarioActivo() {
-        return idUsuarioActivo;
-    }
-
-    public void setIdUsuarioActivo(UUID idUsuarioActivo) {
-        this.idUsuarioActivo = idUsuarioActivo;
-    }
-
-    public User registrarUsuario() {
+    public static Usuario registrarUsuario() {
 
         String nombre,apellido,dni,fechaDeNacimiento,email,password;
         Scanner teclado = new Scanner(System.in);
@@ -62,29 +52,29 @@ public final class Sesion implements Serializable {
         password=teclado.nextLine();
 
         Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
-        UUID id=billetera.billetera;
+        UUID id= modelo.getIdUsuarioActivo();
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
-        guardarBilleteraEnArchivo(billetera);
+        guardarBilleteraEnArchivo(billetera);//Se crea el Archivo de Usuarios
 
         return billetera;
     }
 
-    public UUID loguearUsuario(String email, String password, UUID billetera) {
-        for(Map.Entry<String,UUID> entry: usuariosLoguin.entrySet()) {
-          if(email.equals(entry.getKey()) && password.equals(entry.getKey()) && billetera.equals(entry.getKey())) {///Validacion de correo y contraseña
-               setIdUsuarioActivo(billetera);
-               return billetera;
+    public static UUID loguearUsuario(Billetera usuario) {
+        for(Map.Entry<String,Billetera> entry: usuariosLoguin.entrySet()) {
+            if(usuario.getEmail().equals(entry.getKey()) && usuario.getPassword().equals(entry.getKey()) && usuario.getBilletera().equals(entry.getKey())) {///Validacion de correo, contraseña e ID
+                modelo.setIdUsuarioActivo(usuario.getBilletera());
+                return usuario.getBilletera();
             }
         }
 
         return null;
     }
 
-    public void guardarBilleteraEnArchivo(Billetera billetera) {
+    public static void guardarBilleteraEnArchivo(Billetera billetera) {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
-        aniadirUsuario(billetera.getEmail(), billetera.getBilletera());
+        aniadirUsuario(billetera.getEmail(), billetera);
         try {
             if(!file.exists()){
                 file.createNewFile();
@@ -108,11 +98,11 @@ public final class Sesion implements Serializable {
         }
     }
 
-    public void aniadirUsuario(String email, UUID id) {
-        this.usuariosLoguin.put(email,id);
+    public static void aniadirUsuario(String email, Billetera usuario) {
+        usuariosLoguin.put(email,usuario);
     }
 
-    public HashMap<String, UUID> getUsuariosLoguin() {
+    public HashMap<String, Billetera> getUsuariosLoguin() {
         return usuariosLoguin;
     }
 
@@ -125,7 +115,7 @@ public final class Sesion implements Serializable {
         return transferencias;
     }
 
-    public void finalizarSesion() {
+    public static void finalizarSesion() {
         // Paso los nuevos usuarios registrados a el archivo.
         System.exit(0);
     }
