@@ -51,15 +51,15 @@ public class Transferencia {
     }
 
     ///Busca usuario en la lista por DNI
-    /*public User buscarUsuarioPorDNI(HashMap<String, UUID> usuariosLista) {
+    /*
+    public User buscarUsuarioPorDNI(HashMap<String, UUID> usuariosLista) {
         String dni;
         Scanner dniAux = new Scanner(System.in);
         dni= dniAux.nextLine();
         for (Map.Entry<String,UUID> entry: usuariosLista.entrySet()) {
             if (entry != null && entry.getDni().equals(dni)) {
                 return usuario;
-            }
-        }
+            } }
         return null;
     }*/
 
