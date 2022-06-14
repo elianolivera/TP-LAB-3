@@ -12,6 +12,7 @@ public final class Sesion implements Serializable {
 
     private static final long serialVersionUID = -6719022570919861969L;
     HashMap<UUID, List<String>> usuariosLoguin = new HashMap<>();
+
     private List<Transferencia> transferencias = new ArrayList<>();
     private UUID idUsuarioActivo;
 
