@@ -9,6 +9,14 @@ public class MenuLogica {
 
     Menu modelo=new Menu();
 
+    public int menuPrincipal() {
+        return modelo.mostrarMenuPrincipal();
+    }
+
+    public int menuUsuario() {
+        return modelo.mostrarMenuUsuario();
+    }
+
     public String pedirEmail() {
         try{
             String opcion = "";

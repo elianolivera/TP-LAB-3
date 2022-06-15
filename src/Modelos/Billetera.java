@@ -1,6 +1,8 @@
 package Modelos;
 
-public  class Billetera extends Usuario {
+import java.io.Serializable;
+
+public  class Billetera extends Usuario implements Serializable {
 
     private double saldo;
 

@@ -1,3 +1,5 @@
+import Logica.MenuLogica;
+import Logica.SesionLogica;
 import Modelos.*;
 import Exceptions.InvalidOptionException;
 
@@ -8,22 +10,22 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        Sesion sesion = new Sesion();
-        Menu menu = new Menu();
+        SesionLogica sesion = new SesionLogica();
+        MenuLogica menu = new MenuLogica();
+        sesion.archivoALista();
         correrApp(sesion, menu);
     }
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
-    private static void correrApp(Sesion sesion, Menu menu) {
-        sesion.archivoALista();
+    private static void correrApp(SesionLogica sesion, MenuLogica menu) {
         handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
-     private static void handleLoginAndRegister(Sesion sesion, Menu menu) {
-        while(sesion.getIdUsuarioActivo() == null) {
+     private static void handleLoginAndRegister(SesionLogica sesion, MenuLogica menu) {
+        while(sesion.getBilleteraActiva() == null) {
             try {
-                int opcionMenuUsuario = menu.mostrarMenuUsuario();
+                int opcionMenuUsuario = menu.menuUsuario();
                 if(opcionMenuUsuario == 2) {
                     sesion.registrarUsuario();
                     System.out.println("Nuevo usuario resgistrado.");
@@ -41,7 +43,7 @@ public class Main {
                         System.out.println("\n El ID ingresado no es valido como UUID.");
                     }
 
-                    if(sesion.getIdUsuarioActivo() == null) {
+                    if(sesion.getBilleteraActiva() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
@@ -53,9 +55,9 @@ public class Main {
         System.out.println("Usuario logueado satisfactoriamente.");
     }
 
-    private static void userOperations(Sesion sesion, Menu menu) {
+    private static void userOperations(SesionLogica sesion, MenuLogica menu) {
         try {
-            int opcionMenuPrincipal = menu.mostrarMenuPrincipal();
+            int opcionMenuPrincipal = menu.menuPrincipal();
             ///Lista de usuarios
             List<Transferencia> transferencias =new ArrayList<>();
             Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
@@ -63,9 +65,7 @@ public class Main {
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             Transferencia ttt = new Transferencia();
 
-            sesion.aniadirUsuario(us1.getEmail(), us1.getBilletera());
-            sesion.aniadirUsuario(us2.getEmail(), us2.getBilletera());
-            sesion.aniadirUsuario(us3.getEmail(), us3.getBilletera());
+
 
             switch (opcionMenuPrincipal) {
                 case 1:
@@ -78,7 +78,7 @@ public class Main {
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
+                    //ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
                     System.out.println(us1);
                     System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
@@ -101,7 +101,7 @@ public class Main {
                 case 4:
                     // Validar transaccion.
 
-                    ttt.validar(transferencias);
+                    //ttt.validar(transferencias);
                     break;
                 case 5:
                     // Historial de transacciones.
@@ -114,7 +114,7 @@ public class Main {
                     break;
                 case 7:
                     // Volver al login
-                    sesion.setIdUsuarioActivo(null);
+                    sesion.setBilleteraActiva(null);
                     break;
                 case 8:
                     // Salir.

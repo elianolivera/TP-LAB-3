@@ -1,5 +1,6 @@
 package Modelos;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 // Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
