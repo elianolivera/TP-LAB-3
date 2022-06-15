@@ -29,7 +29,7 @@ public final class Sesion implements Serializable {
         this.idUsuarioActivo = idUsuarioActivo;
     }
 
-    public User registrarUsuario() {
+    public Usuario registrarUsuario() {
 
         String nombre,apellido,dni,fechaDeNacimiento,email,password;
         Scanner teclado = new Scanner(System.in);
