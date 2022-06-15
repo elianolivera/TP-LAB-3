@@ -9,7 +9,7 @@ import java.util.*;
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
         sesion.archivoALista();
