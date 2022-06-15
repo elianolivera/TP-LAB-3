@@ -9,28 +9,42 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
-public class TransferenciaLogica implements Serializable {
+public class TransferenciaLogica extends  Transferencia implements Serializable {
 
     Transferencia modelo = new Transferencia();
+    public TransferenciaLogica() {
+
+    }
+    public TransferenciaLogica(Transferencia modelo) {
+        this.modelo = modelo;
+    }
+
+    public Transferencia getModelo() {
+        return modelo;
+    }
+
+    public TransferenciaLogica setModelo(Transferencia modelo) {
+        this.modelo = modelo;
+        return this;
+    }
 
     // Busca transferencia por UUID para validarla
-    /*public Transferencia buscartransferencia(List<TransferenciaLogica> transferencias) {
+    public Transferencia buscartransferencia(List<TransferenciaLogica> transferencias) {
         System.out.println("Ingrese el UUID de la transferencia a validar: \n");
         String UUIDt;
         Scanner id = new Scanner(System.in);
         UUIDt=id.nextLine();
         for (TransferenciaLogica  transf :transferencias) {
-            //if (transf != null && transf.getUUIDtransaccion().equals(UUIDt)) {
-                //return transf;
+            if (transf != null && transf.getUUIDtransaccion().equals(UUIDt)) {
+                return transf;
             } }
-        //return null;
-    }*/
+        return null;
+    }
 
     /// VALIDAR TRANSFERENCIA
     public void validar(List<TransferenciaLogica> transferencias) {
 
-        TransferenciaLogica t1 = new TransferenciaLogica();
-        //t1= t1.buscartransferencia(transferencias);
+        modelo=buscartransferencia(transferencias);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS

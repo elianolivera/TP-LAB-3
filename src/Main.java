@@ -1,5 +1,6 @@
 import Logica.MenuLogica;
 import Logica.SesionLogica;
+import Logica.TransferenciaLogica;
 import Modelos.*;
 import Exceptions.InvalidOptionException;
 
@@ -18,7 +19,7 @@ public class Main {
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(SesionLogica sesion, MenuLogica menu) {
-        handleLoginAndRegister(sesion, menu);
+       // handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
@@ -63,7 +64,8 @@ public class Main {
             Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
             Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
             Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
-            Transferencia ttt = new Transferencia();
+            TransferenciaLogica ttt = new TransferenciaLogica();
+
 
 
 
@@ -78,7 +80,7 @@ public class Main {
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    //ttt = ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
+                    ttt = (TransferenciaLogica) ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
                     System.out.println(us1);
                     System.out.println(us2);
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
