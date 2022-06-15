@@ -1,13 +1,11 @@
 package Logica;
 
+import Modelos.Billetera;
 import Modelos.Estado;
 import Modelos.Transferencia;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class TransferenciaLogica implements Serializable {
 
@@ -41,13 +39,13 @@ public class TransferenciaLogica implements Serializable {
     }
 
     ///Busca usuario en la lista por DNI
-    public Usuario buscarUsuarioPorDNI(HashMap<String, UUID> usuariosLista) {
+    public Billetera buscarUsuarioPorDNI(HashMap<UUID, Billetera> usuariosLista) {
         String dni;
         Scanner dniAux = new Scanner(System.in);
         dni= dniAux.nextLine();
-        for (Map.Entry<String,UUID> entry: usuariosLista.entrySet()) {
-            if (entry != null && entry.getDni().equals(dni)) {
-                return usuario;
+        for (Map.Entry<UUID,Billetera> entry: usuariosLista.entrySet()) {
+            if (entry != null && entry.getValue().getDni().equals(dni)) {
+                return entry.getValue(); // Retorna la billetera que coincida con el DNI
             }
         }
         return null;
@@ -55,12 +53,12 @@ public class TransferenciaLogica implements Serializable {
 
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<String, UUID> usuariosLista, List<Transferencia>transferencias) {
+    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> usuariosLista, List<Transferencia>transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su DNI   ========: ");
-        Billetera u1 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
+        Billetera u1 = t1.buscarUsuarioPorDNI(usuariosLista);
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
-        Billetera u2 = (Billetera) t1.buscarUsuarioPorDNI(usuariosLista);
+        Billetera u2 = t1.buscarUsuarioPorDNI(usuariosLista);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
