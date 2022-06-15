@@ -40,14 +40,14 @@ public class TransferenciaLogica implements Serializable {
         }
     }
 
-    ///Busca usuario en la lista por DNI
-    public Billetera buscarUsuarioPorDNI(HashMap<UUID, Billetera> usuariosLista) {
-        String dni;
-        Scanner dniAux = new Scanner(System.in);
-        dni = dniAux.nextLine();
+    ///Busca usuario en la lista por UUID
+    public Billetera buscarUsuarioPorUUID(HashMap<UUID, Billetera> usuariosLista) {
+        UUID id;
+        Scanner Aux = new Scanner(System.in);
+        id= UUID.fromString(Aux.nextLine());
         for (Map.Entry<UUID, Billetera> entry : usuariosLista.entrySet()) {
-            if (entry != null && entry.getValue().getDni().equals(dni)) {
-                return entry.getValue(); // Retorna la billetera que coincida con el DNI
+            if (entry != null && entry.getValue().getBilletera().equals(id)) {
+                return entry.getValue(); // Retorna la billetera que coincida con el UUID
             }
         }
         return null;
@@ -57,9 +57,9 @@ public class TransferenciaLogica implements Serializable {
     public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> usuariosLista, List<Transferencia> transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su DNI   ========: ");
-        Billetera u1 = t1.buscarUsuarioPorDNI(usuariosLista);
+        Billetera u1 = t1.buscarUsuarioPorUUID(usuariosLista);
         System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
-        Billetera u2 = t1.buscarUsuarioPorDNI(usuariosLista);
+        Billetera u2 = t1.buscarUsuarioPorUUID(usuariosLista);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
@@ -72,14 +72,14 @@ public class TransferenciaLogica implements Serializable {
         }
         return modelo;
     }
+
     /// Guarda la transferencia en el archivo
     public void guardarTransferenciaArchivo(Transferencia t) {
          File file = new File("Transferencias.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (!file.exists()) {
-                file.createNewFile();
-            }
+                file.createNewFile(); }
             mapper.writeValue(file, t);
         } catch (Exception e) {
             System.out.println(e.getMessage());
