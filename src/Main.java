@@ -85,8 +85,8 @@ public class Main {
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);
 
-
                     sesion.aniadirTransferencia(ttt);
+
                     break;
                 case 3:
                     // Transacciones pendientes.

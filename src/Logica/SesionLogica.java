@@ -115,6 +115,7 @@ public class SesionLogica implements Serializable {
 
     public List<Transferencia> aniadirTransferencia(Transferencia t) {
         this.transferencias.add(t);
+
         return transferencias;
     }
 
