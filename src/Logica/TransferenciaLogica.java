@@ -62,6 +62,8 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
         for (Map.Entry<UUID, Billetera> entry : usuariosLista.entrySet()) {
             if (entry != null && entry.getValue().getBilletera().equals(id)) {
                 return entry.getValue(); // Retorna la billetera que coincida con el UUID
+            }else{
+                System.out.println("el UUID  no existe");
             }
         }
         return null;
@@ -70,9 +72,9 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
     ///Transeferir de un usuario insertado por teclado a otro.
     public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> usuariosLista, List<Transferencia> transferencias) {
         String nombre = null;
-        System.out.print(" ========  Ingrese su DNI   ========: ");
+        System.out.print(" ========  Ingrese su UUID   ========: ");
         Billetera u1 = t1.buscarUsuarioPorUUID(usuariosLista);
-        System.out.print(" ========  Ingrese  el DNI a quien va a transferir ========: ");
+        System.out.print(" ========  Ingrese  el UUID del destinatario ========: ");
         Billetera u2 = t1.buscarUsuarioPorUUID(usuariosLista);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
