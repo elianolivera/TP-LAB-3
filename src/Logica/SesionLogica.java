@@ -98,7 +98,7 @@ public class SesionLogica implements Serializable {
 
         if(file.exists()) {
             try {
-              //  this.usuariosLoguin = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
+          //  this.usuariosLoguin = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }

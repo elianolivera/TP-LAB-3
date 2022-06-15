@@ -61,7 +61,8 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
         id= UUID.fromString(Aux.nextLine());
         for (Map.Entry<UUID, Billetera> entry : usuariosLista.entrySet()) {
             if (entry != null && entry.getValue().getBilletera().equals(id)) {
-                return entry.getValue(); // Retorna la billetera que coincida con el UUID
+                return entry.getValue();
+                // Retorna la billetera que coincida con el UUID
             }else{
                 System.out.println("el UUID  no existe");
             }
