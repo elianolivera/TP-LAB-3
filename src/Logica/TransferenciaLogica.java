@@ -53,7 +53,6 @@ public class TransferenciaLogica implements Serializable {
         return null;
     }
 
-
     ///Transeferir de un usuario insertado por teclado a otro.
     public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> usuariosLista, List<Transferencia> transferencias) {
         String nombre = null;
@@ -77,7 +76,6 @@ public class TransferenciaLogica implements Serializable {
     public void guardarTransferenciaArchivo(Transferencia t) {
          File file = new File("Transferencias.json");
         ObjectMapper mapper = new ObjectMapper();
-
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -85,6 +83,4 @@ public class TransferenciaLogica implements Serializable {
             mapper.writeValue(file, t);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
-    }
-}
+        } } }
