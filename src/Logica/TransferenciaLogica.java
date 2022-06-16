@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
-public class TransferenciaLogica extends  Transferencia implements Serializable {
+public class TransferenciaLogica extends Transferencia implements Serializable {
 
     Transferencia modelo = new Transferencia();
     public TransferenciaLogica() {
@@ -67,10 +67,9 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(TransferenciaLogica t1, float monto,HashMap<UUID, Billetera> billeteras,HashMap<UUID, Usuario> usuarios , List<Transferencia> transferencias) {
+    public Transferencia transferir(TransferenciaLogica t1, float monto, Usuario actualUsuario ,HashMap<UUID, Billetera> billeteras,HashMap<UUID, Usuario> usuarios , List<Transferencia> transferencias) {
         String nombre = null;
-        System.out.print(" ========  Ingrese su UUID   ========: ");
-        Billetera u1 = t1.buscarBilleteraPorUUID(billeteras);
+        Billetera u1 = billeteras.get(actualUsuario.getBilletera());
         System.out.print(" ========  Ingrese  el UUID del destinatario ========: ");
         Billetera u2 = t1.buscarBilleteraPorUUID(billeteras);
         u1.setSaldo(u1.getSaldo() - monto);

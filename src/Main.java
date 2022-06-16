@@ -75,10 +75,10 @@ public class Main {
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = (TransferenciaLogica) ttt.transferir(ttt, monto, sesion.getBilleteras(), sesion.getUsuariosLoguin(), sesion.getTransferencias());
+                    Transferencia transf = ttt.transferir(ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin(), sesion.getTransferencias());
                     System.out.print("\n ======== Comprobante : ======== ");
-                    System.out.println(ttt);
-                    sesion.aniadirTransferencia(ttt);
+                    System.out.println(transf);
+                    sesion.aniadirTransferencia(transf);
 
                     break;
                 case 3:
