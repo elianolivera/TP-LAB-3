@@ -96,7 +96,7 @@ public class Main {
                     case 4:
                         // Validar transaccion.
 
-                        //ttt.validar(transferencias);
+                        ttt.validar(transferencias);
                         break;
                     case 5:
                         // Historial de transacciones.

@@ -30,12 +30,12 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     }
 
     // Busca transferencia por UUID para validarla
-    public Transferencia buscartransferencia(List<TransferenciaLogica> transferencias) {
+    public Transferencia buscartransferencia(List<Transferencia> transferencias) {
         System.out.println("Ingrese el UUID de la transferencia a validar: \n");
         String UUIDt;
         Scanner id = new Scanner(System.in);
         UUIDt=id.nextLine();
-        for (TransferenciaLogica  transf :transferencias) {
+        for (Transferencia  transf :transferencias) {
             if (transf != null && transf.getUUIDtransaccion().equals(UUIDt)) {
                 return transf;
             } }
@@ -43,7 +43,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     }
 
     /// VALIDAR TRANSFERENCIA
-    public void validar(List<TransferenciaLogica> transferencias) {
+    public void validar(List<Transferencia> transferencias) {
 
         modelo=buscartransferencia(transferencias);
         if (modelo.getCantidadtransac() >= 3) {
