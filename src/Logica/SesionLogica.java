@@ -148,6 +148,10 @@ public class SesionLogica implements Serializable {
         return usuarios;
     }
 
+    public HashMap<UUID, Billetera> getBilleteras() {
+        return billeteras;
+    }
+
     public List<Transferencia> aniadirTransferencia(Transferencia t) {
         this.transferencias.add(t);
 
