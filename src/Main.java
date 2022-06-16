@@ -89,9 +89,7 @@ public class Main {
                         for(Transferencia t : sesion.getTransferencias()) {
                             if(t != null && t.getEstado() != Estado.VALIDADA) {
                                 System.out.println(t);
-                            }
-                        }
-
+                            }  }
                         break;
                     case 4:
                         // Validar transaccion.
