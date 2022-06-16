@@ -79,7 +79,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         //Actualiza saldos luego de transacción , en los objetos y el hashmap.
         u1.setSaldo(u1.getSaldo() - monto); //sesion.aniadirBilletera(u1.getIdBilletera(), u1);
         u2.setSaldo(u2.getSaldo() + monto); //sesion.aniadirBilletera(u2.getIdBilletera(), u2);
-        modelo.setCantidadtransac(modelo.getCantidadtransac() + 3);
+        modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
