@@ -104,6 +104,7 @@ public class Main {
                         break;
                     case 6:
                         // Archivo de transacciones.
+                        ttt.mostrarTransferenciasActivas();
                         break;
                     case 7:
                         // Volver al login
