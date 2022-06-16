@@ -76,7 +76,6 @@ public class Main {
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
                     ttt = (TransferenciaLogica) ttt.transferir(ttt, monto, sesion.getBilleteras(), sesion.getUsuariosLoguin(), sesion.getTransferencias());
-                    /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);
                     sesion.aniadirTransferencia(ttt);
