@@ -75,8 +75,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
-        UUID id= this.modelo.UUIDtransaccion = UUID.randomUUID();
-        modelo = new Transferencia(id,usuarios.get(u1.getIdBilletera()),usuarios.get(u2.getIdBilletera()),modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
+        modelo = new Transferencia(usuarios.get(u1.getIdBilletera()),usuarios.get(u2.getIdBilletera()),modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS

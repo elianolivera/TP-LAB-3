@@ -14,7 +14,7 @@ public class Transferencia {
     public Transferencia() {
     }
 
-    public Transferencia(UUID UUIDtransaccion, Usuario us, Usuario receptor, int cantidadtransac, double monto, Estado estado) {
+    public Transferencia(Usuario us, Usuario receptor, int cantidadtransac, double monto, Estado estado) {
         this.UUIDtransaccion = UUID.randomUUID();
         this.us = us;
         this.receptor = receptor;
