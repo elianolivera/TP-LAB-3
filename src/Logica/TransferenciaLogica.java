@@ -67,7 +67,8 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> billeteras, List<Transferencia> transferencias) {
+    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Usuario> usuarios , List<Transferencia> transferencias) {
+        HashMap<UUID, Billetera> billeteras = null;
         String nombre = null;
         System.out.print(" ========  Ingrese su UUID   ========: ");
         Billetera u1 = t1.buscarBilleteraPorUUID(billeteras);
@@ -77,16 +78,12 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
         u2.setSaldo(u2.getSaldo() + monto);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
         UUID id= this.modelo.UUIDtransaccion = UUID.randomUUID();
-        // Para esto se va a tener que buscar el usuario con el ID de la billetera porque da error el u1 y u2, el constructor espera Usuarios y son billeteras.
-        // Si no hacer que transferencia guarde solo el id de ambos (el que envia y el que recibe)
-        //modelo = new Transferencia(id,u1, u2,modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
+        modelo = new Transferencia(id,usuarios.get(u1.getIdBilletera()),usuarios.get(u2.getIdBilletera()),modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS
             guardarTransferenciaArchivo(modelo);
-        }
-        return modelo;
-    }
+        }return modelo; }
 
     /// Guarda la transferencia en el archivo
     public void guardarTransferenciaArchivo(Transferencia t) {
