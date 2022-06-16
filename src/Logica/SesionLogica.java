@@ -140,6 +140,9 @@ public class SesionLogica implements Serializable {
     }
 
     public void aniadirBilletera(UUID id, Billetera billetera) {
+
+
+
         this.billeteras.put(id,billetera);
     }
 
