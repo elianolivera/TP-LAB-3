@@ -1,15 +1,14 @@
 package Modelos;
 
 import java.io.Serializable;
+import java.util.UUID;
 
-public  class Billetera extends Usuario implements Serializable {
+public  class Billetera implements Serializable {
 
     private double saldo;
+    protected UUID idBilletera;
 
-    public Billetera() {}
-
-    public Billetera(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
-        super(nombre, apellido, dni, fechaDeNacimiento, email, password);
+    public Billetera() {
         this.saldo = 100;
     }
 
@@ -19,6 +18,14 @@ public  class Billetera extends Usuario implements Serializable {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public UUID getIdBilletera() {
+        return idBilletera;
+    }
+
+    public void setIdBilletera(UUID idBilletera) {
+        this.idBilletera = idBilletera;
     }
 
     @Override

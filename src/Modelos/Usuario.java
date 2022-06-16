@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 // Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
-public abstract class Usuario {
+public class Usuario {
     protected UUID billetera;
     protected String nombre;
     protected String apellido;

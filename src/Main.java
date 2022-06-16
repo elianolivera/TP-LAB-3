@@ -3,10 +3,7 @@ import Logica.SesionLogica;
 import Logica.TransferenciaLogica;
 import Modelos.*;
 import Exceptions.InvalidOptionException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -15,18 +12,19 @@ public class Main {
     public static void main(String[] args) {
         SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
-        sesion.archivoALista();
+        sesion.archivoAMapUsuarios();
+        sesion.archivoAMapBilleteras();
         correrApp(sesion, menu);
     }
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(SesionLogica sesion, MenuLogica menu) {
-       // handleLoginAndRegister(sesion, menu);
+        handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
      private static void handleLoginAndRegister(SesionLogica sesion, MenuLogica menu) {
-        while(sesion.getBilleteraActiva() == null) {
+        while(sesion.getUsuarioActivo() == null) {
             try {
                 int opcionMenuUsuario = menu.menuUsuario();
                 if(opcionMenuUsuario == 2) {
@@ -46,7 +44,7 @@ public class Main {
                         System.out.println("\n El ID ingresado no es valido como UUID.");
                     }
 
-                    if(sesion.getBilleteraActiva() == null) {
+                    if(sesion.getUsuarioActivo() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
@@ -63,12 +61,7 @@ public class Main {
             int opcionMenuPrincipal = menu.menuPrincipal();
             ///Lista de usuarios
             List<Transferencia> transferencias =new ArrayList<>();
-            Billetera us1  = new Billetera("Peter","Pedro","01010101","26/07/1993","elian.lpb","123");
-            Billetera us2  = new Billetera("Albert","Parker","10101010","26/07/1923","elian.lpb","123");
-            Billetera us3  = new Billetera("Alan","Sanchez","11111111","26/07/1956","elian.lpb","123");
             TransferenciaLogica ttt = new TransferenciaLogica();
-
-
 
 
             switch (opcionMenuPrincipal) {
@@ -82,9 +75,7 @@ public class Main {
                     float monto = 0;
                     Scanner teclado = new Scanner(System.in);
                     monto = teclado.nextFloat();
-                    ttt = (TransferenciaLogica) ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
-                    System.out.println(us1);
-                    System.out.println(us2);
+                    //ttt = (TransferenciaLogica) ttt.transferir(ttt, monto, sesion.getUsuariosLoguin(), sesion.getTransferencias());
                     /// MOSTRAR TRANSFERENCIAS (ESTA VA EN EL 5 CON LISTA DE TRANSFERENCIAS EN ARCHIVO)
                     System.out.print("\n ======== Comprobante : ======== ");
                     System.out.println(ttt);
@@ -118,7 +109,7 @@ public class Main {
                     break;
                 case 7:
                     // Volver al login
-                    sesion.setBilleteraActiva(null);
+                    sesion.setUsuarioActivo(null);
                     break;
                 case 8:
                     // Salir.

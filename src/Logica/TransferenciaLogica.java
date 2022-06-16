@@ -59,15 +59,10 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
         UUID id;
         Scanner Aux = new Scanner(System.in);
         id= UUID.fromString(Aux.nextLine());
-        for (Map.Entry<UUID, Billetera> entry : usuariosLista.entrySet()) {
-            if (entry != null && entry.getValue().getBilletera().equals(id)) {
-                return entry.getValue();
-                // Retorna la billetera que coincida con el UUID
-            }else{
-                System.out.println("el UUID  no existe");
-            }
-        }
-        return null;
+
+        Billetera b = usuariosLista.get(id);
+
+        return b;
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
@@ -81,7 +76,7 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
         u2.setSaldo(u2.getSaldo() + monto);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
         UUID id= this.modelo.UUIDtransaccion = UUID.randomUUID();
-        modelo = new Transferencia(id,u1, u2,modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
+        //modelo = new Transferencia(id,u1, u2,modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
             ///SE PASA AL ARCHIVO DE VALIDADAS

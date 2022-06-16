@@ -18,12 +18,13 @@ public class SesionLogica implements Serializable {
 
     static Sesion modelo=new Sesion();
     private static final long serialVersionUID = -6719022570919861969L;
-    static HashMap<UUID, Billetera> usuariosLoguin = new HashMap<>();
+    static HashMap<UUID, Usuario> usuarios = new HashMap<>();
+    static HashMap<UUID, Billetera> billeteras = new HashMap<>();
     private List<Transferencia> transferencias = new ArrayList<>();
-    private Billetera billeteraActiva;
+    private Usuario usuarioActivo;
 
     public SesionLogica(){
-        this.billeteraActiva = null;
+        this.usuarioActivo = null;
     }
 
     public Billetera registrarUsuario() {
@@ -40,7 +41,7 @@ public class SesionLogica implements Serializable {
 
         System.out.println("\nIngrese su Numero de documento: ");
         dni=teclado.nextLine();
-        if(usuariosLoguin.containsKey(dni)){
+        if(usuarios.containsValue(dni)){
             System.out.println("El numero de Documento ya existe");
             return null;
         }
@@ -50,7 +51,7 @@ public class SesionLogica implements Serializable {
 
         System.out.println("\nIngrese su Correo electronico: ");
         email=teclado.nextLine();
-        if(usuariosLoguin.containsKey(email)){
+        if(usuarios.containsValue(email)){
             System.out.println("El Correo electronico ya existe");
             return null;
         }
@@ -58,21 +59,25 @@ public class SesionLogica implements Serializable {
         System.out.println("\nIngrese su password: ");
         password=teclado.nextLine();
 
-        Billetera billetera = new Billetera(nombre, apellido, dni, fechaDeNacimiento, email, password);
-        UUID id= billetera.getBilletera();
+        Usuario user = new Usuario(nombre, apellido, dni, fechaDeNacimiento, email, password);
+        UUID id= user.getBilletera();
+
+        Billetera billeteraUser = new Billetera();
+        billeteraUser.setIdBilletera(id);
+
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
-        guardarBilleteraEnArchivo(billetera);//Se crea el Archivo de Usuarios
+        guardarBilleteraEnArchivo(billeteraUser);//Se crea el Archivo de Usuarios
+        guardarUsuarioEnArchivo(user);
 
-        return billetera;
+        return billeteraUser;
     }
 
-    public Billetera loguearUsuario(String email, String password, UUID id) {
-        for(Map.Entry<UUID,Billetera> entry: usuariosLoguin.entrySet()) {
-            if(id.equals(entry.getKey()) && password.equals(entry.getValue().getPassword()) && email.equals(entry.getValue().getPassword())) {
-                setBilleteraActiva(entry.getValue());
-                return entry.getValue();
-            }
+    public Usuario loguearUsuario(String email, String password, UUID id) {
+        Usuario user = usuarios.get(id);
+
+        if(user != null && (user.getEmail() == email && user.getPassword() == password)) {
+            return user;
         }
 
         return null;
@@ -81,36 +86,67 @@ public class SesionLogica implements Serializable {
     public void guardarBilleteraEnArchivo(Billetera billetera) {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
-        aniadirUsuario(billetera.getBilletera(), billetera);
+        aniadirBilletera(billetera.getIdBilletera(), billetera);
         try {
             if(!file.exists()){
                 file.createNewFile();
             }
-            mapper.writeValue(file, usuariosLoguin);
+            mapper.writeValue(file, billeteras);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void archivoALista() {
+    public void guardarUsuarioEnArchivo(Usuario usuario) {
+        File file = new File("./usuarios.json");
+        ObjectMapper mapper=new ObjectMapper();
+        aniadirUsuario(usuario.getBilletera(), usuario);
+        try {
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            mapper.writeValue(file, usuarios);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void archivoAMapBilleteras() {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
 
         if(file.exists()) {
             try {
-          //  this.usuariosLoguin = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
+                this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static void aniadirUsuario(UUID id, Billetera billetera) {
-        usuariosLoguin.put(id,billetera);
+    public void archivoAMapUsuarios() {
+        File file = new File("./usuarios.json");
+        ObjectMapper mapper=new ObjectMapper();
+
+        if(file.exists()) {
+            try {
+                this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>(){});
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
-    public HashMap<UUID, Billetera> getUsuariosLoguin() {
-        return usuariosLoguin;
+    public static void aniadirUsuario(UUID id, Usuario usuario) {
+        usuarios.put(id,usuario);
+    }
+
+    public static void aniadirBilletera(UUID id, Billetera billetera) {
+        billeteras.put(id,billetera);
+    }
+
+    public HashMap<UUID, Usuario> getUsuariosLoguin() {
+        return usuarios;
     }
 
     public List<Transferencia> aniadirTransferencia(Transferencia t) {
@@ -123,12 +159,12 @@ public class SesionLogica implements Serializable {
         return transferencias;
     }
 
-    public Billetera getBilleteraActiva() {
-        return billeteraActiva;
+    public Usuario getUsuarioActivo() {
+        return usuarioActivo;
     }
 
-    public void setBilleteraActiva(Billetera billeteraActiva) {
-        this.billeteraActiva = billeteraActiva;
+    public void setUsuarioActivo(Usuario usuarioActivo) {
+        this.usuarioActivo = usuarioActivo;
     }
 
     public static void finalizarSesion() {
