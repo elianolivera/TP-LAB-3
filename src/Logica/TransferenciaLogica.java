@@ -3,6 +3,7 @@ package Logica;
 import Modelos.Billetera;
 import Modelos.Estado;
 import Modelos.Transferencia;
+import Modelos.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -55,27 +56,29 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
     }
 
     ///Busca usuario en la lista por UUID
-    public Billetera buscarUsuarioPorUUID(HashMap<UUID, Billetera> usuariosLista) {
+    public Billetera buscarBilleteraPorUUID(HashMap<UUID, Billetera> billeteras) {
         UUID id;
         Scanner Aux = new Scanner(System.in);
         id= UUID.fromString(Aux.nextLine());
 
-        Billetera b = usuariosLista.get(id);
+        Billetera b = billeteras.get(id);
 
         return b;
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> usuariosLista, List<Transferencia> transferencias) {
+    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Billetera> billeteras, List<Transferencia> transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su UUID   ========: ");
-        Billetera u1 = t1.buscarUsuarioPorUUID(usuariosLista);
+        Billetera u1 = t1.buscarBilleteraPorUUID(billeteras);
         System.out.print(" ========  Ingrese  el UUID del destinatario ========: ");
-        Billetera u2 = t1.buscarUsuarioPorUUID(usuariosLista);
+        Billetera u2 = t1.buscarBilleteraPorUUID(billeteras);
         u1.setSaldo(u1.getSaldo() - monto);
         u2.setSaldo(u2.getSaldo() + monto);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
         UUID id= this.modelo.UUIDtransaccion = UUID.randomUUID();
+        // Para esto se va a tener que buscar el usuario con el ID de la billetera porque da error el u1 y u2, el constructor espera Usuarios y son billeteras.
+        // Si no hacer que transferencia guarde solo el id de ambos (el que envia y el que recibe)
         //modelo = new Transferencia(id,u1, u2,modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
@@ -87,7 +90,7 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
 
     /// Guarda la transferencia en el archivo
     public void guardarTransferenciaArchivo(Transferencia t) {
-         File file = new File("Transferencias.json");
+         File file = new File("./Transferencias.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (!file.exists()) {
