@@ -76,7 +76,8 @@ public class SesionLogica implements Serializable {
     public Usuario loguearUsuario(String email, String password, UUID id) {
         Usuario user = usuarios.get(id);
 
-        if(user != null && (user.getEmail() == email && user.getPassword() == password)) {
+        if(user != null && (user.getEmail().equals(email) && user.getPassword().equals(password))) {
+            setUsuarioActivo(user);
             return user;
         }
 

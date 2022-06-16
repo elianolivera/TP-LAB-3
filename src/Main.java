@@ -110,6 +110,7 @@ public class Main {
                 case 7:
                     // Volver al login
                     sesion.setUsuarioActivo(null);
+                    correrApp(sesion, menu);
                     break;
                 case 8:
                     // Salir.
