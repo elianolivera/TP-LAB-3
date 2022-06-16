@@ -67,8 +67,7 @@ public class TransferenciaLogica extends  Transferencia implements Serializable 
     }
 
     ///Transeferir de un usuario insertado por teclado a otro.
-    public Transferencia transferir(TransferenciaLogica t1, float monto, HashMap<UUID, Usuario> usuarios , List<Transferencia> transferencias) {
-        HashMap<UUID, Billetera> billeteras = null;
+    public Transferencia transferir(TransferenciaLogica t1, float monto,HashMap<UUID, Billetera> billeteras,HashMap<UUID, Usuario> usuarios , List<Transferencia> transferencias) {
         String nombre = null;
         System.out.print(" ========  Ingrese su UUID   ========: ");
         Billetera u1 = t1.buscarBilleteraPorUUID(billeteras);
