@@ -135,12 +135,12 @@ public class SesionLogica implements Serializable {
                 System.out.println(e.getMessage());
             }  }  }
 
-    public static void aniadirUsuario(UUID id, Usuario usuario) {
-        usuarios.put(id,usuario);
+    public void aniadirUsuario(UUID id, Usuario usuario) {
+        this.usuarios.put(id,usuario);
     }
 
-    public static void aniadirBilletera(UUID id, Billetera billetera) {
-        billeteras.put(id,billetera);
+    public void aniadirBilletera(UUID id, Billetera billetera) {
+        this.billeteras.put(id,billetera);
     }
 
     public HashMap<UUID, Usuario> getUsuariosLoguin() {
