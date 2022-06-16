@@ -58,67 +58,69 @@ public class Main {
     }
 
     private static void userOperations(SesionLogica sesion, MenuLogica menu) {
-        try {
-            int opcionMenuPrincipal = menu.menuPrincipal();
-            ///Lista de usuarios
-            List<Transferencia> transferencias =new ArrayList<>();
-            TransferenciaLogica ttt = new TransferenciaLogica();
+        while(sesion.getUsuarioActivo() != null) {
+            try {
+                int opcionMenuPrincipal = menu.menuPrincipal();
+                ///Lista de usuarios
+                List<Transferencia> transferencias =new ArrayList<>();
+                TransferenciaLogica ttt = new TransferenciaLogica();
 
 
-            switch (opcionMenuPrincipal) {
-                case 1:
-                    // Consultar activos.
-                    break;
-                case 2:
-                    // Realizar transferencia
-                    System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getUsuariosLoguin());
-                    System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
-                    float monto = 0;
-                    Scanner teclado = new Scanner(System.in);
-                    monto = teclado.nextFloat();
-                    Transferencia transf = ttt.transferir(ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin(), sesion.getTransferencias());
-                    System.out.print("\n ======== Comprobante : ======== ");
-                    System.out.println(transf);
-                    sesion.aniadirTransferencia(transf);
+                switch (opcionMenuPrincipal) {
+                    case 1:
+                        // Consultar activos.
+                        break;
+                    case 2:
+                        // Realizar transferencia
+                        System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getUsuariosLoguin());
+                        System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
+                        float monto = 0;
+                        Scanner teclado = new Scanner(System.in);
+                        monto = teclado.nextFloat();
+                        Transferencia transf = ttt.transferir(ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin(), sesion.getTransferencias());
+                        System.out.print("\n ======== Comprobante : ======== ");
+                        System.out.println(transf);
+                        sesion.aniadirTransferencia(transf);
 
-                    break;
-                case 3:
-                    // Transacciones pendientes.
-                    System.out.println("Estas son las transacciones pendientes de validacion: \n");
-                    for(Transferencia t : sesion.getTransferencias()) {
-                        if(t != null && t.getEstado() != Estado.VALIDADA) {
-                            System.out.println(t);
+                        break;
+                    case 3:
+                        // Transacciones pendientes.
+                        System.out.println("Estas son las transacciones pendientes de validacion: \n");
+                        for(Transferencia t : sesion.getTransferencias()) {
+                            if(t != null && t.getEstado() != Estado.VALIDADA) {
+                                System.out.println(t);
+                            }
                         }
-                    }
 
-                    break;
-                case 4:
-                    // Validar transaccion.
+                        break;
+                    case 4:
+                        // Validar transaccion.
 
-                    //ttt.validar(transferencias);
-                    break;
-                case 5:
-                    // Historial de transacciones.
-                    System.out.print("\n ======== Comprobante : ======== ");
-                    System.out.println(sesion.getTransferencias());
+                        //ttt.validar(transferencias);
+                        break;
+                    case 5:
+                        // Historial de transacciones.
+                        System.out.print("\n ======== Comprobante : ======== ");
+                        System.out.println(sesion.getTransferencias());
 
-                    break;
-                case 6:
-                    // Archivo de transacciones.
-                    break;
-                case 7:
-                    // Volver al login
-                    sesion.setUsuarioActivo(null);
-                    correrApp(sesion, menu);
-                    break;
-                case 8:
-                    // Salir.
-                    sesion.finalizarSesion();
-                    break;
+                        break;
+                    case 6:
+                        // Archivo de transacciones.
+                        break;
+                    case 7:
+                        // Volver al login
+                        sesion.setUsuarioActivo(null);
+                        correrApp(sesion, menu);
+                        break;
+                    case 8:
+                        // Salir.
+                        sesion.finalizarSesion();
+                        break;
+                }
+            } catch(InvalidOptionException | InputMismatchException ex) {
+                System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
+
             }
-        } catch(InvalidOptionException | InputMismatchException ex) {
-            System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
-
         }
     }
 }

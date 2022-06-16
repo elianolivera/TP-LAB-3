@@ -67,7 +67,7 @@ public class SesionLogica implements Serializable {
 
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
-        guardarBilleteraEnArchivo(billeteraUser);//Se crea el Archivo de Usuarios
+        aniadirBilletera(billeteraUser.getIdBilletera(), billeteraUser);//Se crea el Archivo de Usuarios
         guardarUsuarioEnArchivo(user);
 
         return billeteraUser;
@@ -84,15 +84,14 @@ public class SesionLogica implements Serializable {
         return null;
     }
 
-    public void guardarBilleteraEnArchivo(Billetera billetera) {
+    private void guardarBilleterasEnArchivo() {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
-        aniadirBilletera(billetera.getIdBilletera(), billetera);
         try {
             if(!file.exists()){
                 file.createNewFile();
             }
-            mapper.writeValue(file, billeteras);
+            mapper.writeValue(file, this.billeteras);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -170,8 +169,9 @@ public class SesionLogica implements Serializable {
         this.usuarioActivo = usuarioActivo;
     }
 
-    public static void finalizarSesion() {
+    public void finalizarSesion() {
         // Paso los nuevos usuarios registrados a el archivo.
+        guardarBilleterasEnArchivo();
         System.exit(0);
     }
 }
