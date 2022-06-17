@@ -1,9 +1,10 @@
 package Modelos;
 
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Transferencia {
+public class Transferencia implements Serializable {
     protected Usuario us;
     protected Usuario receptor;
     public UUID UUIDtransaccion;
