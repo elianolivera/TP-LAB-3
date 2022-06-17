@@ -93,7 +93,7 @@ public class Main {
                         break;
                     case 4:
                         // Validar transaccion.
-
+                        System.out.print("\n ======== Validación de transacción : ======== ");
                         ttt.validar(transferencias);
                         break;
                     case 5:
@@ -104,6 +104,7 @@ public class Main {
                         break;
                     case 6:
                         // Archivo de transacciones.
+                        System.out.print("\n ======== Archivo de transacciones : ======== ");
                         ttt.mostrarTransferenciasActivas();
                         break;
                     case 7:
