@@ -20,7 +20,7 @@ public class Main {
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(SesionLogica sesion, MenuLogica menu) {
-        handleLoginAndRegister(sesion, menu);
+        ///handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
@@ -105,7 +105,7 @@ public class Main {
                     case 6:
                         // Archivo de transacciones.
                         System.out.print("\n ======== Archivo de transacciones : ======== ");
-                        ttt.mostrarTransferenciasActivas();
+                        ttt.mostrarTransferenciasActivas(ttt);
                         break;
                     case 7:
                         // Volver al login

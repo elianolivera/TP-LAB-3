@@ -108,13 +108,13 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
 
 
     /// Mostrar transferencias activas
-    public void mostrarTransferenciasActivas() {
+    public void mostrarTransferenciasActivas(Transferencia p) {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper = new ObjectMapper();
 
         if (file.exists()) {
             try {
-               mapper.reader();
+              mapper.readTree(String.valueOf(p));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
