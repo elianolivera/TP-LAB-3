@@ -82,7 +82,7 @@ public class Usuario {
 
         return
 
-                "\nN de billetera=" + billetera +
+                "\n\nN° de billetera=" + billetera +
                 "\n Nombre='" + nombre +
                 "\n Apellido='" + apellido +
                 "\n Fecha De Nacimiento='" + fechaDeNacimiento +

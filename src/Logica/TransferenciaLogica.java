@@ -52,7 +52,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         modelo = buscartransferencia(transferencias);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
-            //Se pasa al archivo de transacciones validadas
+            //Cuando las validaciones sean mayor a 3 se pasa al archivo de transacciones validadas.
            guardarTransferenciaArchivo(transf);
         } else if (modelo.getCantidadtransac() <= 3) {
             modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
@@ -73,13 +73,14 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
 
     ///Transeferir de un usuario insertado por teclado a otro.
     public Transferencia transferir(SesionLogica sesion,TransferenciaLogica t1, float monto, Usuario actualUsuario, HashMap<UUID, Billetera> billeteras, HashMap<UUID, Usuario> usuarios, List<Transferencia> transferencias) {
-        String nombre = null;
+
         Billetera u1 = billeteras.get(actualUsuario.getBilletera());
-        System.out.print(" ========  Ingrese  el UUID del destinatario ========: ");
+        System.out.print(" ========  Ingrese  el N°de billetera (UUID) del destinatario ========: ");
         Billetera u2 = t1.buscarBilleteraPorUUID(billeteras);
         //Actualiza saldos luego de transacción , en los objetos y el saldo en el  hashmap de billeteras.
         u1.setSaldo(u1.getSaldo() - monto); sesion.aniadirBilletera(u1.getIdBilletera(), u1);
         u2.setSaldo(u2.getSaldo() + monto); sesion.aniadirBilletera(u2.getIdBilletera(), u2);
+
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
         if (modelo.getCantidadtransac() >= 3) {
@@ -117,8 +118,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
                 mapper.readValue(file,Transferencia.class);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-            }
-        }
+            } }
     }
 
 
