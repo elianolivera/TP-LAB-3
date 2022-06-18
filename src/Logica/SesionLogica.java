@@ -9,8 +9,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.UUID;
 
 
@@ -92,9 +95,13 @@ public class SesionLogica implements Serializable {
                 file.createNewFile();
             }
             mapper.writeValue(file, this.billeteras);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
+        } catch(IOException e) {
+            System.out.println("No se pudo completar la operacion."+e.getMessage());
         }
+        finally {
+            if (file!=null){
+                file.close();
+            }
     }
 
     public void guardarUsuarioEnArchivo(Usuario usuario) {
@@ -106,10 +113,16 @@ public class SesionLogica implements Serializable {
                 file.createNewFile();
             }
             mapper.writeValue(file, usuarios);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
+        } catch(IOException e) {
+            System.out.println("No se pudo completar la operacion."+e.getMessage());
+        }
+        finally {
+            if (file!=null){
+                file.close();
+            }
         }
     }
+
     public void guardarTransferenciaArchivo(Transferencia transferencia) {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper=new ObjectMapper();
@@ -119,24 +132,32 @@ public class SesionLogica implements Serializable {
                 file.createNewFile();
             }
             mapper.writeValue(file, transferencias);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
+        } catch(IOException e) {
+            System.out.println("No se pudo completar la operacion."+e.getMessage());
         }
+        finally {
+            if (file!=null){
+                file.close();
+            }
     }
 
-
-    public void archivoAMapBilleteras() {
+    public void archivoAMapBilleteras () {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
 
         if(file.exists()) {
             try {
                 this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
+            } catch(IOException e) {
+                System.out.println("No se pudo completar la operacion."+e.getMessage());
             }
+            finally {
+                if (file!=null){
+                    file.close();
+                }
         }
     }
+
     public void archivoAMapTransferencias() {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper=new ObjectMapper();
@@ -144,9 +165,13 @@ public class SesionLogica implements Serializable {
         if(file.exists()) {
             try {
                 this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
+            } catch(IOException e) {
+                System.out.println("No se pudo completar la operacion."+e.getMessage());
             }
+            finally {
+                if (file!=null){
+                    file.close();
+                }
         }
     }
 
@@ -157,20 +182,21 @@ public class SesionLogica implements Serializable {
         if(file.exists()) {
             try {
                 this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>(){});
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }  }  }
+            } catch(IOException e) {
+                System.out.println("No se pudo completar la operacion."+e.getMessage());
+            }
+            finally {
+                if (file!=null){
+                    file.close();
+                }
+        }
+    }
 
     public void aniadirUsuario(UUID id, Usuario usuario) {
         this.usuarios.put(id,usuario);
     }
 
-    public void aniadirBilletera(UUID id, Billetera billetera) {
-
-
-
-        this.billeteras.put(id,billetera);
-    }
+    public void aniadirBilletera(UUID id, Billetera billetera) {this.billeteras.put(id,billetera);}
 
     public HashMap<UUID, Usuario> getUsuariosLoguin() {
         return usuarios;
@@ -180,15 +206,12 @@ public class SesionLogica implements Serializable {
         return billeteras;
     }
 
-
-
     public HashMap<UUID, Transferencia> getTransferencias() {
         return transferencias;
     }
-    public void aniadirtransferencia(UUID id,Transferencia transferencia) {
 
-        this.transferencias.put(id,transferencia);
-    }
+    public void aniadirtransferencia(UUID id,Transferencia transferencia) {this.transferencias.put(id,transferencia);}
+
     public Usuario getUsuarioActivo() {
         return usuarioActivo;
     }
@@ -203,3 +226,15 @@ public class SesionLogica implements Serializable {
         System.exit(0);
     }
 }
+
+    public void archivoAMapUsuarios() {
+    }
+
+    public void aniadirBilletera() {
+    }
+
+    public void aniadirBilletera() {
+    }
+
+    public void aniadirBilletera() {
+    }

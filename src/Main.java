@@ -41,8 +41,8 @@ public class Main {
 
                     try {
                         UUID id = menu.pedirUUID();
-
                         sesion.loguearUsuario(email,password,id);
+
                     } catch (IllegalArgumentException ex) {
                         System.out.println("\n El ID ingresado no es valido como UUID.");
                     }

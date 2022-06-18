@@ -1,6 +1,5 @@
 package Modelos;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 // Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
@@ -80,9 +79,7 @@ public class Usuario {
     @Override
     public String toString() {
 
-        return
-
-                "\n\nN° de billetera=" + billetera +
+        return  "\nN° de billetera=" + billetera +
                 "\n Nombre='" + nombre +
                 "\n Apellido='" + apellido +
                 "\n Fecha De Nacimiento='" + fechaDeNacimiento +

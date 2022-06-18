@@ -1,10 +1,9 @@
 package Modelos;
 
 
-import java.io.Serializable;
 import java.util.UUID;
 
-public class Transferencia implements Serializable {
+public class Transferencia  {
     protected Usuario us;
     protected Usuario receptor;
     public UUID UUIDtransaccion;
@@ -73,15 +72,13 @@ public class Transferencia implements Serializable {
     }
     @Override
     public String toString() {
-        return "\n\nTransferencia{" +
-                "\nus=" + us.getNombre() +
-                "\n, receptor=" + receptor.getNombre() +
-                "\n, UUIDtransaccion=" + UUIDtransaccion +
-                "\n, Validaciones=" + validaciones +
-                "\n, monto Transferido=" + monto +
-                "\n, estado=" + estado +
-
-                '}';
+        return "\nTransferencia:" +
+                "\n Usuario emisor=" + us.getNombre() +
+                "\n Usuario receptor=" + receptor.getNombre() +
+                "\n ID de la transaccion=" + UUIDtransaccion +
+                "\n Validaciones=" + validaciones +
+                "\n Monto Transferido=" + monto +
+                "\n Estado=" + estado;
     }
 }
 

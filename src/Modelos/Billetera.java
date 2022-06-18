@@ -31,7 +31,7 @@ public  class Billetera implements Serializable {
     @Override
     public String toString() {
         return super.toString() +
-                "\n saldo=" + saldo;
+                "\n Saldo=" + saldo;
     }
 
 }
