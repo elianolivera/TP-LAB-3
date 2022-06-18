@@ -89,7 +89,7 @@ public class Main {
                     case 3:
                         // Transacciones pendientes.
                         System.out.println("Estas son las transacciones pendientes de validacion: \n");
-                        System.out.println(sesion.pendientesValidacion());
+                        sesion.pendientesValidacion();
 
                         break;
                     case 4:

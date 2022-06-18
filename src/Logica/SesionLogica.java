@@ -167,16 +167,17 @@ public class SesionLogica implements Serializable {
         return billeteraUsuarioActivo.getSaldo();
     }
 
-    public ArrayList<Transferencia> pendientesValidacion() {
-        ArrayList<Transferencia> pendientes = new ArrayList<>();
+    public  HashMap<UUID, Transferencia> pendientesValidacion() {
+        archivoAMapTransferencias();
 
         for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
             if(t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
-                pendientes.add(t.getValue());
-            }
-        }
-
-        return pendientes;
+              System.out.println(transferencias);
+            }else
+            {
+                System.out.println("No hay transferencias pendientes de validación");
+        }}
+        return transferencias;
     }
 
     public void aniadirUsuario(UUID id, Usuario usuario) {
