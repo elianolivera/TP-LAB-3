@@ -161,6 +161,11 @@ public class SesionLogica implements Serializable {
                 System.out.println(e.getMessage());
             }  }  }
 
+    public double consultarActivos() {
+        Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
+        return billeteraUsuarioActivo.getSaldo();
+    }
+
     public void aniadirUsuario(UUID id, Usuario usuario) {
         this.usuarios.put(id,usuario);
     }

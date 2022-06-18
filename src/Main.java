@@ -13,16 +13,17 @@ public class Main {
 
         SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
+
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
+        sesion.archivoAMapTransferencias();
 
         correrApp(sesion, menu);
     }
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(SesionLogica sesion, MenuLogica menu) {
-
-       handleLoginAndRegister(sesion, menu);
+        handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
@@ -71,7 +72,7 @@ public class Main {
                 switch (opcionMenuPrincipal) {
                     case 1:
                         // Consultar activos.
-                        sesion.getBilleteras();
+                        System.out.println("Actualmente cuentas con: $" + sesion.consultarActivos());
                         break;
                     case 2:
                         // Realizar transferencia
