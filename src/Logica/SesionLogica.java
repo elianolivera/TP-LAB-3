@@ -20,7 +20,7 @@ public class SesionLogica implements Serializable {
     private static final long serialVersionUID = -6719022570919861969L;
     static HashMap<UUID, Usuario> usuarios = new HashMap<>();
     static HashMap<UUID, Billetera> billeteras = new HashMap<>();
-    private List<Transferencia> transferencias = new ArrayList<>();
+    private HashMap<UUID, Transferencia> transferencias = new HashMap<UUID, Transferencia>();
     private Usuario usuarioActivo;
 
     public SesionLogica(){
@@ -110,6 +110,20 @@ public class SesionLogica implements Serializable {
             System.out.println(e.getMessage());
         }
     }
+    public void guardarTransferenciaArchivo(Transferencia transferencia) {
+        File file = new File("./Transferencias.json");
+        ObjectMapper mapper=new ObjectMapper();
+        aniadirtransferencia(transferencia.getUUIDtransaccion(),transferencia);
+        try {
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            mapper.writeValue(file, transferencias);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     public void archivoAMapBilleteras() {
         File file = new File("./billeteras.json");
@@ -154,16 +168,15 @@ public class SesionLogica implements Serializable {
         return billeteras;
     }
 
-    public List<Transferencia> aniadirTransferencia(Transferencia t) {
-        this.transferencias.add(t);
 
+
+    public HashMap<UUID, Transferencia> getTransferencias() {
         return transferencias;
     }
+    public void aniadirtransferencia(UUID id,Transferencia transferencia) {
 
-    public List<Transferencia> getTransferencias() {
-        return transferencias;
+        this.transferencias.put(id,transferencia);
     }
-
     public Usuario getUsuarioActivo() {
         return usuarioActivo;
     }

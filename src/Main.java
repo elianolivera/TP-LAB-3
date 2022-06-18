@@ -82,16 +82,17 @@ public class Main {
                         Transferencia transf = ttt.transferir(sesion,ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin(), sesion.getTransferencias());
                         System.out.print("\n ======== Comprobante : ======== ");
                         System.out.println(transf);
-                        sesion.aniadirTransferencia(transf);
+                        sesion.aniadirtransferencia(transf.getUUIDtransaccion(),transf);
+                        sesion.guardarTransferenciaArchivo(transf);
 
                         break;
                     case 3:
                         // Transacciones pendientes.
                         System.out.println("Estas son las transacciones pendientes de validacion: \n");
-                        for(Transferencia t : sesion.getTransferencias()) {
+                        /*for(Transferencia t : sesion.getTransferencias()) {
                             if(t != null && t.getEstado() != Estado.VALIDADA) {
                                 System.out.println(t);
-                            }  }
+                            }  }*/
                         break;
                     case 4:
                         // Validar transaccion.
@@ -107,7 +108,7 @@ public class Main {
                     case 6:
                         // Archivo de transacciones.
                         System.out.print("\n ======== Archivo de transacciones : ======== ");
-                        ttt.mostrarTransferenciasActivas(ttt);
+                        System.out.println("\n ======== Lista de Transferencias ======== :  \n" + sesion.getTransferencias());
                         break;
                     case 7:
                         // Volver al login
