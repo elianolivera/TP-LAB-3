@@ -107,7 +107,6 @@ public class Main {
                         // Archivo de transacciones.
                         System.out.print("\n ======== Archivo de transacciones : ======== ");
                         System.out.println("\n ======== Lista de Transferencias ======== :  \n" + sesion.getTransferencias());
-                        sesion.archivoAMapTransferencias();
                         break;
                     case 7:
                         // Volver al login

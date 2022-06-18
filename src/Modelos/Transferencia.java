@@ -8,8 +8,8 @@ public class Transferencia implements Serializable {
     protected Usuario us;
     protected Usuario receptor;
     public UUID UUIDtransaccion;
-    protected  int validaciones;
-    protected  double monto;
+    protected int validaciones;
+    protected double monto;
     protected Estado estado;
 
     public Transferencia() {
