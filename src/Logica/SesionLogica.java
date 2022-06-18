@@ -15,8 +15,8 @@ public class SesionLogica implements Serializable {
 
     static Sesion modelo=new Sesion();
     private static final long serialVersionUID = -6719022570919861969L;
-    static HashMap<UUID, Usuario> usuarios = new HashMap<>();
-    static HashMap<UUID, Billetera> billeteras = new HashMap<>();
+    private HashMap<UUID, Usuario> usuarios = new HashMap<>();
+    private HashMap<UUID, Billetera> billeteras = new HashMap<>();
     private HashMap<UUID, Transferencia> transferencias = new HashMap<>();
     private Usuario usuarioActivo;
 
