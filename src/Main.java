@@ -64,10 +64,8 @@ public class Main {
         while(sesion.getUsuarioActivo() != null) {
             try {
                 int opcionMenuPrincipal = menu.menuPrincipal();
-                ///Lista de usuarios
-                List<Transferencia> transferencias =new ArrayList<>();
-                TransferenciaLogica ttt = new TransferenciaLogica();
 
+                TransferenciaLogica ttt = new TransferenciaLogica();
 
                 switch (opcionMenuPrincipal) {
                     case 1:
