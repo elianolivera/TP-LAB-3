@@ -1,10 +1,7 @@
 package Logica;
 
 
-import Modelos.Billetera;
-import Modelos.Sesion;
-import Modelos.Transferencia;
-import Modelos.Usuario;
+import Modelos.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -164,6 +161,18 @@ public class SesionLogica implements Serializable {
     public double consultarActivos() {
         Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
         return billeteraUsuarioActivo.getSaldo();
+    }
+
+    public ArrayList<Transferencia> pendientesValidacion() {
+        ArrayList<Transferencia> pendientes = new ArrayList<>();
+
+        for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
+            if(t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
+                pendientes.add(t.getValue());
+            }
+        }
+
+        return pendientes;
     }
 
     public void aniadirUsuario(UUID id, Usuario usuario) {
