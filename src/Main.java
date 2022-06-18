@@ -15,6 +15,7 @@ public class Main {
         MenuLogica menu = new MenuLogica();
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
+        sesion.archivoAMapTransferencias();
         correrApp(sesion, menu);
     }
 
@@ -89,10 +90,8 @@ public class Main {
                     case 3:
                         // Transacciones pendientes.
                         System.out.println("Estas son las transacciones pendientes de validacion: \n");
-                        /*for(Transferencia t : sesion.getTransferencias()) {
-                            if(t != null && t.getEstado() != Estado.VALIDADA) {
-                                System.out.println(t);
-                            }  }*/
+
+
                         break;
                     case 4:
                         // Validar transaccion.

@@ -20,7 +20,7 @@ public class SesionLogica implements Serializable {
     private static final long serialVersionUID = -6719022570919861969L;
     static HashMap<UUID, Usuario> usuarios = new HashMap<>();
     static HashMap<UUID, Billetera> billeteras = new HashMap<>();
-    private HashMap<UUID, Transferencia> transferencias = new HashMap<UUID, Transferencia>();
+    private HashMap<UUID, Transferencia> transferencias = new HashMap<>();
     private Usuario usuarioActivo;
 
     public SesionLogica(){
@@ -132,6 +132,18 @@ public class SesionLogica implements Serializable {
         if(file.exists()) {
             try {
                 this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    public void archivoAMapTransferencias() {
+        File file = new File("./Transferencias.json");
+        ObjectMapper mapper=new ObjectMapper();
+
+        if(file.exists()) {
+            try {
+                this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
             } catch(Exception e) {
                 System.out.println(e.getMessage());
             }
