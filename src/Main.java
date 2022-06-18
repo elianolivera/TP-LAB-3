@@ -13,16 +13,17 @@ public class Main {
 
         SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
+
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
+        sesion.archivoAMapTransferencias();
 
         correrApp(sesion, menu);
     }
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(SesionLogica sesion, MenuLogica menu) {
-
-       handleLoginAndRegister(sesion, menu);
+        handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
 
@@ -63,15 +64,13 @@ public class Main {
         while(sesion.getUsuarioActivo() != null) {
             try {
                 int opcionMenuPrincipal = menu.menuPrincipal();
-                ///Lista de usuarios
-                List<Transferencia> transferencias =new ArrayList<>();
-                TransferenciaLogica ttt = new TransferenciaLogica();
 
+                TransferenciaLogica ttt = new TransferenciaLogica();
 
                 switch (opcionMenuPrincipal) {
                     case 1:
                         // Consultar activos.
-                        sesion.getBilleteras();
+                        System.out.println("Actualmente cuentas con: $" + sesion.consultarActivos());
                         break;
                     case 2:
                         // Realizar transferencia
@@ -80,7 +79,7 @@ public class Main {
                         float monto = 0;
                         Scanner teclado = new Scanner(System.in);
                         monto = teclado.nextFloat();
-                        Transferencia transf = ttt.transferir(sesion,ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin());
+                        Transferencia transf = ttt.transferir(ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin());
                         System.out.print("\n ======== Comprobante : ======== ");
                         System.out.println(transf);
                         sesion.aniadirtransferencia(transf.getUUIDtransaccion(),transf);
@@ -90,7 +89,7 @@ public class Main {
                     case 3:
                         // Transacciones pendientes.
                         System.out.println("Estas son las transacciones pendientes de validacion: \n");
-
+                        System.out.println(sesion.pendientesValidacion());
 
                         break;
                     case 4:
@@ -108,7 +107,6 @@ public class Main {
                         // Archivo de transacciones.
                         System.out.print("\n ======== Archivo de transacciones : ======== ");
                         System.out.println("\n ======== Lista de Transferencias ======== :  \n" + sesion.getTransferencias());
-                        sesion.archivoAMapTransferencias();
                         break;
                     case 7:
                         // Volver al login

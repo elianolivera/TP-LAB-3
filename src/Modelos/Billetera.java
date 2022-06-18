@@ -3,7 +3,7 @@ package Modelos;
 import java.io.Serializable;
 import java.util.UUID;
 
-public  class Billetera implements Serializable {
+public  class Billetera {
 
     private double saldo;
     protected UUID idBilletera;
