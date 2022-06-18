@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.Serializable;
+import java.security.KeyStore;
 import java.util.*;
 
 public class TransferenciaLogica extends Transferencia implements Serializable {
@@ -33,32 +34,32 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     }
 
     // Busca transferencia por UUID para validarla
-    public Transferencia buscartransferencia(List<Transferencia> transferencias) {
-        System.out.println("Ingrese el UUID de la transferencia que desea añadir una validación: \n");
-        String UUIDt;
-        Scanner id = new Scanner(System.in);
-        UUIDt = id.nextLine();
-        for (Transferencia transf : transferencias) {
-            if (transf != null && transf.getUUIDtransaccion().equals(UUIDt)) {
-                return transf;
-            }
-        }
-        return null;
+    public Transferencia buscartransferencia(HashMap<UUID,Transferencia> trans) {
+        UUID id;
+        Scanner Aux = new Scanner(System.in);
+        id = UUID.fromString(Aux.nextLine());
+
+        Transferencia b = trans.get(id);
+
+        return b;
     }
 
     /// VALIDAR TRANSFERENCIA
-    public void validar(List<Transferencia> transferencias) {
-        for (Transferencia transf : transferencias) {
-        modelo = buscartransferencia(transferencias);
+
+    /*
+    public void validar(HashMap<UUID,Transferencia> transferencias) {
+       Transferencia t = transferencias.get(t.getUUIDtransaccion());
+        for ( Entry<UUID,Transferencia> t: transferencias.entrySet())
+        modelo = buscartransferencia(t);
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
             //Cuando las validaciones sean mayor a 3 se pasa al archivo de transacciones validadas.
-           guardarTransferenciaArchivo(transf);
+           guardarTransferenciaArchivo(t);
         } else if (modelo.getCantidadtransac() <= 3) {
             modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
             /// Se añade una validación
         }}
-    }
+    }*/
 
     ///Busca usuario en la lista por UUID
     public Billetera buscarBilleteraPorUUID(HashMap<UUID, Billetera> billeteras) {
