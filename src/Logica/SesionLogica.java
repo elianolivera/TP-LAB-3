@@ -3,6 +3,7 @@ package Logica;
 
 import Modelos.*;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -110,6 +111,7 @@ public class SesionLogica implements Serializable {
     public void guardarTransferenciaArchivo(Transferencia transferencia) {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper=new ObjectMapper();
+
         aniadirtransferencia(transferencia.getUUIDtransaccion(),transferencia);
         try {
             if(!file.exists()){
@@ -136,7 +138,9 @@ public class SesionLogica implements Serializable {
     }
     public void archivoAMapTransferencias() {
         File file = new File("./Transferencias.json");
+
         ObjectMapper mapper=new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         if(file.exists()) {
             try {
