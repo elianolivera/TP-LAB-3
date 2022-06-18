@@ -120,6 +120,4 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
                 System.out.println(e.getMessage());
             } }
     }
-
-
 }

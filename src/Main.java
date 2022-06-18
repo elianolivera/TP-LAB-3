@@ -20,6 +20,7 @@ public class Main {
 
     // Esta hecha en caso de que el usuario quiera desloguearse, se llama de nuevo a esta funcion.
     private static void correrApp(SesionLogica sesion, MenuLogica menu) {
+
        handleLoginAndRegister(sesion, menu);
         userOperations(sesion,menu);
     }
@@ -69,6 +70,7 @@ public class Main {
                 switch (opcionMenuPrincipal) {
                     case 1:
                         // Consultar activos.
+                        sesion.getBilleteras();
                         break;
                     case 2:
                         // Realizar transferencia
