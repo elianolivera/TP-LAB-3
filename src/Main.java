@@ -15,7 +15,7 @@ public class Main {
         MenuLogica menu = new MenuLogica();
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
-        sesion.archivoAMapTransferencias();
+
         correrApp(sesion, menu);
     }
 
@@ -96,7 +96,7 @@ public class Main {
                     case 4:
                         // Validar transaccion.
                         System.out.print("\n ======== Validación de transacción : ======== ");
-                        ttt.validar(transferencias);
+                       ttt.validar(sesion,sesion.getTransferencias());
                         break;
                     case 5:
                         // Historial de transacciones.
@@ -108,6 +108,7 @@ public class Main {
                         // Archivo de transacciones.
                         System.out.print("\n ======== Archivo de transacciones : ======== ");
                         System.out.println("\n ======== Lista de Transferencias ======== :  \n" + sesion.getTransferencias());
+                        sesion.archivoAMapTransferencias();
                         break;
                     case 7:
                         // Volver al login
