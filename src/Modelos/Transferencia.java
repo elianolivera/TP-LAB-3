@@ -8,7 +8,7 @@ public class Transferencia implements Serializable {
     protected Usuario us;
     protected Usuario receptor;
     public UUID UUIDtransaccion;
-    protected  int cantidadtransac;
+    protected  int validaciones;
     protected  double monto;
     protected Estado estado;
 
@@ -19,7 +19,7 @@ public class Transferencia implements Serializable {
         this.UUIDtransaccion = UUID.randomUUID();
         this.us = us;
         this.receptor = receptor;
-        this.cantidadtransac = cantidadtransac;
+        this.validaciones = cantidadtransac;
         this.monto = monto;
         this.estado = estado;
     }
@@ -47,11 +47,11 @@ public class Transferencia implements Serializable {
     }
 
     public int getCantidadtransac() {
-        return cantidadtransac;
+        return validaciones;
     }
 
     public Transferencia setCantidadtransac(int cantidadtransac) {
-        this.cantidadtransac = cantidadtransac;
+        this.validaciones = cantidadtransac;
         return this;
     }
     public double getMonto() {
@@ -73,13 +73,14 @@ public class Transferencia implements Serializable {
     }
     @Override
     public String toString() {
-        return "Transferencia{" +
-                "us=" + us.getNombre() +
-                ", receptor=" + receptor.getNombre() +
-                ", UUIDtransaccion=" + UUIDtransaccion +
-                ", cantidadtransac=" + cantidadtransac +
-                ", monto Transferido=" + monto +
-                ", estado=" + estado +
+        return "\n\nTransferencia{" +
+                "\nus=" + us.getNombre() +
+                "\n, receptor=" + receptor.getNombre() +
+                "\n, UUIDtransaccion=" + UUIDtransaccion +
+                "\n, Validaciones=" + validaciones +
+                "\n, monto Transferido=" + monto +
+                "\n, estado=" + estado +
+
                 '}';
     }
 }
