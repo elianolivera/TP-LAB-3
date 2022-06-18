@@ -58,7 +58,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     public void validar(SesionLogica sesion,HashMap<UUID, Transferencia> transferencias) throws InvalidOptionException {
         modelo = buscartransferencia(transferencias);
         for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
-
+            modelo = buscartransferencia(transferencias);
             if (modelo.getCantidadtransac() >= 3) {
                 modelo.setEstado(Estado.VALIDADA);
                 //Cuando las validaciones sean mayor a 3 se pasa al archivo de transacciones validadas.
@@ -74,7 +74,6 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     public Transferencia transferir(SesionLogica sesion, TransferenciaLogica t1, float monto, Usuario actualUsuario, HashMap<UUID, Billetera> billeteras, HashMap<UUID, Usuario> usuarios) throws InvalidOptionException {
 
         Billetera u1 = billeteras.get(actualUsuario.getBilletera());
-
         System.out.print(" ========  Ingrese  el N°de billetera (UUID) del destinatario ========: ");
         Billetera u2 = t1.buscarBilleteraPorUUID(billeteras);
         //Actualiza saldos luego de transacción , en los objetos y el saldo en el  hashmap de billeteras.
@@ -91,6 +90,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         sesion.aniadirBilletera(u2.getIdBilletera(), u2);
         modelo.setCantidadtransac(modelo.getCantidadtransac() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getCantidadtransac(), monto, Estado.NOVALIDADA);
+
         if (modelo.getCantidadtransac() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
         } else {

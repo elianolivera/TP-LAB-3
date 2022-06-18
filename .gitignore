@@ -4,4 +4,6 @@ out/
 *.iml
 *.ipr
 *.iws
-*.json
+billeteras.json
+Transferencias.json
+usuarios.json

@@ -1,11 +1,9 @@
 package Logica;
 
 
-import Modelos.Billetera;
-import Modelos.Sesion;
-import Modelos.Transferencia;
-import Modelos.Usuario;
+import Modelos.*;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -21,8 +19,8 @@ public class SesionLogica implements Serializable {
 
     static Sesion modelo=new Sesion();
     private static final long serialVersionUID = -6719022570919861969L;
-    static HashMap<UUID, Usuario> usuarios = new HashMap<>();
-    static HashMap<UUID, Billetera> billeteras = new HashMap<>();
+    private HashMap<UUID, Usuario> usuarios = new HashMap<>();
+    private HashMap<UUID, Billetera> billeteras = new HashMap<>();
     private HashMap<UUID, Transferencia> transferencias = new HashMap<>();
     private Usuario usuarioActivo;
 
@@ -126,6 +124,7 @@ public class SesionLogica implements Serializable {
     public void guardarTransferenciaArchivo(Transferencia transferencia) {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper=new ObjectMapper();
+
         aniadirtransferencia(transferencia.getUUIDtransaccion(),transferencia);
         try {
             if(!file.exists()){
@@ -160,7 +159,9 @@ public class SesionLogica implements Serializable {
 
     public void archivoAMapTransferencias() {
         File file = new File("./Transferencias.json");
+
         ObjectMapper mapper=new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         if(file.exists()) {
             try {
@@ -190,6 +191,24 @@ public class SesionLogica implements Serializable {
                     file.close();
                 }
         }
+    }
+
+    public double consultarActivos() {
+        Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
+        return billeteraUsuarioActivo.getSaldo();
+    }
+
+    public  HashMap<UUID, Transferencia> pendientesValidacion() {
+        archivoAMapTransferencias();
+
+        for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
+            if(t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
+              System.out.println(transferencias);
+            }else
+            {
+                System.out.println("No hay transferencias pendientes de validación");
+        }}
+        return transferencias;
     }
 
     public void aniadirUsuario(UUID id, Usuario usuario) {
