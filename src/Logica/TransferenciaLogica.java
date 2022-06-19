@@ -82,6 +82,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
             modelo = buscartransferencia(transferencias);
             if (modelo.getValidaciones() >= 3) {
                 modelo.setEstado(Estado.VALIDADA);
+                System.out.println("La transacción ya está validada");
                 //Cuando las validaciones sean mayor a 3 se pasa al archivo de transacciones validadas.
 
             } else if (modelo.getValidaciones() <= 3) {
