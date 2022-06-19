@@ -165,19 +165,7 @@ public class SesionLogica implements Serializable {
         Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
         return billeteraUsuarioActivo.getSaldo();
     }
-///Método transacciones pendientes de validar
-    public  HashMap<UUID, Transferencia> pendientesValidacion() {
-        archivoAMapTransferencias();
 
-        for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
-            if(t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
-              System.out.println(transferencias);
-            }else
-            {
-                System.out.println("No hay transferencias pendientes de validación");
-        }}
-        return transferencias;
-    }
 
     public void aniadirUsuario(UUID id, Usuario usuario) {
         this.usuarios.put(id,usuario);
