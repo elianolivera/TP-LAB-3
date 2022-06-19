@@ -108,11 +108,10 @@ public class SesionLogica implements Serializable {
             System.out.println(e.getMessage());
         }
     }
-    public void guardarTransferenciaArchivo(Transferencia transferencia) {
+    public void guardarTransferenciaArchivo(Transferencia t) {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper=new ObjectMapper();
-
-        aniadirtransferencia(transferencia.getUUIDtransaccion(),transferencia);
+       aniadirtransferencia(t.getUUIDtransaccion(),t);
         try {
             if(!file.exists()){
                 file.createNewFile();
@@ -218,6 +217,8 @@ public class SesionLogica implements Serializable {
 
     public void finalizarSesion() {
         // Paso los nuevos usuarios registrados a el archivo.
+
+
         guardarBilleterasEnArchivo();
         System.exit(0);
     }

@@ -83,7 +83,7 @@ public class Main {
                         System.out.print("\n ======== Comprobante : ======== ");
                         System.out.println(transf);
                         sesion.aniadirtransferencia(transf.getUUIDtransaccion(),transf);
-                        //sesion.guardarTransferenciaArchivo(transf);
+                        sesion.guardarTransferenciaArchivo(transf);
 
                         break;
                     case 3:
