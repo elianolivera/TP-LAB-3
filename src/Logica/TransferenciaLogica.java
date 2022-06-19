@@ -96,9 +96,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
 
     }
     ///Método transacciones pendientes de validar
-    public  HashMap<UUID, Transferencia> pendientesValidacion(SesionLogica sesion,HashMap<UUID, Transferencia> transferencias) {
-        sesion.archivoAMapTransferencias();
-
+    public  HashMap<UUID, Transferencia> pendientesValidacion(HashMap<UUID, Transferencia> transferencias) {
         for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
             if(t.getValue().getEstado().equals(Estado.VALIDADA)) {
                 System.out.println(transferencias);

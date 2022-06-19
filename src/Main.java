@@ -89,7 +89,7 @@ public class Main {
                     case 3:
                         // Transacciones pendientes.
                         System.out.println(" ======== Estas son las transacciones pendientes de validacion ======== : \n");
-                        ttt.pendientesValidacion(sesion,sesion.getTransferencias());
+                        ttt.pendientesValidacion(sesion.getTransferencias());
 
                         break;
                     case 4:
