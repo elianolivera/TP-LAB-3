@@ -166,7 +166,7 @@ public class SesionLogica implements Serializable {
         Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
         return billeteraUsuarioActivo.getSaldo();
     }
-
+///Método transacciones pendientes de validar
     public  HashMap<UUID, Transferencia> pendientesValidacion() {
         archivoAMapTransferencias();
 
