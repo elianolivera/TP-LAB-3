@@ -2,7 +2,9 @@ package Logica;
 
 
 import Exceptions.InvalidOptionException;
-import Modelos.*;
+import Modelos.Billetera;
+import Modelos.Transferencia;
+import Modelos.Usuario;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
-import Modelos.Billetera;
 
 
 public class SesionLogica implements Serializable {
@@ -112,7 +113,7 @@ public class SesionLogica implements Serializable {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
         } finally {
             if (file != null) {
-                file.close();
+                ///file.close();
             }
         }
     }
@@ -130,7 +131,7 @@ public class SesionLogica implements Serializable {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
         } finally {
             if (file != null) {
-                file.close();
+                ///file.close();
             }
         }
     }
@@ -148,7 +149,7 @@ public class SesionLogica implements Serializable {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
             } finally {
                 if (file != null) {
-                    file.close();
+                    ///file.close();
                 }
             }
     }
@@ -169,7 +170,7 @@ public class SesionLogica implements Serializable {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
         } finally {
             if (file != null) {
-                file.close();
+                ///file.close();
             }
         }
     }
@@ -181,13 +182,13 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>() {
+                    this.billeteras = (HashMap<UUID, Billetera>) mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>() {
                     });
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
                 } finally {
                     if (file != null) {
-                        file.close();
+                        ///file.close();
                     }
                 }
             }
@@ -200,13 +201,13 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
+                    this.transferencias = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
                     });
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
                 } finally {
                     if (file != null) {
-                        file.close();
+                        ///file.close;
                     }
                 }
             }
@@ -218,13 +219,13 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>() {
+                    this.usuarios = (HashMap<UUID, Usuario>) mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>() {
                     });
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
                 } finally {
                     if (file != null) {
-                        file.close();
+                       /// file.close();
                     }
                 }
             }
@@ -237,13 +238,13 @@ public class SesionLogica implements Serializable {
 
         if (file.exists()) {
             try {
-                this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
+                this.transferencias = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
                 });
             } catch (IOException e) {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
             } finally {
                 if (file != null) {
-                    file.close();
+                   /// file.close();
                 }
             }
         }
