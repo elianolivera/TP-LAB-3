@@ -244,7 +244,7 @@ public class SesionLogica implements Serializable {
             } catch (IOException e) {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
             } finally {
-                System.out.println(transferencias);
+
                 if (file != null) {
                    /// file.close();
                 }
