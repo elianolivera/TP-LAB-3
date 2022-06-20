@@ -158,7 +158,7 @@ public class SesionLogica implements Serializable {
     public void guardarValidacionArchivo (Transferencia t){
         File file = new File("./Validaciones.json");
         ObjectMapper mapper = new ObjectMapper();
-        aniadirtransferencia(t.getUUIDtransaccion(), t);
+        aniadirtransferenciaValidada(t.getUUIDtransaccion(), t);
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -237,11 +237,6 @@ public class SesionLogica implements Serializable {
         return transferenciasValidadas;
     }
 
-    public SesionLogica setTransferenciasValidadas(HashMap<UUID, Transferencia> transferenciasValidadas) {
-        this.transferenciasValidadas = transferenciasValidadas;
-        return this;
-    }
-
     public void aniadirUsuario (Usuario usuario){
         this.usuarios.put(usuario.getBilletera(), usuario);
         }
@@ -263,6 +258,10 @@ public class SesionLogica implements Serializable {
 
         public void aniadirtransferencia (UUID id, Transferencia transferencia){
             this.transferencias.put(id, transferencia);
+        }
+
+        public void aniadirtransferenciaValidada (UUID id, Transferencia transferencia){
+            this.transferenciasValidadas.put(id, transferencia);
         }
 
         public Usuario getUsuarioActivo () {
