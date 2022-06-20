@@ -122,10 +122,10 @@ public class SesionLogica implements Serializable {
     }
 
     public void guardarTransferenciaArchivo(Transferencia transferencia) {
+    public void guardarTransferenciaArchivo(Transferencia t) {
         File file = new File("./Transferencias.json");
         ObjectMapper mapper=new ObjectMapper();
-
-        aniadirtransferencia(transferencia.getUUIDtransaccion(),transferencia);
+       aniadirtransferencia(t.getUUIDtransaccion(),t);
         try {
             if(!file.exists()){
                 file.createNewFile();
@@ -139,6 +139,7 @@ public class SesionLogica implements Serializable {
                 file.close();
             }
     }
+
 
     public void archivoAMapBilleteras () {
         File file = new File("./billeteras.json");
@@ -198,18 +199,6 @@ public class SesionLogica implements Serializable {
         return billeteraUsuarioActivo.getSaldo();
     }
 
-    public  HashMap<UUID, Transferencia> pendientesValidacion() {
-        archivoAMapTransferencias();
-
-        for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
-            if(t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
-              System.out.println(transferencias);
-            }else
-            {
-                System.out.println("No hay transferencias pendientes de validación");
-        }}
-        return transferencias;
-    }
 
     public void aniadirUsuario(UUID id, Usuario usuario) {
         this.usuarios.put(id,usuario);
@@ -241,6 +230,8 @@ public class SesionLogica implements Serializable {
 
     public void finalizarSesion() {
         // Paso los nuevos usuarios registrados a el archivo.
+
+
         guardarBilleterasEnArchivo();
         System.exit(0);
     }

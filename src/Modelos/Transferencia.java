@@ -14,11 +14,11 @@ public class Transferencia  {
     public Transferencia() {
     }
 
-    public Transferencia(Usuario us, Usuario receptor, int cantidadtransac, double monto, Estado estado) {
+    public Transferencia(Usuario us, Usuario receptor, int validaciones, double monto, Estado estado) {
         this.UUIDtransaccion = UUID.randomUUID();
         this.us = us;
         this.receptor = receptor;
-        this.validaciones = cantidadtransac;
+        this.validaciones = validaciones;
         this.monto = monto;
         this.estado = estado;
     }
@@ -45,14 +45,20 @@ public class Transferencia  {
         return UUIDtransaccion;
     }
 
-    public int getCantidadtransac() {
+    public Transferencia setUUIDtransaccion(UUID UUIDtransaccion) {
+        this.UUIDtransaccion = UUIDtransaccion;
+        return this;
+    }
+
+    public int getValidaciones() {
         return validaciones;
     }
 
-    public Transferencia setCantidadtransac(int cantidadtransac) {
-        this.validaciones = cantidadtransac;
+    public Transferencia setValidaciones(int validaciones) {
+        this.validaciones = validaciones;
         return this;
     }
+
     public double getMonto() {
         return monto;
     }

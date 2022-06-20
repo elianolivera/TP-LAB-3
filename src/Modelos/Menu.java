@@ -34,6 +34,8 @@ public final class Menu {
     public int mostrarMenuUsuario() throws InputMismatchException {
         int opcion = -1;
 
+        System.out.print("\n ========  BIENVENIDO: ======== ");
+
         System.out.print("\n 1. Ingresar. ");
         System.out.print("\n 2. Registrarse.");
         System.out.print("\n 3. Salir.");
