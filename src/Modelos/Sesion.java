@@ -1,14 +1,12 @@
 package Modelos;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.*;
-import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 
-public final class Sesion implements Serializable {
+public final class Sesion  {
 
     private static final long serialVersionUID = -6719022570919861969L;
     HashMap<String, UUID> usuariosLoguin = new HashMap<>();

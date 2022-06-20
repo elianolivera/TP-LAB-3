@@ -52,7 +52,7 @@ public class Main {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
                 } else {
-                    sesion.finalizarSesion();
+                    sesion.
                 }
             } catch(InvalidOptionException | InputMismatchException ex) {
                 System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));

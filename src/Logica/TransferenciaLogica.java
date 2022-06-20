@@ -32,11 +32,11 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     }
 
 
-    ///Busca usuario en la lista por UUID
+    ///Busca billetera en la lista por UUID
     public Billetera buscarBilleteraPorUUID(HashMap<UUID, Billetera> billeteras) {
-        UUID id;
+
         Scanner Aux = new Scanner(System.in);
-        id = UUID.fromString(Aux.nextLine());
+        UUID id = UUID.fromString(Aux.nextLine());
 
         Billetera b = billeteras.get(id);
 
@@ -50,8 +50,10 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         System.out.print(" ========  Ingrese  el N°de billetera (UUID) del destinatario ========: ");
         Billetera u2 = t1.buscarBilleteraPorUUID(billeteras);
         //Actualiza saldos luego de transacción , en los objetos y el saldo en el  hashmap de billeteras.
-        u1.setSaldo(u1.getSaldo() - monto); sesion.aniadirBilletera(u1.getIdBilletera(),u1);
-        u2.setSaldo(u2.getSaldo() + monto); sesion.aniadirBilletera(u2.getIdBilletera(),u2);
+        u1.setSaldo(u1.getSaldo() - monto);
+        sesion.aniadirBilletera(u1.getIdBilletera(),u1);
+        u2.setSaldo(u2.getSaldo() + monto);
+        sesion.aniadirBilletera(u2.getIdBilletera(),u2);
 
         modelo.setValidaciones(modelo.getValidaciones() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getValidaciones(), monto, Estado.NOVALIDADA);

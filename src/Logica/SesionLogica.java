@@ -1,6 +1,7 @@
 package Logica;
 
 
+import Exceptions.InvalidOptionException;
 import Modelos.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -13,67 +14,81 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.UUID;
+import Modelos.Billetera;
 
 
 public class SesionLogica implements Serializable {
 
-    static Sesion modelo=new Sesion();
+    ///static Sesion modelo=new Sesion();
     private static final long serialVersionUID = -6719022570919861969L;
     private HashMap<UUID, Usuario> usuarios = new HashMap<>();
     private HashMap<UUID, Billetera> billeteras = new HashMap<>();
     private HashMap<UUID, Transferencia> transferencias = new HashMap<>();
     private Usuario usuarioActivo;
 
+
     public SesionLogica(){
         this.usuarioActivo = null;
     }
 
-    public Billetera registrarUsuario() {
+///********************METODO REGISTRO DE USUARIO***********************************
+    public Billetera registrarUsuario() throws InvalidOptionException {
 
-        String nombre,apellido,dni,fechaDeNacimiento,email,password;
+        Usuario aux = new Usuario();
         Scanner teclado = new Scanner(System.in);
+        String opcionMenuLoguin;
 
-        System.out.println("\nIngreso de Datos.");
-        System.out.println("\nIngrese su Nombre: ");
-        nombre=teclado.nextLine();
+        while (aux==null) {
+            System.out.println("\nIngreso de Datos.");
+            System.out.println("\nIngrese su Nombre: ");
+            aux.setNombre(teclado.nextLine());
 
-        System.out.println("\nIngrese su Apellido: ");
-        apellido=teclado.nextLine();
+            System.out.println("\nIngrese su Apellido: ");
+            aux.setApellido(teclado.nextLine());
 
-        System.out.println("\nIngrese su Numero de documento: ");
-        dni=teclado.nextLine();
-        if(usuarios.containsValue(dni)){
-            System.out.println("El numero de Documento ya existe");
-            return null;
+            System.out.println("\nIngrese su Numero de documento: ");
+            aux.setDni(teclado.nextLine());
+            if (usuarios.containsValue(aux.getDni())) {
+                System.out.println("El numero de Documento ya existe");
+                return null;
+            }
+
+            System.out.println("\nIngrese su Fecha de nacimiento: ");
+            aux.setFechaDeNacimiento(teclado.nextLine());
+
+            System.out.println("\nIngrese su Correo electronico: ");
+            aux.setEmail(teclado.nextLine());
+            if (usuarios.containsValue(aux.getEmail())) {
+                System.out.println("El Correo electronico ya existe");
+                return null;
+            }
+
+            System.out.println("\nIngrese su password: ");
+            aux.setPassword(teclado.nextLine());
+
+            System.out.println("\nDatos ingresados"+ aux);
+            System.out.println("\nSon correctos?. N para corregir. Cualquier tecla para continuar");
+            opcionMenuLoguin=teclado.nextLine();
+            if(opcionMenuLoguin == "N"){
+                    registrarUsuario();
+            }
+
         }
 
-        System.out.println("\nIngrese su Fecha de nacimiento: ");
-        fechaDeNacimiento=teclado.nextLine();
-
-        System.out.println("\nIngrese su Correo electronico: ");
-        email=teclado.nextLine();
-        if(usuarios.containsValue(email)){
-            System.out.println("El Correo electronico ya existe");
-            return null;
-        }
-
-        System.out.println("\nIngrese su password: ");
-        password=teclado.nextLine();
-
-        Usuario user = new Usuario(nombre, apellido, dni, fechaDeNacimiento, email, password);
-        UUID id= user.getBilletera();
+        UUID id= aux.getBilletera();
 
         Billetera billeteraUser = new Billetera();
         billeteraUser.setIdBilletera(id);
 
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
-        aniadirBilletera(billeteraUser.getIdBilletera(), billeteraUser);//Se crea el Archivo de Usuarios
+        aniadirBilletera(billeteraUser);//Se crea el Archivo de Usuarios
         guardarUsuarioEnArchivo(user);
 
         return billeteraUser;
     }
 
+    ///*****************************METODO LOGUEAR USUARIO///////////////////////////////////////////
     public Usuario loguearUsuario(String email, String password, UUID id) {
         Usuario user = usuarios.get(id);
 
@@ -141,7 +156,7 @@ public class SesionLogica implements Serializable {
     }
 
 
-    public void archivoAMapBilleteras () {
+    public void archivoAMapBilleteras() {
         File file = new File("./billeteras.json");
         ObjectMapper mapper=new ObjectMapper();
 
@@ -204,7 +219,9 @@ public class SesionLogica implements Serializable {
         this.usuarios.put(id,usuario);
     }
 
-    public void aniadirBilletera(UUID id, Billetera billetera) {this.billeteras.put(id,billetera);}
+    public void aniadirBilletera(Billetera aux) {
+            this.billeteras.put();
+        }
 
     public HashMap<UUID, Usuario> getUsuariosLoguin() {
         return usuarios;
@@ -247,4 +264,7 @@ public class SesionLogica implements Serializable {
     }
 
     public void aniadirBilletera() {
+    }
+
+    public void finalizarSesion() {
     }
