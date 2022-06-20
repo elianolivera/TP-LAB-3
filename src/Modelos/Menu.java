@@ -18,7 +18,7 @@ public final class Menu {
         System.out.print("\n 2. Realizar una transacción.");
         System.out.print("\n 3. Transacciones pendientes.");
         System.out.print("\n 4. Validar transaccion.");
-        System.out.print("\n 5. Historial de transacciones. ");
+        System.out.print("\n 5.  Transferencias activas. ");
         System.out.print("\n 6. Archivo de transacciones. ");
         System.out.print("\n 7. Volver al login. ");
         System.out.print("\n 8. Salir. ");

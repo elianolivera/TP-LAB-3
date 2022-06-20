@@ -96,8 +96,8 @@ public class Main {
                        ttt.validar(sesion,sesion.getTransferencias());
                         break;
                     case 5:
-                        // Historial de transacciones.
-                        System.out.print("\n ======== Comprobante : ======== ");
+                        // Transacciones activas
+                        System.out.print("\n ======== Transacciones activas : ======== ");
                         System.out.println(sesion.getTransferencias());
 
                         break;

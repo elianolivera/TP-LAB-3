@@ -239,6 +239,7 @@ public class SesionLogica implements Serializable {
         if (file.exists()) {
             try {
                 this.transferencias = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
+
                 });
             } catch (IOException e) {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
