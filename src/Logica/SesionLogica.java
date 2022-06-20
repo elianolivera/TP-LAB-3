@@ -27,18 +27,18 @@ public class SesionLogica implements Serializable {
     private Usuario usuarioActivo;
 
 
-    public SesionLogica(){
+    public SesionLogica() {
         this.usuarioActivo = null;
     }
 
-///********************METODO REGISTRO DE USUARIO***********************************
+    ///********************METODO REGISTRO DE USUARIO***********************************
     public Billetera registrarUsuario() throws InvalidOptionException {
 
         Usuario aux = new Usuario();
         Scanner teclado = new Scanner(System.in);
         String opcionMenuLoguin;
 
-        while (aux==null) {
+        while (aux == null) {
             System.out.println("\nIngreso de Datos.");
             System.out.println("\nIngrese su Nombre: ");
             aux.setNombre(teclado.nextLine());
@@ -66,16 +66,15 @@ public class SesionLogica implements Serializable {
             System.out.println("\nIngrese su password: ");
             aux.setPassword(teclado.nextLine());
 
-            System.out.println("\nDatos ingresados"+ aux);
+            System.out.println("\nDatos ingresados" + aux);
             System.out.println("\nSon correctos?. N para corregir. Cualquier tecla para continuar");
-            opcionMenuLoguin=teclado.nextLine();
-            if(opcionMenuLoguin == "N"){
-                    registrarUsuario();
+            opcionMenuLoguin = teclado.nextLine();
+            if (opcionMenuLoguin == "N") {
+                registrarUsuario();
             }
-
         }
 
-        UUID id= aux.getBilletera();
+        UUID id = aux.getBilletera();
 
         Billetera billeteraUser = new Billetera();
         billeteraUser.setIdBilletera(id);
@@ -83,7 +82,7 @@ public class SesionLogica implements Serializable {
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
         aniadirBilletera(billeteraUser);//Se crea el Archivo de Usuarios
-        guardarUsuarioEnArchivo(user);
+        guardarUsuarioEnArchivo(aux);
 
         return billeteraUser;
     }
@@ -92,7 +91,7 @@ public class SesionLogica implements Serializable {
     public Usuario loguearUsuario(String email, String password, UUID id) {
         Usuario user = usuarios.get(id);
 
-        if(user != null && (user.getEmail().equals(email) && user.getPassword().equals(password))) {
+        if (user != null && (user.getEmail().equals(email) && user.getPassword().equals(password))) {
             setUsuarioActivo(user);
             return user;
         }
@@ -102,169 +101,158 @@ public class SesionLogica implements Serializable {
 
     private void guardarBilleterasEnArchivo() {
         File file = new File("./billeteras.json");
-        ObjectMapper mapper=new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
             mapper.writeValue(file, this.billeteras);
-        } catch(IOException e) {
-            System.out.println("No se pudo completar la operacion."+e.getMessage());
-        }
-        finally {
-            if (file!=null){
+        } catch (IOException e) {
+            System.out.println("No se pudo completar la operacion." + e.getMessage());
+        } finally {
+            if (file != null) {
                 file.close();
             }
+        }
     }
 
     public void guardarUsuarioEnArchivo(Usuario usuario) {
         File file = new File("./usuarios.json");
-        ObjectMapper mapper=new ObjectMapper();
-        aniadirUsuario(usuario.getBilletera(), usuario);
+        ObjectMapper mapper = new ObjectMapper();
+        aniadirUsuario(usuario);
         try {
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
             mapper.writeValue(file, usuarios);
-        } catch(IOException e) {
-            System.out.println("No se pudo completar la operacion."+e.getMessage());
-        }
-        finally {
-            if (file!=null){
+        } catch (IOException e) {
+            System.out.println("No se pudo completar la operacion." + e.getMessage());
+        } finally {
+            if (file != null) {
                 file.close();
             }
         }
     }
 
-    public void guardarTransferenciaArchivo(Transferencia transferencia) {
-    public void guardarTransferenciaArchivo(Transferencia t) {
-        File file = new File("./Transferencias.json");
-        ObjectMapper mapper=new ObjectMapper();
-       aniadirtransferencia(t.getUUIDtransaccion(),t);
-        try {
-            if(!file.exists()){
-                file.createNewFile();
-            }
-            mapper.writeValue(file, transferencias);
-        } catch(IOException e) {
-            System.out.println("No se pudo completar la operacion."+e.getMessage());
-        }
-        finally {
-            if (file!=null){
-                file.close();
-            }
-    }
-
-
-    public void archivoAMapBilleteras() {
-        File file = new File("./billeteras.json");
-        ObjectMapper mapper=new ObjectMapper();
-
-        if(file.exists()) {
+    public void guardarTransferenciaArchivo (Transferencia t){
+            File file = new File("./Transferencias.json");
+            ObjectMapper mapper = new ObjectMapper();
+            aniadirtransferencia(t.getUUIDtransaccion(), t);
             try {
-                this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
-            } catch(IOException e) {
-                System.out.println("No se pudo completar la operacion."+e.getMessage());
-            }
-            finally {
-                if (file!=null){
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                mapper.writeValue(file, transferencias);
+            } catch (IOException e) {
+                System.out.println("No se pudo completar la operacion." + e.getMessage());
+            } finally {
+                if (file != null) {
                     file.close();
                 }
-        }
-    }
-
-    public void archivoAMapTransferencias() {
-        File file = new File("./Transferencias.json");
-
-        ObjectMapper mapper=new ObjectMapper();
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
-        if(file.exists()) {
-            try {
-                this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
-            } catch(IOException e) {
-                System.out.println("No se pudo completar la operacion."+e.getMessage());
             }
-            finally {
-                if (file!=null){
-                    file.close();
-                }
-        }
     }
 
-    public void archivoAMapUsuarios() {
-        File file = new File("./usuarios.json");
-        ObjectMapper mapper=new ObjectMapper();
 
-        if(file.exists()) {
-            try {
-                this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>(){});
-            } catch(IOException e) {
-                System.out.println("No se pudo completar la operacion."+e.getMessage());
+
+    public void archivoAMapBilleteras () {
+            File file = new File("./billeteras.json");
+            ObjectMapper mapper = new ObjectMapper();
+
+            if (file.exists()) {
+                try {
+                    this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>() {
+                    });
+                } catch (IOException e) {
+                    System.out.println("No se pudo completar la operacion." + e.getMessage());
+                } finally {
+                    if (file != null) {
+                        file.close();
+                    }
+                }
             }
-            finally {
-                if (file!=null){
-                    file.close();
+    }
+
+    public void archivoAMapTransferencias () {
+            File file = new File("./Transferencias.json");
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+            if (file.exists()) {
+                try {
+                    this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
+                    });
+                } catch (IOException e) {
+                    System.out.println("No se pudo completar la operacion." + e.getMessage());
+                } finally {
+                    if (file != null) {
+                        file.close();
+                    }
                 }
+            }
+    }
+
+    public void archivoAMapUsuarios () {
+            File file = new File("./usuarios.json");
+            ObjectMapper mapper = new ObjectMapper();
+
+            if (file.exists()) {
+                try {
+                    this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>() {
+                    });
+                } catch (IOException e) {
+                    System.out.println("No se pudo completar la operacion." + e.getMessage());
+                } finally {
+                    if (file != null) {
+                        file.close();
+                    }
+                }
+            }
+    }
+
+    public double consultarActivos () {
+            Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
+            return billeteraUsuarioActivo.getSaldo();
+    }
+
+
+        public void aniadirUsuario (Usuario usuario){
+            this.usuarios.put(usuario.getBilletera(), usuario);
         }
-    }
 
-    public double consultarActivos() {
-        Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
-        return billeteraUsuarioActivo.getSaldo();
-    }
-
-
-    public void aniadirUsuario(UUID id, Usuario usuario) {
-        this.usuarios.put(id,usuario);
-    }
-
-    public void aniadirBilletera(Billetera aux) {
-            this.billeteras.put();
+        public void aniadirBilletera (Billetera aux){
+            this.billeteras.put(aux.getIdBilletera(),aux);
         }
 
-    public HashMap<UUID, Usuario> getUsuariosLoguin() {
-        return usuarios;
-    }
+        public HashMap<UUID, Usuario> getUsuariosLoguin () {
+            return usuarios;
+        }
 
-    public HashMap<UUID, Billetera> getBilleteras() {
-        return billeteras;
-    }
+        public HashMap<UUID, Billetera> getBilleteras () {
+            return billeteras;
+        }
 
-    public HashMap<UUID, Transferencia> getTransferencias() {
-        return transferencias;
-    }
+        public HashMap<UUID, Transferencia> getTransferencias () {
+            return transferencias;
+        }
 
-    public void aniadirtransferencia(UUID id,Transferencia transferencia) {this.transferencias.put(id,transferencia);}
+        public void aniadirtransferencia (UUID id, Transferencia transferencia){
+            this.transferencias.put(id, transferencia);
+        }
 
-    public Usuario getUsuarioActivo() {
-        return usuarioActivo;
-    }
+        public Usuario getUsuarioActivo () {
+            return usuarioActivo;
+        }
 
-    public void setUsuarioActivo(Usuario usuarioActivo) {
-        this.usuarioActivo = usuarioActivo;
-    }
+        public void setUsuarioActivo (Usuario usuarioActivo){
+            this.usuarioActivo = usuarioActivo;
+        }
 
-    public void finalizarSesion() {
-        // Paso los nuevos usuarios registrados a el archivo.
-
-
-        guardarBilleterasEnArchivo();
-        System.exit(0);
-    }
+        public void finalizarSesion () {
+            // Paso los nuevos usuarios registrados a el archivo.
+            guardarBilleterasEnArchivo();
+            System.exit(0);
+        }
 }
 
-    public void archivoAMapUsuarios() {
-    }
 
-    public void aniadirBilletera() {
-    }
-
-    public void aniadirBilletera() {
-    }
-
-    public void aniadirBilletera() {
-    }
-
-    public void finalizarSesion() {
-    }

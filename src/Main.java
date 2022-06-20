@@ -51,8 +51,6 @@ public class Main {
                     if(sesion.getUsuarioActivo() == null) {
                         System.out.println("\n Los datos ingresados no son correctos o no existe el usuario.");
                     }
-                } else {
-                    sesion.
                 }
             } catch(InvalidOptionException | InputMismatchException ex) {
                 System.out.println("\n" + (ex instanceof InputMismatchException ? "La opcion debe ser un numero." : ex.getMessage()));
