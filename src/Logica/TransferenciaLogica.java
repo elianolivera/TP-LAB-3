@@ -118,9 +118,9 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         public HashMap<UUID, Transferencia> pendientesValidacion (HashMap < UUID, Transferencia > transferencias){
             for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
                 if (t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
-                    System.out.println(transferencias);
+                    System.out.println(t);
                 } else {
-                    System.out.println("No hay transferencias pendientes de validación");
+                    System.out.println("");
                 }
             }
             return transferencias;

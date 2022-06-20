@@ -233,7 +233,16 @@ public class SesionLogica implements Serializable {
             return billeteraUsuarioActivo.getSaldo();
     }
 
-        public void aniadirUsuario (Usuario usuario){
+    public HashMap<UUID, Transferencia> getTransferenciasValidadas() {
+        return transferenciasValidadas;
+    }
+
+    public SesionLogica setTransferenciasValidadas(HashMap<UUID, Transferencia> transferenciasValidadas) {
+        this.transferenciasValidadas = transferenciasValidadas;
+        return this;
+    }
+
+    public void aniadirUsuario (Usuario usuario){
         this.usuarios.put(usuario.getBilletera(), usuario);
         }
         public void aniadirBilletera (Billetera aux){
