@@ -75,9 +75,8 @@ public class Main {
                         // Realizar transferencia
                         System.out.println("\n ======== Lista de usuarios ======== :  \n" + sesion.getUsuariosLoguin());
                         System.out.print("\n ========  Ingrese monto a transferir  ======== :  ");
-                        float monto = 0;
                         Scanner teclado = new Scanner(System.in);
-                        monto = teclado.nextFloat();
+                        float monto = teclado.nextFloat();
                         Transferencia transf = ttt.transferir(sesion,ttt, monto,sesion.getUsuarioActivo(), sesion.getBilleteras(), sesion.getUsuariosLoguin());
                         System.out.print("\n ======== Comprobante : ======== ");
                         System.out.println(transf);
