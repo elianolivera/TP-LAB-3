@@ -25,6 +25,7 @@ public class SesionLogica implements Serializable {
     private HashMap<UUID, Usuario> usuarios = new HashMap<>();
     private HashMap<UUID, Billetera> billeteras = new HashMap<>();
     private HashMap<UUID, Transferencia> transferencias = new HashMap<>();
+    private HashMap<UUID, Transferencia> transferenciasValidadas = new HashMap<>();
     private Usuario usuarioActivo;
 
 
@@ -155,15 +156,12 @@ public class SesionLogica implements Serializable {
     public void guardarValidacionArchivo (Transferencia t){
         File file = new File("./Validaciones.json");
         ObjectMapper mapper = new ObjectMapper();
-
-        if (t.getValidaciones()>0 && t.getValidaciones()<3) {
-            aniadirtransferencia(t.getUUIDtransaccion(), t);
-        }
+        aniadirtransferenciaValidada(t.getUUIDtransaccion(), t);
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            mapper.writeValue(file, transferencias);
+            mapper.writeValue(file, transferenciasValidadas);
         } catch (IOException e) {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
         } finally {
@@ -180,14 +178,9 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.billeteras = (HashMap<UUID, Billetera>) mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>() {
-                    });
+                    this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
-                } finally {
-                    if (file != null) {
-                        ///file.close();
-                    }
                 }
             }
     }
@@ -199,14 +192,9 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.transferencias = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
-                    });
+                    this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
-                } finally {
-                    if (file != null) {
-                        ///file.close;
-                    }
                 }
             }
     }
@@ -217,14 +205,9 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.usuarios = (HashMap<UUID, Usuario>) mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>() {
-                    });
+                    this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>(){});
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
-                } finally {
-                    if (file != null) {
-                       /// file.close();
-                    }
                 }
             }
     }
@@ -236,14 +219,9 @@ public class SesionLogica implements Serializable {
 
         if (file.exists()) {
             try {
-                this.transferencias = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
-                });
+                this.transferenciasValidadas = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
             } catch (IOException e) {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
-            } finally {
-                if (file != null) {
-                   /// file.close();
-                }
             }
         }
     }
@@ -253,7 +231,11 @@ public class SesionLogica implements Serializable {
             return billeteraUsuarioActivo.getSaldo();
     }
 
-        public void aniadirUsuario (Usuario usuario){
+    public HashMap<UUID, Transferencia> getTransferenciasValidadas() {
+        return transferenciasValidadas;
+    }
+
+    public void aniadirUsuario (Usuario usuario){
         this.usuarios.put(usuario.getBilletera(), usuario);
         }
         public void aniadirBilletera (Billetera aux){
@@ -274,6 +256,10 @@ public class SesionLogica implements Serializable {
 
         public void aniadirtransferencia (UUID id, Transferencia transferencia){
             this.transferencias.put(id, transferencia);
+        }
+
+        public void aniadirtransferenciaValidada (UUID id, Transferencia transferencia){
+            this.transferenciasValidadas.put(id, transferencia);
         }
 
         public Usuario getUsuarioActivo () {
