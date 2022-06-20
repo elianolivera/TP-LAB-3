@@ -17,7 +17,7 @@ public class Main {
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
         sesion.archivoAMapTransferencias();
-        sesion.archivoAMapValidaciones();
+
 
         correrApp(sesion, menu);
     }
@@ -98,7 +98,7 @@ public class Main {
                     case 5:
                         // Transacciones activas
                         System.out.print("\n ======== Transacciones activas : ======== ");
-                        System.out.println(sesion.getTransferencias());
+                        sesion.archivoAMapValidaciones();
 
                         break;
                     case 6:
