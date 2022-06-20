@@ -57,8 +57,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
 
         if (modelo.getValidaciones() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
-        } else {
-            System.out.println("Transacción aún pendiente de validar");
+        } else { System.out.println("Transacción aún pendiente de validar");
         }
         return modelo;
     }
@@ -98,7 +97,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
     ///Método transacciones pendientes de validar
     public  HashMap<UUID, Transferencia> pendientesValidacion(HashMap<UUID, Transferencia> transferencias) {
         for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
-            if(t.getValue().getEstado().equals(Estado.VALIDADA)) {
+            if(t.getValue().getEstado().equals(Estado.NOVALIDADA)) {
                 System.out.println(transferencias);
             }else
             {
