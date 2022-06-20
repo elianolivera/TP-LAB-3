@@ -98,7 +98,7 @@ public class Main {
                     case 5:
                         // Transacciones activas
                         System.out.print("\n ======== Transacciones activas : ======== ");
-                       sesion.getTransferenciasValidadas();
+                       System.out.println(sesion.getTransferenciasValidadas());
 
                         break;
                     case 6:
