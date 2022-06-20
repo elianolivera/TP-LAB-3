@@ -78,7 +78,7 @@ public class Transferencia  {
     }
     @Override
     public String toString() {
-        return "\nTransferencia:" +
+        return "\n\n Transferencia:" +
                 "\n Usuario emisor=" + us.getNombre() +
                 "\n Usuario receptor=" + receptor.getNombre() +
                 "\n ID de la transaccion=" + UUIDtransaccion +

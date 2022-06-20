@@ -46,16 +46,11 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
                 u2.setSaldo(u2.getSaldo() + monto);
                 sesion.aniadirBilletera(u2);
             }
-            else{
-                System.out.println("Fondos insuficientes");
-                return null;
+            else{ System.out.println("Fondos insuficientes");return null;
             }
-        }
-        else {
-            System.out.println("Error de transaccion");
+        }  else {            System.out.println("Error de transaccion");
             return null;
         }
-
         modelo.setValidaciones(modelo.getValidaciones() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getValidaciones(), monto, Estado.NOVALIDADA);
 
@@ -70,13 +65,12 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
 
     // Busca transferencia por UUID para validarla
     public Transferencia buscartransferencia(HashMap<UUID, Transferencia> trans) {
-
+        System.out.println("\nIngrese el UUID de transacción que desea validar: ");
         Scanner Aux = new Scanner(System.in);
         UUID id = UUID.fromString(Aux.nextLine());
 
         Transferencia b = trans.get(id);
         if (id!=null) {
-            System.out.println("Transferencia encontrada"+b);
             return b;
         }
         else{
@@ -106,23 +100,19 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
 
         public void validar (SesionLogica sesion, HashMap < UUID, Transferencia > transferencias) throws
         InvalidOptionException {
-            modelo = buscartransferencia(transferencias);
-            for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
-                modelo = buscartransferencia(transferencias);
+                        modelo = buscartransferencia(transferencias);
                 if (modelo.getValidaciones() >= 3) {
                     modelo.setEstado(Estado.VALIDADA);
                     System.out.println("La transacción ya está validada");
                     //Cuando las validaciones sean mayor a 3 se pasa al archivo de transacciones validadas.
-
+                    sesion.guardarValidacionArchivo(modelo);
                 } else if (modelo.getValidaciones() <= 3) {
                     modelo.setValidaciones(modelo.getValidaciones() + 1);
                     System.out.println("se ha añadido 1 validación");
-                    sesion.guardarValidacionArchivo(modelo);
                     /// Se añade una validación
                 }
                 sesion.guardarTransferenciaArchivo(modelo);
-            }
-        }
+    }
 
         ///Método transacciones pendientes de validar
         public HashMap<UUID, Transferencia> pendientesValidacion (HashMap < UUID, Transferencia > transferencias){
