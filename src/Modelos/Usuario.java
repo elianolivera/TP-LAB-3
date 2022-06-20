@@ -1,5 +1,6 @@
 package Modelos;
 
+
 import java.util.UUID;
 
 // Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
@@ -14,14 +15,18 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
-        this.billetera=UUID.randomUUID();
+    public Usuario(UUID billetera,String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
+        this.billetera= billetera;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.email = email;
         this.password = password;
+    }
+
+    public void setBilletera(UUID billetera) {
+        this.billetera = billetera;
     }
 
     public UUID getBilletera() {

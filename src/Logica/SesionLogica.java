@@ -37,10 +37,10 @@ public class SesionLogica implements Serializable {
 
         Usuario aux = new Usuario();
         Scanner teclado = new Scanner(System.in);
-        String opcionMenuLoguin;
 
-        while (aux == null) {
             System.out.println("\nIngreso de Datos.");
+            aux.setBilletera(UUID.randomUUID());
+
             System.out.println("\nIngrese su Nombre: ");
             aux.setNombre(teclado.nextLine());
 
@@ -68,24 +68,21 @@ public class SesionLogica implements Serializable {
             aux.setPassword(teclado.nextLine());
 
             System.out.println("\nDatos ingresados" + aux);
-            System.out.println("\nSon correctos?. N para corregir. Cualquier tecla para continuar");
-            opcionMenuLoguin = teclado.nextLine();
-            if (opcionMenuLoguin == "N") {
-                registrarUsuario();
+            System.out.println("\nSon correctos?. 1 para corregir. 2 para continuar");
+            int opcionMenuLoguin = teclado.nextInt();
+            if (opcionMenuLoguin == 1) {
+                System.exit(0);
             }
-        }
+            System.out.println("Su ID para loguearse es: " + aux.getBilletera() + ". Guardalo!");
 
-        UUID id = aux.getBilletera();
+            Billetera billeteraUser = new Billetera();
 
-        Billetera billeteraUser = new Billetera();
-        billeteraUser.setIdBilletera(id);
-
-        System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
-
-        aniadirBilletera(billeteraUser);//Se crea el Archivo de Usuarios
-        guardarUsuarioEnArchivo(aux);
+            billeteraUser.setIdBilletera(aux.getBilletera());
+            guardarUsuarioEnArchivo(aux);
+            guardarBilleterasEnArchivo(billeteraUser);
 
         return billeteraUser;
+
     }
 
     ///*****************************METODO LOGUEAR USUARIO********************************************
@@ -101,9 +98,10 @@ public class SesionLogica implements Serializable {
     }
 
     ///**************************METODOS DE GUARDADO EN ARCHIVOS***************************************
-    private void guardarBilleterasEnArchivo() {
+    private void guardarBilleterasEnArchivo(Billetera billetera) {
         File file = new File("./billeteras.json");
         ObjectMapper mapper = new ObjectMapper();
+        aniadirBilletera(billetera);
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -288,7 +286,7 @@ public class SesionLogica implements Serializable {
 
         public void finalizarSesion () {
             // Paso los nuevos usuarios registrados a el archivo.
-            guardarBilleterasEnArchivo();
+            ///guardarBilleterasEnArchivo();
             System.exit(0);
         }
 }

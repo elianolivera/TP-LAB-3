@@ -1,15 +1,16 @@
 package Modelos;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 public  class Billetera {
+
 
     private double saldo;
     protected UUID idBilletera;
 
     public Billetera() {
         this.saldo = 100;
+        this.idBilletera = idBilletera;
     }
 
     public double getSaldo() {
@@ -30,8 +31,7 @@ public  class Billetera {
 
     @Override
     public String toString() {
-        return super.toString() +
-                "\n Saldo=" + saldo;
+        return  "\n Saldo=" + saldo +
+                "\n Id de Billetera=" + idBilletera;
     }
-
 }
