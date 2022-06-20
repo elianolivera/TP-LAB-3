@@ -11,12 +11,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-       SesionLogica sesion = new SesionLogica();
+        SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
 
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
         sesion.archivoAMapTransferencias();
+        sesion.archivoAMapValidaciones();
 
         correrApp(sesion, menu);
     }

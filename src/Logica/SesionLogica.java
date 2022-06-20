@@ -87,7 +87,7 @@ public class SesionLogica implements Serializable {
         return billeteraUser;
     }
 
-    ///*****************************METODO LOGUEAR USUARIO///////////////////////////////////////////
+    ///*****************************METODO LOGUEAR USUARIO********************************************
     public Usuario loguearUsuario(String email, String password, UUID id) {
         Usuario user = usuarios.get(id);
 
@@ -99,6 +99,7 @@ public class SesionLogica implements Serializable {
         return null;
     }
 
+    ///**************************METODOS DE GUARDADO EN ARCHIVOS***************************************
     private void guardarBilleterasEnArchivo() {
         File file = new File("./billeteras.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -152,8 +153,28 @@ public class SesionLogica implements Serializable {
             }
     }
 
+    public void guardarValidacionArchivo (Transferencia t){
+        File file = new File("./Validaciones.json");
+        ObjectMapper mapper = new ObjectMapper();
 
+        if (t.getValidaciones()>0 && t.getValidaciones()<3) {
+            aniadirtransferencia(t.getUUIDtransaccion(), t);
+        }
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            mapper.writeValue(file, transferencias);
+        } catch (IOException e) {
+            System.out.println("No se pudo completar la operacion." + e.getMessage());
+        } finally {
+            if (file != null) {
+                file.close();
+            }
+        }
+    }
 
+    ///******************************************METODOS DE APERTURA DE ARCHIVOS*******************************
     public void archivoAMapBilleteras () {
             File file = new File("./billeteras.json");
             ObjectMapper mapper = new ObjectMapper();
@@ -174,7 +195,6 @@ public class SesionLogica implements Serializable {
 
     public void archivoAMapTransferencias () {
             File file = new File("./Transferencias.json");
-
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
@@ -210,18 +230,35 @@ public class SesionLogica implements Serializable {
             }
     }
 
+    public void archivoAMapValidaciones () {
+        File file = new File("./Validaciones.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+        if (file.exists()) {
+            try {
+                this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>() {
+                });
+            } catch (IOException e) {
+                System.out.println("No se pudo completar la operacion." + e.getMessage());
+            } finally {
+                if (file != null) {
+                    file.close();
+                }
+            }
+        }
+    }
+
     public double consultarActivos () {
             Billetera billeteraUsuarioActivo = billeteras.get(usuarioActivo.getBilletera());
             return billeteraUsuarioActivo.getSaldo();
     }
 
-
         public void aniadirUsuario (Usuario usuario){
-            this.usuarios.put(usuario.getBilletera(), usuario);
+        this.usuarios.put(usuario.getBilletera(), usuario);
         }
-
         public void aniadirBilletera (Billetera aux){
-            this.billeteras.put(aux.getIdBilletera(),aux);
+        this.billeteras.put(aux.getIdBilletera(),aux);
         }
 
         public HashMap<UUID, Usuario> getUsuariosLoguin () {
@@ -245,7 +282,7 @@ public class SesionLogica implements Serializable {
         }
 
         public void setUsuarioActivo (Usuario usuarioActivo){
-            this.usuarioActivo = usuarioActivo;
+        this.usuarioActivo = usuarioActivo;
         }
 
         public void finalizarSesion () {

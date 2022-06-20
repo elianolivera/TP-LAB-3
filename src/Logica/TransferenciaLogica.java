@@ -39,10 +39,22 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         System.out.print(" ========  Ingrese  el N°de billetera (UUID) del destinatario ========: ");
         Billetera u2 = t1.buscarBilleteraPorUUID(billeteras);
         //Actualiza saldos luego de transacción , en los objetos y el saldo en el  hashmap de billeteras.
-        u1.setSaldo(u1.getSaldo() - monto);
-        sesion.aniadirBilletera(u1);
-        u2.setSaldo(u2.getSaldo() + monto);
-        sesion.aniadirBilletera(u2);
+        if (monto>0) {
+            if (u1.getSaldo() >= monto) {
+                u1.setSaldo(u1.getSaldo() - monto);
+                sesion.aniadirBilletera(u1);
+                u2.setSaldo(u2.getSaldo() + monto);
+                sesion.aniadirBilletera(u2);
+            }
+            else{
+                System.out.println("Fondos insuficientes");
+                return null;
+            }
+        }
+        else {
+            System.out.println("Error de transaccion");
+            return null;
+        }
 
         modelo.setValidaciones(modelo.getValidaciones() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getValidaciones(), monto, Estado.NOVALIDADA);
@@ -52,6 +64,7 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         } else {
             System.out.println("Transacción aún pendiente de validar");
         }
+        sesion.guardarTransferenciaArchivo(modelo);
         return modelo;
     }
 
@@ -104,12 +117,13 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
                 } else if (modelo.getValidaciones() <= 3) {
                     modelo.setValidaciones(modelo.getValidaciones() + 1);
                     System.out.println("se ha añadido 1 validación");
+                    sesion.guardarValidacionArchivo(modelo);
                     /// Se añade una validación
                 }
                 sesion.guardarTransferenciaArchivo(modelo);
             }
         }
-        
+
         ///Método transacciones pendientes de validar
         public HashMap<UUID, Transferencia> pendientesValidacion (HashMap < UUID, Transferencia > transferencias){
             for (Map.Entry<UUID, Transferencia> t : transferencias.entrySet()) {
