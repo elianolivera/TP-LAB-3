@@ -178,7 +178,7 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.billeteras = mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
+                    this.billeteras = (HashMap<UUID, Billetera>) mapper.readValue(file, new TypeReference<Map<UUID, Billetera>>(){});
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
                 }
@@ -192,7 +192,7 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.transferencias = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
+                    this.transferencias = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
                 }
@@ -205,7 +205,7 @@ public class SesionLogica implements Serializable {
 
             if (file.exists()) {
                 try {
-                    this.usuarios = mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>(){});
+                    this.usuarios = (HashMap<UUID, Usuario>) mapper.readValue(file, new TypeReference<Map<UUID, Usuario>>(){});
                 } catch (IOException e) {
                     System.out.println("No se pudo completar la operacion." + e.getMessage());
                 }
@@ -219,7 +219,7 @@ public class SesionLogica implements Serializable {
 
         if (file.exists()) {
             try {
-                this.transferenciasValidadas = mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
+                this.transferenciasValidadas = (HashMap<UUID, Transferencia>) mapper.readValue(file, new TypeReference<Map<UUID, Transferencia>>(){});
             } catch (IOException e) {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
             }
