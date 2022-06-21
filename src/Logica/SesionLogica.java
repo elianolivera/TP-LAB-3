@@ -273,19 +273,32 @@ public class SesionLogica implements Serializable {
             ///guardarBilleterasEnArchivo();
             System.exit(0);
         }
-        public void mostrarLogo(){
-            if (!(new File("logo.txt")).exists()) {
-        return;
-        }try {
-        BufferedReader fEntrada = new BufferedReader(new FileReader(new File("logo.txt")));
-        String linea=null;
-        while ((linea=fEntrada.readLine()) != null) {
-            System.out.println(linea);
-        }
-        fEntrada.close();
-    } catch (IOException e) {
-        System.out.println("Se produjo un error al escribir en el archivo: " + e.getMessage());
-    }}
+    public void mostrarLogo(){
+        if (!(new File("logo.txt")).exists()) {
+            return;
+        }try {        BufferedReader fEntrada = new BufferedReader(new FileReader(new File("logo.txt")));
+            String linea=null;
+            while ((linea=fEntrada.readLine()) != null) {
+                System.out.println(linea);
+            }
+            fEntrada.close();
+        } catch (IOException e) {
+            System.out.println("Se produjo un error al escribir en el archivo: " + e.getMessage());
+        }}
+
+    public void mostrarLogosaldo(){
+        if (!(new File("saldo.txt")).exists()) {
+            return;
+        }try {        BufferedReader fEntrada = new BufferedReader(new FileReader(new File("saldo.txt")));
+            String linea=null;
+            while ((linea=fEntrada.readLine()) != null) {
+                System.out.println(linea);
+            }
+            fEntrada.close();
+        } catch (IOException e) {
+            System.out.println("Se produjo un error al escribir en el archivo: " + e.getMessage());
+        }}
+
 }
 
 

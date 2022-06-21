@@ -73,7 +73,8 @@ public class Main {
                 switch (opcionMenuPrincipal) {
                     case 1:
                         // Consultar activos.
-                        System.out.println("Actualmente cuentas con: $" + sesion.consultarActivos());
+                        sesion.mostrarLogosaldo();
+                        System.out.println("                   Actualmente cuentas con       ======== : $" + sesion.consultarActivos());
                         break;
                     case 2:
                         // Realizar transferencia
