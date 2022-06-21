@@ -38,43 +38,27 @@ public class SesionLogica implements Serializable {
 
         Usuario aux = new Usuario();
         Scanner teclado = new Scanner(System.in);
-        String opcionMenuLoguin;
 
-        while (aux == null) {
-            System.out.println("\nIngreso de Datos.");
-            System.out.println("\nIngrese su Nombre: ");
-            aux.setNombre(teclado.nextLine());
+        System.out.println("\nIngreso de Datos.");
+        System.out.println("\nIngrese su Nombre: ");
+        aux.setNombre(teclado.nextLine());
 
-            System.out.println("\nIngrese su Apellido: ");
-            aux.setApellido(teclado.nextLine());
+        System.out.println("\nIngrese su Apellido: ");
+        aux.setApellido(teclado.nextLine());
 
-            System.out.println("\nIngrese su Numero de documento: ");
-            aux.setDni(teclado.nextLine());
-            if (usuarios.containsValue(aux.getDni())) {
-                System.out.println("El numero de Documento ya existe");
-                return null;
-            }
+        System.out.println("\nIngrese su Numero de documento: ");
+        aux.setDni(teclado.nextLine());
 
-            System.out.println("\nIngrese su Fecha de nacimiento: ");
-            aux.setFechaDeNacimiento(teclado.nextLine());
+        System.out.println("\nIngrese su Fecha de nacimiento: ");
+        aux.setFechaDeNacimiento(teclado.nextLine());
 
-            System.out.println("\nIngrese su Correo electronico: ");
-            aux.setEmail(teclado.nextLine());
-            if (usuarios.containsValue(aux.getEmail())) {
-                System.out.println("El Correo electronico ya existe");
-                return null;
-            }
+        System.out.println("\nIngrese su Correo electronico: ");
+        aux.setEmail(teclado.nextLine());
 
-            System.out.println("\nIngrese su password: ");
-            aux.setPassword(teclado.nextLine());
+        System.out.println("\nIngrese su password: ");
+        aux.setPassword(teclado.nextLine());
 
-            System.out.println("\nDatos ingresados" + aux);
-            System.out.println("\nSon correctos?. N para corregir. Cualquier tecla para continuar");
-            opcionMenuLoguin = teclado.nextLine();
-            if (opcionMenuLoguin == "N") {
-                registrarUsuario();
-            }
-        }
+        System.out.println("\nDatos ingresados" + aux);
 
         UUID id = aux.getBilletera();
 
@@ -83,7 +67,7 @@ public class SesionLogica implements Serializable {
 
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
 
-        aniadirBilletera(billeteraUser);//Se crea el Archivo de Usuarios
+        aniadirBilletera(billeteraUser);
         guardarUsuarioEnArchivo(aux);
 
         return billeteraUser;

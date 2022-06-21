@@ -12,7 +12,9 @@ public class Usuario {
     protected String email;
     protected String password;
 
-    public Usuario() {}
+    public Usuario() {
+        this.billetera=UUID.randomUUID();
+    }
 
     public Usuario(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
         this.billetera=UUID.randomUUID();

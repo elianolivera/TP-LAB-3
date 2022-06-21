@@ -6,4 +6,5 @@ out/
 *.iws
 billeteras.json
 Transferencias.json
+Validaciones.json
 usuarios.json
