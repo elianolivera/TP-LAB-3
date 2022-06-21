@@ -73,8 +73,6 @@ public class SesionLogica implements Serializable {
 
         UUID id = aux.getBilletera();
 
-        System.out.println("\nDatos ingresados" + aux);
-
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
         Billetera billeteraUser = new Billetera();
         billeteraUser.setIdBilletera(id);
