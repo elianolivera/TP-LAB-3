@@ -9,9 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -75,15 +73,17 @@ public class SesionLogica implements Serializable {
 
         UUID id = aux.getBilletera();
 
-        Billetera billeteraUser = new Billetera();
-        billeteraUser.setIdBilletera(id);
+        System.out.println("\nDatos ingresados" + aux);
 
         System.out.println("Su ID para loguearse es: " + id + ". Guardalo!");
+        Billetera billeteraUser = new Billetera();
+        billeteraUser.setIdBilletera(id);
 
         aniadirBilletera(billeteraUser);
         guardarUsuarioEnArchivo(aux);
 
         return billeteraUser;
+
     }
 
     ///*****************************METODO LOGUEAR USUARIO********************************************
@@ -102,6 +102,7 @@ public class SesionLogica implements Serializable {
     private void guardarBilleterasEnArchivo() {
         File file = new File("./billeteras.json");
         ObjectMapper mapper = new ObjectMapper();
+
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -109,10 +110,6 @@ public class SesionLogica implements Serializable {
             mapper.writeValue(file, this.billeteras);
         } catch (IOException e) {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
-        } finally {
-            if (file != null) {
-                ///file.close();
-            }
         }
     }
 
@@ -127,10 +124,6 @@ public class SesionLogica implements Serializable {
             mapper.writeValue(file, usuarios);
         } catch (IOException e) {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
-        } finally {
-            if (file != null) {
-                ///file.close();
-            }
         }
     }
 
@@ -145,10 +138,6 @@ public class SesionLogica implements Serializable {
                 mapper.writeValue(file, transferencias);
             } catch (IOException e) {
                 System.out.println("No se pudo completar la operacion." + e.getMessage());
-            } finally {
-                if (file != null) {
-                    ///file.close();
-                }
             }
     }
 
@@ -163,10 +152,6 @@ public class SesionLogica implements Serializable {
             mapper.writeValue(file, transferenciasValidadas);
         } catch (IOException e) {
             System.out.println("No se pudo completar la operacion." + e.getMessage());
-        } finally {
-            if (file != null) {
-                ///file.close();
-            }
         }
     }
 
@@ -274,6 +259,32 @@ public class SesionLogica implements Serializable {
             guardarBilleterasEnArchivo();
             System.exit(0);
         }
+    public void mostrarLogo(){
+        if (!(new File("logo.txt")).exists()) {
+            return;
+        }try {        BufferedReader fEntrada = new BufferedReader(new FileReader(new File("logo.txt")));
+            String linea=null;
+            while ((linea=fEntrada.readLine()) != null) {
+                System.out.println(linea);
+            }
+            fEntrada.close();
+        } catch (IOException e) {
+            System.out.println("Se produjo un error al escribir en el archivo: " + e.getMessage());
+        }}
+
+    public void mostrarLogosaldo(){
+        if (!(new File("saldo.txt")).exists()) {
+            return;
+        }try {        BufferedReader fEntrada = new BufferedReader(new FileReader(new File("saldo.txt")));
+            String linea=null;
+            while ((linea=fEntrada.readLine()) != null) {
+                System.out.println(linea);
+            }
+            fEntrada.close();
+        } catch (IOException e) {
+            System.out.println("Se produjo un error al escribir en el archivo: " + e.getMessage());
+        }}
+
 }
 
 

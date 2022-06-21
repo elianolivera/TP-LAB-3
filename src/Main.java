@@ -4,6 +4,10 @@ import Logica.TransferenciaLogica;
 import Modelos.*;
 import Exceptions.InvalidOptionException;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -13,7 +17,7 @@ public class Main {
 
         SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
-
+        sesion.mostrarLogo();
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
         sesion.archivoAMapTransferencias();
@@ -71,7 +75,8 @@ public class Main {
                 switch (opcionMenuPrincipal) {
                     case 1:
                         // Consultar activos.
-                        System.out.println("Actualmente cuentas con: $" + sesion.consultarActivos());
+                        sesion.mostrarLogosaldo();
+                        System.out.println("                   Actualmente cuentas con       ======== : $" + sesion.consultarActivos());
                         break;
                     case 2:
                         // Realizar transferencia
@@ -100,7 +105,7 @@ public class Main {
                     case 5:
                         // Transacciones activas
                         System.out.print("\n ======== Transacciones activas : ======== ");
-                       sesion.getTransferenciasValidadas();
+                       System.out.println(sesion.getTransferenciasValidadas());
 
                         break;
                     case 6:

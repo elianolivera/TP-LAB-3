@@ -1,8 +1,8 @@
 package Modelos;
 
+
 import java.util.UUID;
 
-// Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
 public class Usuario {
     protected UUID billetera;
     protected String nombre;
@@ -16,14 +16,18 @@ public class Usuario {
         this.billetera=UUID.randomUUID();
     }
 
-    public Usuario(String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
-        this.billetera=UUID.randomUUID();
+    public Usuario(UUID billetera,String nombre, String apellido, String dni, String fechaDeNacimiento, String email, String password) {
+        this.billetera= billetera;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.email = email;
         this.password = password;
+    }
+
+    public void setBilletera(UUID billetera) {
+        this.billetera = billetera;
     }
 
     public UUID getBilletera() {
@@ -79,9 +83,28 @@ public class Usuario {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return usuario.billetera == billetera && usuario.nombre == nombre && usuario.apellido == apellido && usuario.dni == dni && usuario.fechaDeNacimiento == fechaDeNacimiento && usuario.email == email && usuario.password == password;
+    }
+
+    @Override
+    public int hashCode() {
+        int resultado= Short.hashCode(Short.parseShort(nombre));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(apellido));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(dni));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(fechaDeNacimiento));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(email));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(password));
+        return resultado;
+    }
+
+    @Override
     public String toString() {
 
-        return  "\n\nN° de billetera=" + billetera +
+        return  "\n N° de billetera=" + billetera +
                 "\n Nombre='" + nombre +
                 "\n Apellido='" + apellido +
                 "\n Fecha De Nacimiento='" + fechaDeNacimiento +
