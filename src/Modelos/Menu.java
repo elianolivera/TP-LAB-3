@@ -34,14 +34,17 @@ public final class Menu {
     public int mostrarMenuUsuario() throws InputMismatchException {
         int opcion = -1;
 
-        System.out.print("\n ========  BIENVENIDO: ======== ");
 
-        System.out.print("\n 1. Ingresar. ");
-        System.out.print("\n 2. Registrarse.");
-        System.out.print("\n 3. Salir.");
-        System.out.print("\n ==== SELECIONA OPCIÓN ===: \n");
+        System.out.print("\n =================================================================================================== ");
+        System.out.print("\n                                       1. Ingresar. ");
+        System.out.print("\n                                       2. Registrarse.");
+        System.out.print("\n                                       3. Salir.");
+        System.out.print("\n =================================================================================================== ");
+        System.out.print("\n                             ==== SELECIONA UNA OPCIÓN ===: ");
         Scanner teclado = new Scanner(System.in);
         opcion = teclado.nextInt();
+
+
 
         if (opcion > 3 || opcion < 1) throw new InvalidOptionException("La opcion seleccionada no existe.");
 

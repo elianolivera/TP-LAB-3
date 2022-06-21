@@ -9,9 +9,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -275,6 +273,19 @@ public class SesionLogica implements Serializable {
             ///guardarBilleterasEnArchivo();
             System.exit(0);
         }
+        public void mostrarLogo(){
+            if (!(new File("logo.txt")).exists()) {
+        return;
+        }try {
+        BufferedReader fEntrada = new BufferedReader(new FileReader(new File("logo.txt")));
+        String linea=null;
+        while ((linea=fEntrada.readLine()) != null) {
+            System.out.println(linea);
+        }
+        fEntrada.close();
+    } catch (IOException e) {
+        System.out.println("Se produjo un error al escribir en el archivo: " + e.getMessage());
+    }}
 }
 
 

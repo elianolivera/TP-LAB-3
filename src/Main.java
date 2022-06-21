@@ -4,6 +4,10 @@ import Logica.TransferenciaLogica;
 import Modelos.*;
 import Exceptions.InvalidOptionException;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -13,7 +17,7 @@ public class Main {
 
         SesionLogica sesion = new SesionLogica();
         MenuLogica menu = new MenuLogica();
-
+        sesion.mostrarLogo();
         sesion.archivoAMapUsuarios();
         sesion.archivoAMapBilleteras();
         sesion.archivoAMapTransferencias();
