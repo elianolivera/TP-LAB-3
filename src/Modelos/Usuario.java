@@ -3,7 +3,6 @@ package Modelos;
 
 import java.util.UUID;
 
-// Si billetera va a heredar de esto, no deberia ser instanciada, por eso el abstract.
 public class Usuario {
     protected UUID billetera;
     protected String nombre;
@@ -82,9 +81,28 @@ public class Usuario {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return usuario.billetera == billetera && usuario.nombre == nombre && usuario.apellido == apellido && usuario.dni == dni && usuario.fechaDeNacimiento == fechaDeNacimiento && usuario.email == email && usuario.password == password;
+    }
+
+    @Override
+    public int hashCode() {
+        int resultado= Short.hashCode(Short.parseShort(nombre));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(apellido));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(dni));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(fechaDeNacimiento));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(email));
+        resultado=31 * resultado + Short.hashCode(Short.parseShort(password));
+        return resultado;
+    }
+
+    @Override
     public String toString() {
 
-        return  "\n\nN° de billetera=" + billetera +
+        return  "\n N° de billetera=" + billetera +
                 "\n Nombre='" + nombre +
                 "\n Apellido='" + apellido +
                 "\n Fecha De Nacimiento='" + fechaDeNacimiento +
