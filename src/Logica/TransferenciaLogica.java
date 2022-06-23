@@ -41,27 +41,21 @@ public class TransferenciaLogica extends Transferencia implements Serializable {
         //Actualiza saldos luego de transacción , en los objetos y el saldo en el  hashmap de billeteras.
         if (monto>0) {
             if (u1.getSaldo() >= monto) {
-                u1.setSaldo(u1.getSaldo() - monto);
-                sesion.aniadirBilletera(u1);
-                u2.setSaldo(u2.getSaldo() + monto);
-                sesion.aniadirBilletera(u2);
-            }
-            else{ System.out.println("Fondos insuficientes");return null;
+                u1.setSaldo(u1.getSaldo() - monto); sesion.aniadirBilletera(u1);
+                u2.setSaldo(u2.getSaldo() + monto); sesion.aniadirBilletera(u2);
+            }            else{ System.out.println("Fondos insuficientes");return null;
             }
         }  else {            System.out.println("Error de transaccion");
             return null;
         }
         modelo.setValidaciones(modelo.getValidaciones() + 1);
         modelo = new Transferencia(usuarios.get(u1.getIdBilletera()), usuarios.get(u2.getIdBilletera()), modelo.getValidaciones(), monto, Estado.NOVALIDADA);
-
         if (modelo.getValidaciones() >= 3) {
             modelo.setEstado(Estado.VALIDADA);
         } else {
             System.out.println("Transacción aún pendiente de validar");
-        }
-        sesion.guardarTransferenciaArchivo(modelo);
-        return modelo;
-    }
+        }        sesion.guardarTransferenciaArchivo(modelo);
+        return modelo; }
 
     // Busca transferencia por UUID para validarla
     public Transferencia buscartransferencia(HashMap<UUID, Transferencia> trans) {
